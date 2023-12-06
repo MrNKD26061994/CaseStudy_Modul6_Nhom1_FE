@@ -1,0 +1,151 @@
+header {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #dddddd;
+    padding: 0 80px;
+}
+
+.header-left {
+    text-align: left;
+    align-self: center;
+    flex: 1;
+}
+
+#logo {
+    width: 102px;
+    height: 32px;
+}
+#logo:hover {
+    cursor: pointer;
+}
+
+.header-mid {
+    display: flex;
+    height: 48px;
+    border: 1px #ddd solid;
+    border-radius: 80px;
+    align-self: center;
+}
+
+.header-mid div{
+    line-height: 48px;
+}
+.header-mid-center {
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    height: 60%;
+}
+.header-mid-right {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.btn-search {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #ff385c;
+    position: relative;
+}
+.search-icon {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: red;
+}
+
+.header-mid:hover {
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+}
+
+.header-right {
+    align-self: center;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.headerRight-left {
+    height: 42px;
+    line-height: 42px;
+    border-radius: 80px;
+    padding: 0 16px;
+}
+
+.headerRight-left:hover {
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+    background-color: #f7f7f7;
+}
+
+.user {
+    width: 86px;
+    height: 48px;
+    padding: 8px 8px 8px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e2e2e2;
+    border-radius: 30px;
+    position: relative;
+}
+
+.sub-login {
+    display: none;
+    width: 300px;
+    position: absolute;
+    top: 55px;
+    left: -215px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 14px 28px, rgba(0, 0, 0, 0.22) 0 10px 10px;
+    border-radius: 5px;
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.sub-login-item {
+    text-align: left;
+    padding: 12px 0 12px 8px;
+    font-size: 13px;
+}
+
+.sub-login-item:hover {
+    background-color: rgb(249, 249, 249);
+    color: black;
+    font-weight: 500;
+}
+
+.user:hover {
+    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+    cursor: pointer;
+}
+
+.user:hover::after {
+    content: "";
+    position: absolute;
+    top: 47px;
+    left: 0;
+    width: 86px;
+    height: 10px;
+}
+
+.user:hover .sub-login {
+    display: block;
+}
+
+.user-left-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+}
+.p-rl-16 {
+    padding: 0 16px;
+}
