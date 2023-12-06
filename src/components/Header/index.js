@@ -29,7 +29,7 @@ function Header() {
         <>
             <header>
                 <div className="header-left">
-                    <img id="logo" src={logo} alt="" />
+                    <img id="logo" src={logo} alt=""/>
                 </div>
 
                 <div className="header-mid">
@@ -38,7 +38,7 @@ function Header() {
                     <div className="header-mid-right pr-2">
                         <span className="p-rl-16">Thêm khách</span>
                         <div className="btn-search">
-                            <img className="search-icon" src={search} alt="" />
+                            <img className="search-icon" src={search} alt=""/>
                         </div>
                     </div>
                 </div>
@@ -46,19 +46,38 @@ function Header() {
                 <div className="header-right">
                     <div className="headerRight-left">Cho thuê chỗ ở qua Airbnb</div>
                     <div className="user">
-                        <img className="user-left-icon" src={nav} alt="" />
-                        <img className="user-icon" src={imgUser} alt="" />
+                        <img className="user-left-icon" src={nav} alt=""/>
+                        {user == null ?
+                            <>
+                                <img className="user-icon" src={imgUser} alt=""/>
+                            </>
+                            :
+                            <>
+                                <img style={{borderRadius: '50%'}} className="user-icon" src={user.avatar} alt=""/>
+                            </>
+                        }
                         <div className="sub-login" id="user">
                             {user == null ?
                                 <>
-                                    <Login />
+                                    <Login/>
 
-                                    <Register />
-                                    <hr />
+                                    <Register/>
+                                    <hr/>
                                     <div className="sub-login-item">Cho thuê chỗ ở qua Airbnb</div>
                                 </>
                                 :
                                 <>
+                                    {user.roles[0].authority === "ROLE_ADMIN" ?
+                                        // giao dien Admin
+                                        <>
+                                            <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
+                                        </>
+                                        :
+                                        //Giao dien User
+                                        <>
+                                            <div onClick={handleLogout} className="sub-login-item">Thông tin User</div>
+                                        </>
+                                    }
                                     <div onClick={handleLogout} className="sub-login-item">Đăng xuất</div>
                                 </>
                             }
