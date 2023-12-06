@@ -71,6 +71,7 @@ function Header() {
                                         // giao dien Admin
                                         <>
                                             <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
+                                            <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
                                         </>
                                         :
                                         //Giao dien User
