@@ -4,7 +4,7 @@ const customAxios = axios.create({
     baseURL: 'http://localhost:8080/'
 })
 customAxios.interceptors.request.use(config => {
-    const account = JSON.parse(localStorage.getItem("account"));
+    const account = JSON.parse(localStorage.getItem("user"));
     if (account && account.token){
         config.headers.Authorization = `Bearer ${account.token}`;
     }
