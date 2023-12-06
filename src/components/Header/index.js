@@ -6,7 +6,7 @@ import search from "../../assets/imgs/header/search-icon.png"
 import nav from "../../assets/imgs/header/3ngang.png"
 import imgUser from "../../assets/imgs/header/user-icon.jpg"
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../../services/userService";
 import {toast} from "react-toastify";
 import Register from "../../pages/Register";
@@ -71,12 +71,16 @@ function Header() {
                                         // giao dien Admin
                                         <>
                                             <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
+                                            <div onClick={handleLogout} className="sub-login-item">Quản lý User</div>
                                             <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
                                         </>
                                         :
                                         //Giao dien User
                                         <>
+                                            <Link className={"nav-link"} to={"/user-detail"}>Thông tin User<span className="sr-only">(current)</span></Link>
+
                                             <div onClick={handleLogout} className="sub-login-item">Thông tin User</div>
+                                            <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
                                         </>
                                     }
                                     <div onClick={handleLogout} className="sub-login-item">Đăng xuất</div>

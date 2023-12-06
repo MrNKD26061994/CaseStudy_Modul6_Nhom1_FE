@@ -1,10 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {login, logout, register} from "../../services/userService";
+import {editDetailUser, findUserById, login, logout, register} from "../../services/userService";
 
 
 const initialState = {
     currentUser: JSON.parse(localStorage.getItem('user')),
-    users: []
+    users: [],
+    userDetail: {},
 }
 
 const userSlice = createSlice({
@@ -22,6 +23,12 @@ const userSlice = createSlice({
             })
             .addCase(register.fulfilled, (state, action) => {
                 state["users"].push(action.payload);
+            })
+            .addCase(editDetailUser.fulfilled, (state, action) => {
+                state.userDetail = action.payload.data
+            })
+            .addCase(findUserById.fulfilled, (state, action) => {
+                state.userDetail = action.payload.data
             });
     }
 })
