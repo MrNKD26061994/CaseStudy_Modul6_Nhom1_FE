@@ -10,6 +10,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../../services/userService";
 import {toast} from "react-toastify";
 import Register from "../../pages/Register";
+import ChangePassword from "../Modal/ChangePassword";
 
 function Header() {
     const dispatch = useDispatch();
@@ -78,9 +79,11 @@ function Header() {
                                         :
                                         //Giao dien User
                                         <>
-                                            <Link className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
+                                            <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
 
-                                            <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
+                                            <ChangePassword nameClass={'sub-login-item'}/>
+
+                                            {/*<div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>*/}
                                         </>
                                     }
                                     <div onClick={handleLogout} className="sub-login-item">Đăng xuất</div>

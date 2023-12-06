@@ -42,6 +42,8 @@ export default function Register({nameClass}) {
             <Modal
                 show={showRegisterModal}
                 onHide={() => setShowRegisterModal(false)}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
             >
                 <Formik initialValues={{username: '', password: '', confirmPassword: ''}}
                         onSubmit={(values, formikBag) => {
@@ -49,28 +51,38 @@ export default function Register({nameClass}) {
                         }}>
                     <Form>
 
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email/Uername</label>
-                            <Field name={'username'} type="text" className={'form-control'} id='exampleInputEmail1'
-                                   aria-describedby='emailHelp'/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Password</label>
-                            <Field name={'password'} type="password" className={"form-control"}
-                                   id="exampleInputPassword1"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword2">Confirm Password</label>
-                            <Field name={'confirmPassword'} type="password" className={"form-control"}
-                                   id="exampleInputPassword2"/>
-                        </div>
-                        <button style={{width: '100%', borderRadius: '5px'}} type="submit"
-                                className="btn btn-primary">Submit
-                        </button>
+                        <Modal.Header closeButton>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                Đăng ký
+                            </Modal.Title>
+                        </Modal.Header>
 
-                        <div onClick={() => setShowRegisterModal(false)} style={{width: '100%', borderRadius: '5px', marginTop: '16px'}}
-                                className="btn btn-secondary">Cancel
-                        </div>
+                        <Modal.Body>
+                            <div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">Email/Uername:<span className={'text-red'}> *</span></label>
+                                    <Field name={'username'} type="text" className={'form-control'} id='exampleInputEmail1'
+                                           aria-describedby='emailHelp'/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword1">Password:<span className={'text-red'}> *</span></label>
+                                    <Field name={'password'} type="password" className={"form-control"}
+                                           id="exampleInputPassword1"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword2">Confirm Password:<span className={'text-red'}> *</span></label>
+                                    <Field name={'confirmPassword'} type="password" className={"form-control"}
+                                           id="exampleInputPassword2"/>
+                                </div>
+                                <button style={{width: '100%', borderRadius: '5px'}} type="submit"
+                                        className="btn btn-primary">Submit
+                                </button>
+
+                                <div onClick={() => setShowRegisterModal(false)} style={{width: '100%', borderRadius: '5px', marginTop: '16px'}}
+                                     className="btn btn-secondary">Cancel
+                                </div>
+                            </div>
+                        </Modal.Body>
                     </Form>
                 </Formik>
             </Modal>

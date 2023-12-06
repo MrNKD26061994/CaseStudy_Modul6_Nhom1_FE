@@ -25,25 +25,30 @@ export default function UserDetail() {
     }
 
     const handleEditUser = async (values, {resetForm}) => {
-        let dataTemp = {...values};
-        let data = {...userDetail}
-        Object.keys(data).map(key => {
-            if(dataTemp[key] !== undefined) {
-                data[key] = dataTemp[key];
-            }
-        })
-        console.log(data)
-        await dispatch(editDetailUser(data)).then((res) => {
-            if(res.type === 'user/login/rejected') {
-                navigate('')
-                toast.error("Login fail!");
-            } else {
-                navigate('')
-                toast.success("Edit successful!");
-                setShowEditUserModal(false);
-            }
-        })
-        navigate('')
+        if(values.phone === '') {
+            toast.error("Phone number isEmpty!");
+        } else {
+            let dataTemp = {...values};
+            let data = {...userDetail}
+            Object.keys(data).map(key => {
+                if(dataTemp[key] !== undefined) {
+                    data[key] = dataTemp[key];
+                }
+            })
+            console.log(data)
+            await dispatch(editDetailUser(data)).then((res) => {
+                if(res.type === 'user/login/rejected') {
+                    navigate('')
+                    toast.error("Login fail!");
+                } else {
+                    navigate('')
+                    toast.success("Edit successful!");
+                    setShowEditUserModal(false);
+                }
+            })
+            navigate('')
+        }
+
     }
 
     return (
@@ -98,8 +103,9 @@ export default function UserDetail() {
             <Modal
                 show={showEditUserModal}
                 onHide={() => setShowEditUserModal(false)}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
             >
-                <h1 style={{textAlign: 'center'}}>Edit User</h1>
                 <Formik initialValues={{username: userDetail.username, firstname: userDetail.firstname, lastname: userDetail.lastname, address: userDetail.address, phone: userDetail.phone}}
 
                         onSubmit={(values, formikBag) => {
@@ -108,38 +114,48 @@ export default function UserDetail() {
                         enableReinitialize={true}
                 >
                     <Form>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Email/Uername</label>
-                            <Field disabled={true} name={'username'} type="text" className={'form-control'} id='exampleInputEmail1'
-                                   aria-describedby='emailHelp'/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Firstname</label>
-                            <Field name={'firstname'} type="text" className={"form-control"}
-                                   id="exampleInputPassword1"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword2">Lastname</label>
-                            <Field name={'lastname'} type="text" className={"form-control"}
-                                   id="exampleInputPassword2"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword2">Address</label>
-                            <Field name={'address'} type="text" className={"form-control"}
-                                   id="exampleInputPassword2"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword2">Phone</label>
-                            <Field name={'phone'} type="text" className={"form-control"}
-                                   id="exampleInputPassword2"/>
-                        </div>
-                        <button style={{width: '100%', borderRadius: '5px'}} type="submit"
-                                className="btn btn-primary">Submit
-                        </button>
+                        <Modal.Header closeButton>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                Cập nhật thông tin
+                            </Modal.Title>
+                        </Modal.Header>
 
-                        <div onClick={() => setShowEditUserModal(false)} style={{width: '100%', borderRadius: '5px', marginTop: '16px'}}
-                             className="btn btn-secondary">Cancel
-                        </div>
+                        <Modal.Body>
+                            <div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputEmail1">Email/Uername</label>
+                                    <Field disabled={true} name={'username'} type="text" className={'form-control'} id='exampleInputEmail1'
+                                           aria-describedby='emailHelp'/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword1">Firstname</label>
+                                    <Field name={'firstname'} type="text" className={"form-control"}
+                                           id="exampleInputPassword1"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword2">Lastname</label>
+                                    <Field name={'lastname'} type="text" className={"form-control"}
+                                           id="exampleInputPassword2"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword2">Address</label>
+                                    <Field name={'address'} type="text" className={"form-control"}
+                                           id="exampleInputPassword2"/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="exampleInputPassword2">Phone:<span className={'text-red'}> *</span></label>
+                                    <Field name={'phone'} type="text" className={"form-control"}
+                                           id="exampleInputPassword2"/>
+                                </div>
+                                <button style={{width: '100%', borderRadius: '5px'}} type="submit"
+                                        className="btn btn-primary">Submit
+                                </button>
+
+                                <div onClick={() => setShowEditUserModal(false)} style={{width: '100%', borderRadius: '5px', marginTop: '16px'}}
+                                     className="btn btn-secondary">Cancel
+                                </div>
+                            </div>
+                        </Modal.Body>
                     </Form>
                 </Formik>
             </Modal>
