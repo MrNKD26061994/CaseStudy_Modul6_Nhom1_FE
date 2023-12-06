@@ -61,12 +61,13 @@ function Header() {
                                 <>
                                     <Login/>
 
-                                    <Register/>
+                                    <Register nameClass={"sub-login-item"}/>
                                     <hr/>
                                     <div className="sub-login-item">Cho thuê chỗ ở qua Airbnb</div>
                                 </>
                                 :
                                 <>
+
                                     {user.roles[0].authority === "ROLE_ADMIN" ?
                                         // giao dien Admin
                                         <>
@@ -77,9 +78,8 @@ function Header() {
                                         :
                                         //Giao dien User
                                         <>
-                                            <Link className={"nav-link"} to={"/user-detail"}>Thông tin User<span className="sr-only">(current)</span></Link>
+                                            <Link className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
 
-                                            <div onClick={handleLogout} className="sub-login-item">Thông tin User</div>
                                             <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
                                         </>
                                     }

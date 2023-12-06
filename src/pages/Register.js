@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {register} from "../services/userService";
 import {toast} from "react-toastify";
 
-export default function Register() {
+export default function Register({nameClass}) {
     const [showRegisterModal, setShowRegisterModal] = useState(false);
 
     const dispatch = useDispatch();
@@ -17,23 +17,27 @@ export default function Register() {
     }
 
     const handleRegister = (values, {resetForm}) => {
-        dispatch(register(values)).then((res) => {
-            console.log(res)
-            if(res.type === 'user/register/rejected') {
-                navigate('')
-                toast.error("Login fail!");
-                resetForm();
-            } else {
-                navigate('')
-                toast.success("Register successful!")
-                setShowRegisterModal(false)
-            }
-        })
+        if(values.username === '' && values.password === '' && values.confirmPassword === '') {
+            toast.error("Register fail!");
+        } else {
+            dispatch(register(values)).then((res) => {
+                if(res.type === 'user/register/rejected') {
+                    navigate('')
+                    toast.error("Register fail!");
+                    resetForm();
+                } else {
+                    navigate('')
+                    toast.success("Register successful!")
+                    setShowRegisterModal(false)
+                }
+            })
+        }
+
     }
 
     return (
         <>
-            <div onClick={() => showModalRegister()} className="sub-login-item">Đăng ký</div>
+            <div onClick={() => showModalRegister()} className={`${nameClass}`}>Đăng ký</div>
 
             <Modal
                 show={showRegisterModal}

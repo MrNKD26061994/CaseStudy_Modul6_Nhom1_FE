@@ -56,15 +56,12 @@ export default function Login() {
                             <Field name={'password'} type="password" className={"form-control"}
                                    id="exampleInputPassword1"/>
                         </div>
-                        <button style={{width: '100%', borderRadius: '5px'}} type="submit"
-                                className="btn btn-primary">Submit
+                        <button type="submit"
+                                className="btn btn-primary btn-edit-modal">Submit
                         </button>
 
-                        <Register />
+                        <Register nameClass={"btn btn-secondary btn-edit-modal"}/>
 
-                        <div style={{width: '100%', borderRadius: '5px', marginTop: '16px'}} type="submit"
-                                    className="btn btn-secondary">Register
-                        </div>
                     </Form>
                 </Formik>
             </Modal>
