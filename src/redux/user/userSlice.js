@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {login, logout, register} from "../../services/userService";
+import {getListUser, login, logout, register} from "../../services/userService";
 
 
 const initialState = {
@@ -22,6 +22,9 @@ const userSlice = createSlice({
             })
             .addCase(register.fulfilled, (state, action) => {
                 state["users"].push(action.payload);
+            })
+            .addCase(getListUser.fulfilled, (state, action) => {
+                state.users = action.payload;
             });
     }
 })

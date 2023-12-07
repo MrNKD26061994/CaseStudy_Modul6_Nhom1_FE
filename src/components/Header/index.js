@@ -25,6 +25,7 @@ function Header() {
             toast.success("Logout successful!");
         })
     }
+    const linktoChangeAdminPass=async () =>(navigate("/admin/listUser"))
     return (
         <>
             <header>
@@ -71,6 +72,10 @@ function Header() {
                                         // giao dien Admin
                                         <>
                                             <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
+                                            <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
+                                            <div onClick={handleLogout} className="sub-login-item">Xem danh sách chủ nhà</div>
+                                            <div onClick={handleLogout} className="sub-login-item">Xem danh sách người thuê nhà</div>
+
                                         </>
                                         :
                                         //Giao dien User
