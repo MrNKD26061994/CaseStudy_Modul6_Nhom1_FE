@@ -25,7 +25,8 @@ export default function UserDetail() {
     }
 
     const handleEditUser = async (values, {resetForm}) => {
-        if(values.phone === '') {
+        console.log(values)
+        if(values.phone === '' || values.phone === null) {
             toast.error("Phone number isEmpty!");
         } else {
             let dataTemp = {...values};

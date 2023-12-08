@@ -32,16 +32,6 @@ export default function ChangePassword({nameClass}) {
         } else {
             let id = JSON.parse(localStorage.getItem('user')).id;
             let data = {id: id, ...values};
-            console.log(data)
-            // console.log("dataTemp ", dataTemp)
-            // let data = {...userDetail}
-            // console.log("data ", data)
-            // Object.keys(data).map(key => {
-            //     if(dataTemp[key] !== undefined) {
-            //         data[key] = dataTemp[key];
-            //     }
-            // })
-            // console.log("data FN ",data)
             await dispatch(editPasswordUser(data)).then((res) => {
                 if(res.type === 'user/editPassword/rejected') {
                     navigate('')
@@ -53,7 +43,6 @@ export default function ChangePassword({nameClass}) {
                 }
             })
         }
-
     }
 
     return (
