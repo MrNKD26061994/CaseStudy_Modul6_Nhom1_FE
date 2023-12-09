@@ -6,7 +6,6 @@ export default function Home() {
         <>
             <Header></Header>
             <Outlet></Outlet>
-
         </>
     );
 }

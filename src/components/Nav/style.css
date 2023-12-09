@@ -1,0 +1,80 @@
+nav {
+    height: 78px;
+    width: 100%;
+    padding: 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-category {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+}
+.nav-item-full{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid #ffffff;
+}
+
+.nav-item-full:hover {
+    border-bottom: 3px solid #dddddd;
+    cursor: pointer;
+}
+
+.nav-item-full-active.nav-item-full:hover,
+.nav-item-full-active.nav-item-full:hover .label-item{
+    cursor: inherit;
+    color: #000;
+}
+.nav-item-full-active.nav-item-full:hover {
+    border-bottom: 3px solid #000;
+}
+
+.nav-item-full:hover .label-item{
+    color: #dddddd;
+}
+
+.nav-item-full-active {
+    border-bottom: 3px solid #000;
+}
+
+.nav-item {
+    height: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-item-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.label-item {
+    font-size: 12px;
+}
+
+.btn-filter {
+    height: 48px;
+    border: 1px solid #b9b9b9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.btn-filter:hover {
+    cursor: pointer;
+}
+.filter {
+    padding: 2px 16px;
+}
+
+.btn-filter img {
+    width: 16px;
+    height: 16px;
+}

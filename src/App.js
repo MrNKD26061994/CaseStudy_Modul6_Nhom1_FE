@@ -2,7 +2,9 @@ import './App.css';
 import {ToastContainer} from "react-toastify";
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/home/Home";
-import ShowListUser from "./pages/Admin/ShowListUser";
+import UserDetail from "./pages/home/user/UserDetail";
+import HomeUser from "./pages/home/user/HomeUser";
+import UserInfo from "./pages/home/user/UserInfo";
 
 function App() {
   return (
@@ -10,7 +12,9 @@ function App() {
         <ToastContainer />
         <Routes>
             <Route path={''} element={<Home></Home>}>
-                <Route path={"/admin/listUser"} element={<ShowListUser/>}></Route>
+                <Route path={''} element={<HomeUser />} />
+                <Route path={'user-detail'} element={<UserDetail />} />
+                <Route path={'user-info'} element={<UserInfo />} />
             </Route>
         </Routes>
 

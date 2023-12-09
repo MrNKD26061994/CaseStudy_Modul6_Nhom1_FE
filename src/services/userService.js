@@ -14,6 +14,22 @@ export const logout = createAsyncThunk(
     async () => {
     }
 )
+export const openFormEdit = createAsyncThunk(
+    'user/openFormEdit',
+    async () => {
+    }
+)
+export const closeFormEdit = createAsyncThunk(
+    'user/closeFormEdit',
+    async () => {
+    }
+)
+export const getName = createAsyncThunk(
+    'user/getName',
+    async (name) => {
+        return name;
+    }
+)
 export const register = createAsyncThunk(
     'user/register',
     async (data) => {
@@ -21,15 +37,31 @@ export const register = createAsyncThunk(
         return res;
     }
 )
-// export const getListUser = () => {
-//     // return customAxios.get('admin/users');
-// }
-
-export const getListUser = createAsyncThunk(
-    'admin/listUser',
+export const editDetailUser = createAsyncThunk (
+    'user/edit',
     async (data) => {
-        const res = await customAxios.get('admin/users');
-        // console.log(res.data)
+        const res = await customAxios.put('users/' + data.id, data);
+        // console.log("Kết quả trả về của edit",  res)
         return res;
     }
 )
+export const editPasswordUser = createAsyncThunk (
+    'user/editPassword',
+    async (data) => {
+        const res = await customAxios.put('users/changePassword/' + data.id, data);
+        console.log("Kết quả trả về của change password",  res)
+        return res;
+    }
+)
+export const findUserById = createAsyncThunk (
+    'user/findById',
+    async (id) => {
+        const res = await customAxios.get('users/' + id);
+        // console.log("Kết quả trả về của user",  res)
+        return res;
+    }
+)
+
+
+
+

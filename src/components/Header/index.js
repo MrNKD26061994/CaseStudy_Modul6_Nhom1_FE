@@ -6,10 +6,11 @@ import search from "../../assets/imgs/header/search-icon.png"
 import nav from "../../assets/imgs/header/3ngang.png"
 import imgUser from "../../assets/imgs/header/user-icon.jpg"
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {logout} from "../../services/userService";
 import {toast} from "react-toastify";
 import Register from "../../pages/Register";
+import ChangePassword from "../Modal/ChangePassword";
 
 function Header() {
     const dispatch = useDispatch();
@@ -61,16 +62,18 @@ function Header() {
                                 <>
                                     <Login/>
 
-                                    <Register/>
+                                    <Register nameClass={"sub-login-item"}/>
                                     <hr/>
                                     <div className="sub-login-item">Cho thuê chỗ ở qua Airbnb</div>
                                 </>
                                 :
                                 <>
+
                                     {user.roles[0].authority === "ROLE_ADMIN" ?
                                         // giao dien Admin
                                         <>
                                             <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
+                                            <div onClick={handleLogout} className="sub-login-item">Quản lý User</div>
                                             <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
                                             <div onClick={handleLogout} className="sub-login-item">Xem danh sách chủ nhà</div>
                                             <div onClick={handleLogout} className="sub-login-item">Xem danh sách người thuê nhà</div>
@@ -79,7 +82,12 @@ function Header() {
                                         :
                                         //Giao dien User
                                         <>
-                                            <div onClick={handleLogout} className="sub-login-item">Thông tin User</div>
+                                            <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
+                                            <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
+
+                                            <ChangePassword nameClass={'sub-login-item'}/>
+
+                                            {/*<div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>*/}
                                         </>
                                     }
                                     <div onClick={handleLogout} className="sub-login-item">Đăng xuất</div>

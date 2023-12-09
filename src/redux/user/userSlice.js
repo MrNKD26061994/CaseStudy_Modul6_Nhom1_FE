@@ -1,10 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getListUser, login, logout, register} from "../../services/userService";
+import {
+    closeFormEdit,
+    editDetailUser,
+    editPasswordUser,
+    findUserById, getName,
+    login,
+    logout, openFormEdit,
+    register,
+} from "../../services/userService";
 
 
 const initialState = {
     currentUser: JSON.parse(localStorage.getItem('user')),
-    users: []
+    users: [],
+    userDetail: {},
+    isActiveEdit: false,
+    nameEditOne: "",
 }
 
 const userSlice = createSlice({
@@ -20,12 +31,29 @@ const userSlice = createSlice({
                 state.currentUser = null;
                 localStorage.removeItem('user');
             })
+            .addCase(openFormEdit.fulfilled, (state) => {
+                state.isActiveEdit = true;
+            })
+            .addCase(closeFormEdit.fulfilled, (state) => {
+                state.isActiveEdit = false;
+            })
+            .addCase(getName.fulfilled, (state, action) => {
+                state.nameEditOne = action.payload;
+            })
             .addCase(register.fulfilled, (state, action) => {
                 state["users"].push(action.payload);
             })
-            .addCase(getListUser.fulfilled, (state, action) => {
-                state.users = action.payload;
-            });
+            .addCase(editDetailUser.fulfilled, (state, action) => {
+                state.userDetail = action.payload.data
+                state.isActiveEdit = false;
+            })
+            .addCase(editPasswordUser.fulfilled, (state, action) => {
+                state.userDetail = action.payload.data
+            })
+            .addCase(findUserById.fulfilled, (state, action) => {
+                state.userDetail = action.payload.data
+            })
+            ;
     }
 })
 
