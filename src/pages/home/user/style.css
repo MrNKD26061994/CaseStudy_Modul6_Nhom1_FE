@@ -6,6 +6,14 @@
     display: none;
 }
 
+.color-grey {
+    color: #717171;
+}
+
+.color-red {
+    color: rgb(193, 53, 21);
+}
+
 .user-info {
     display: flex;
     justify-content: space-between;
@@ -30,16 +38,13 @@
     width: 80%;
 }
 
-.color-grey {
-    color: #717171;
-}
-
 .infoItem-right {
 }
 
 .editBtn {
     text-decoration: underline;
     cursor: pointer;
+    font-weight: 600;
 }
 
 .user-info-right {

@@ -1,10 +1,12 @@
 import "./style.css"
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {closeFormEdit, editDetailUser, findUserById, getName, openFormEdit} from "../../../services/userService";
 import {toast} from "react-toastify";
 import {useEffect} from "react";
+import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
+
 export default function UserInfo() {
 
     const dispatch = useDispatch();
@@ -32,7 +34,7 @@ export default function UserInfo() {
     }
     function offFormEdit() {
         dispatch(closeFormEdit()).then(() => {})
-        // dispatch(getName("")).then(() => {})
+        dispatch(getName("")).then(() => {})
     }
 
     async function handleEdit(values, {resetForm}) {
@@ -51,7 +53,6 @@ export default function UserInfo() {
             } else {
                 navigate('/user-info')
                 toast.success("Edit successful!");
-                // setShowEditUserModal(false);
             }
         })
         navigate('')
@@ -63,8 +64,8 @@ export default function UserInfo() {
                 <div className="nav-userInfo">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" style={{background: 'none'}}>
-                            <li className="breadcrumb-item"><a href="#">Home</a></li>
-                            <li className="breadcrumb-item active" aria-current="page">Library</li>
+                            <li className="breadcrumb-item"><Link to={''}>Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Thông tin cá nhân</li>
                         </ol>
                     </nav>
                 </div>
@@ -102,17 +103,20 @@ export default function UserInfo() {
                                 <p className="color-grey">Đây là tên trên giấy tờ thông hành của bạn, có thể là giấy phép hoặc hộ chiếu</p>
                                 <Formik initialValues={{firstname: user.firstname, lastname: user.lastname}}
                                         enableReinitialize={true}
+                                        validationSchema={FirstLastNameSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEdit(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-md-6">
+                                            <div className="form-group col-md-6 color-red">
                                                 <Field name={'firstname'} type="text" className={'form-control'} placeholder={'First Name:'} />
+                                                <ErrorMessage name={'firstname'}></ErrorMessage>
                                             </div>
 
-                                            <div className="form-group col-md-6">
+                                            <div className="form-group col-md-6 color-red">
                                                 <Field name={'lastname'} type="text" className={"form-control"} placeholder={'Last Name:'}/>
+                                                <ErrorMessage name={'lastname'}></ErrorMessage>
                                             </div>
                                         </div>
 
@@ -154,13 +158,15 @@ export default function UserInfo() {
                                 <p className="color-grey">Sử dụng địa chỉ mà bạn luôn có quyền truy cập.</p>
                                 <Formik initialValues={{email: user.email}}
                                         enableReinitialize={true}
+                                        validationSchema={EmailSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEdit(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-12">
+                                            <div className="form-group col-12 color-red">
                                                 <Field name={'email'} type="email" className={'form-control'} placeholder={'Email:'} />
+                                                <ErrorMessage name={'email'}></ErrorMessage>
                                             </div>
                                         </div>
 
@@ -202,13 +208,15 @@ export default function UserInfo() {
                                 <p className="color-grey">Thêm số điện thoại để khách đã xác nhận và Airbnb có thể liên hệ với bạn. Bạn có thể thêm các số điện thoại khác và chọn mục đích sử dụng tương ứng.</p>
                                 <Formik initialValues={{phone: user.phone}}
                                         enableReinitialize={true}
+                                        validationSchema={PhoneSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEdit(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-12">
+                                            <div className="form-group col-12 color-red">
                                                 <Field name={'phone'} type="text" className={'form-control'} placeholder={'Số điện thoại:'} />
+                                                <ErrorMessage name={'phone'}></ErrorMessage>
                                             </div>
                                         </div>
 
@@ -255,7 +263,7 @@ export default function UserInfo() {
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-12">
+                                            <div className="form-group col-12 color-red">
                                                 <Field name={'address'} type="text" className={'form-control'} placeholder={'Địa chỉ:'} />
                                             </div>
                                         </div>
