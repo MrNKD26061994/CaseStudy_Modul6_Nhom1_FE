@@ -21,4 +21,14 @@ export const register = createAsyncThunk (
         return res;
     }
 )
+export const edit = createAsyncThunk(
+    'user/edit',
+    async (date) =>{
+        const res = await customAxios.put('edit', data);
+        return res;
+    }
+)
+
+
+
 

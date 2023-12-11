@@ -23,6 +23,7 @@ const userSlice = createSlice({
             .addCase(register.fulfilled, (state, action) => {
                 state["users"].push(action.payload);
             });
+
     }
 })
 
