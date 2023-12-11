@@ -28,17 +28,19 @@ export default function ChangePassword({nameClass}) {
 
         if(values.oldPassword === '' && values.newPassword === '' && values.confirmNewPassword === ''
         || values.newPassword !== values.confirmNewPassword) {
-            toast.error("Change Password fail!");
+            toast.error("Cập nhật mật khẩu thất bại!");
         } else {
             let id = JSON.parse(localStorage.getItem('user')).id;
             let data = {id: id, ...values};
+            console.log(data)
             await dispatch(editPasswordUser(data)).then((res) => {
+                console.log(res)
                 if(res.type === 'user/editPassword/rejected') {
                     navigate('')
-                    toast.error("Change Password fail!");
+                    toast.error("Cập nhật mật khẩu thất bại!");
                 } else {
                     navigate('')
-                    toast.success("Change Password successful!");
+                    toast.success("Cập nhật mật khẩu thành công!");
                     setShowModal(false);
                 }
             })

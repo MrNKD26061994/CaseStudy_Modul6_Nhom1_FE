@@ -1,4 +1,4 @@
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {login} from "../services/userService";
@@ -8,6 +8,7 @@ import {Modal} from "react-bootstrap";
 import Register from "./Register";
 import '../components/Modal/style.css'
 import iconGoogle from "../assets/imgs/icon-google.png"
+import {LoginUserSchema} from "../validate/validate";
 
 export default function Login() {
 
@@ -21,7 +22,7 @@ export default function Login() {
             console.log(res);
             if (res.type === 'user/login/rejected') {
                 navigate('')
-                toast.error("Login fail!");
+                toast.error("Đăng nhập thất bại!");
                 resetForm();
             }
             else {
@@ -29,7 +30,7 @@ export default function Login() {
                     navigate('/admin/listUser')
                 } else {
                 navigate('')}
-                toast.success("Login successful!");
+                toast.success("Đăng nhập thành công!");
                 setShowLoginModal(false);
             }
         })
@@ -50,6 +51,7 @@ export default function Login() {
                 centered
             >
                 <Formik initialValues={{username: '', password: ''}}
+                        validationSchema={LoginUserSchema}
                         onSubmit={(values, formikBag) => {
                             handleLogin(values, formikBag);
                         }}>
@@ -63,20 +65,21 @@ export default function Login() {
                         <Modal.Body>
                             <div>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputEmail1">Email/Uername:<span className={'text-red'}> *</span></label>
+                                    <label htmlFor="exampleInputEmail1">Tên đăng nhập:<span className={'text-red'}> *</span></label>
                                     <Field name={'username'} type="text" className={'form-control'} id='exampleInputEmail1'
                                            aria-describedby='emailHelp'/>
+                                    <span className='color-red'><ErrorMessage name={'username'}></ErrorMessage></span>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="exampleInputPassword1">Password:<span className={'text-red'}> *</span></label>
+                                    <label htmlFor="exampleInputPassword1">Mật khẩu:<span className={'text-red'}> *</span></label>
                                     <Field name={'password'} type="password" className={"form-control"}
                                            id="exampleInputPassword1"/>
+                                    <span className='color-red'><ErrorMessage name={'password'}></ErrorMessage></span>
                                 </div>
                                 <button type="submit" className="btn btn-primary btn-edit-modal">
                                     <img src="" alt=""/>
-                                    Submit
+                                    Đăng nhập
                                 </button>
-
                                 <Register nameClass={"btn btn-secondary btn-edit-modal"}/>
                             </div>
                         </Modal.Body>

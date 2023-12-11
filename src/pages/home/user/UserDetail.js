@@ -19,7 +19,11 @@ export default function UserDetail() {
     })
 
     useEffect(() => {
-        dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id));
+        if(localStorage.getItem('user') != null) {
+            dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
+        } else {
+            navigate('/')
+        }
     },[])
 
     const showModalEditUser = async () => {
@@ -116,10 +120,6 @@ export default function UserDetail() {
                         </td>
 
                     </tr>
-
-
-
-
 
 
                     <tr className={(attributeName === `Lastname`) ?

@@ -13,6 +13,7 @@ export default function UserInfo() {
     const navigate = useNavigate();
 
     const user = useSelector(state => {
+        console.log(state.userDetail.userDetail)
         return state.userDetail.userDetail
     })
 
@@ -49,10 +50,10 @@ export default function UserInfo() {
         await dispatch(editDetailUser(data)).then((res) => {
             if(res.type === 'user/login/rejected') {
                 navigate('/user-info')
-                toast.error("Login fail!");
+                toast.error("Cập nhật thất bại!");
             } else {
                 navigate('/user-info')
-                toast.success("Edit successful!");
+                toast.success("Cập nhật thành công!");
             }
         })
         navigate('')
