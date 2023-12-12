@@ -26,13 +26,13 @@ export default function Login() {
                 resetForm();
             }
             else {
-                if(res.payload.data.roles[0].authority==="ROLE_ADMIN"){
-                    navigate('/admin/listUser')
-                } else {
+                // if(res.payload.data.roles[0].authority==="ROLE_ADMIN"){
+                //     navigate('/admin/listUser')
+                // } else {
                 navigate('')}
                 toast.success("Đăng nhập thành công!");
                 setShowLoginModal(false);
-            }
+            // }
         })
     }
 

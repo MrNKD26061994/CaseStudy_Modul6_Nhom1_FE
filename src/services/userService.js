@@ -58,6 +58,14 @@ export const findUserById = createAsyncThunk (
         return res;
     }
 )
+
+export const findAdminById = createAsyncThunk (
+    'user/findAdminById',
+    async (id) => {
+        const res = await customAxios.get('admin/' + id);
+        return res;
+    }
+)
 export const checkRegistration = createAsyncThunk (
     'user/registration',
     async (token) => {

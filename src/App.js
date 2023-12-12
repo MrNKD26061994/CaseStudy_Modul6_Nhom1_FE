@@ -7,8 +7,9 @@ import HomeUser from "./pages/home/user/HomeUser";
 import UserInfo from "./pages/home/user/UserInfo";
 import Registration from "./pages/Registration";
 import {useEffect} from "react";
-import {findUserById} from "./services/userService";
+import {findAdminById, findUserById} from "./services/userService";
 import {useDispatch} from "react-redux";
+import House from "./pages/home/house/House";
 
 function App() {
     const dispatch = useDispatch();
@@ -16,7 +17,13 @@ function App() {
     useEffect(() => {
         if(localStorage.getItem('user') != null) {
             let user = JSON.parse(localStorage.getItem('user'));
-            console.log(user)
+            if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
+                dispatch(findAdminById(user.id));
+            } else {
+                dispatch(findUserById(user.id));
+            }
+            navigate('/')
+
             // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
         } else {
             navigate('/')
@@ -30,6 +37,7 @@ function App() {
                 <Route path={''} element={<HomeUser />} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
+                <Route path={'houses'} element={<House></House>}></Route>
             </Route>
             <Route path={'/api/registrationConfirm/:token'} element={<Registration/>} ></Route>
         </Routes>
