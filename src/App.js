@@ -14,6 +14,7 @@ import OwnerList from "./pages/Admin/OwnerList";
 import RenterList from "./pages/Admin/RenterList";
 import ShowListUser from "./pages/Admin/ShowListUser";
 import SetPermisionForRenter from "./pages/Admin/SetPermisionForRenter";
+import Test from "./firebase/Test";
 
 function App() {
     const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
                 <Route path={'admin/SetPermisionForRenter'} element={<SetPermisionForRenter/>} />
 
 
+                <Route path={'test'} element={<Test />} />
             </Route>
             <Route path={'/api/registrationConfirm/:token'} element={<Registration/>} ></Route>
         </Routes>
