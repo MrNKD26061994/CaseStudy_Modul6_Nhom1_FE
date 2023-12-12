@@ -40,3 +40,7 @@
 .color-red {
   color: rgb(193, 53, 21);
 }
+.avatar-form{
+  width: 100px;
+  height: 100px;
+}

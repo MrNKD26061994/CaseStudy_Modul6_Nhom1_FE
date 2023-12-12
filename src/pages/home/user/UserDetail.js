@@ -18,14 +18,6 @@ export default function UserDetail() {
         return state.userDetail.userDetail
     })
 
-        // useEffect(() => {
-        //     if(localStorage.getItem('user') != null) {
-        //         dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
-        //     } else {
-        //         navigate('/')
-        //     }
-        // },[])
-
     const showModalEditUser = async () => {
         setShowEditUserModal(true);
     }

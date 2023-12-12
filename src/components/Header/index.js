@@ -17,6 +17,7 @@ function Header() {
     const navigate = useNavigate();
 
     const user = useSelector(state => {
+        console.log("BBBBB",state.user.currentUser)
         return state.user.currentUser
     })
 
@@ -77,6 +78,7 @@ function Header() {
                                 </>
                                 :
                                 <>
+                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/test"}>Test<span className="sr-only">(current)</span></Link>
                                     <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
                                 {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
                                     // Form Admin
