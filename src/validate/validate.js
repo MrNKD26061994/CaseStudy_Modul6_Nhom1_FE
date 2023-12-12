@@ -78,5 +78,21 @@ export const LoginUserSchema = Yup.object().shape({
         .required('Mật khẩu không được bỏ trống')
         ,
 })
+export const ChangePasswordSchema = Yup.object().shape({
+    oldPassword: Yup.string()
+        .required('Mật khẩu cũ không được bỏ trống')
+        ,
+    newPassword: Yup.string()
+        .required('Mật khẩu không được bỏ trống')
+        .min(6, 'Mật khẩu phải chứa ít nhất 6 kí tự')
+        .matches(
+            /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$/,
+            'Mật khẩu phải chứa chữ cái viết hoa, viết thường và ký tự số'
+        ),
+    confirmNewPassword: Yup.string()
+        .required('Vui lòng xác nhận lại mật khẩu')
+        .oneOf([Yup.ref('newPassword'), null], 'Mật khẩu không khớp'),
+})
+
 
 

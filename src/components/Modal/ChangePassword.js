@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useNavigate} from "react-router-dom";
 import {Modal} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
-import {editDetailUser, editPasswordUser, findUserById} from "../../services/userService";
+import {editPasswordUser, findUserById} from "../../services/userService";
+import {ChangePasswordSchema} from "../../validate/validate";
 
 export default function ChangePassword({nameClass}) {
     const [showModal, setShowModal] = useState(false);
@@ -58,6 +59,7 @@ export default function ChangePassword({nameClass}) {
                 centered
             >
                 <Formik initialValues={{oldPassword: '', newPassword: '', confirmNewPassword: ''}}
+                        validationSchema={ChangePasswordSchema}
                         onSubmit={(values, formikBag) => {
                             handleSubmit(values, formikBag);
                         }}>
@@ -72,18 +74,18 @@ export default function ChangePassword({nameClass}) {
                             <div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputEmail1">Old Password:<span className={'text-red'}> *</span></label>
-                                    <Field name={'oldPassword'} type="password" className={'form-control'} id='exampleInputEmail1'
-                                           aria-describedby='emailHelp'/>
+                                    <Field name={'oldPassword'} type="password" className={'form-control'}/>
+                                    <span className='color-red'><ErrorMessage name={'oldPassword'}></ErrorMessage></span>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputPassword1">Password:<span className={'text-red'}> *</span></label>
-                                    <Field name={'newPassword'} type="password" className={"form-control"}
-                                           id="exampleInputPassword1"/>
+                                    <Field name={'newPassword'} type="password" className={"form-control"}/>
+                                    <span className='color-red'><ErrorMessage name={'newPassword'}></ErrorMessage></span>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputPassword2">Confirm Password:<span className={'text-red'}> *</span></label>
-                                    <Field name={'confirmNewPassword'} type="password" className={"form-control"}
-                                           id="exampleInputPassword2"/>
+                                    <Field name={'confirmNewPassword'} type="password" className={"form-control"}/>
+                                    <span className='color-red'><ErrorMessage name={'confirmNewPassword'}></ErrorMessage></span>
                                 </div>
 
                                 <button style={{width: '100%', borderRadius: '5px'}} type="submit"
