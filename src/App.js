@@ -10,6 +10,10 @@ import {useEffect} from "react";
 import {findAdminById, findUserById} from "./services/userService";
 import {useDispatch} from "react-redux";
 import House from "./pages/home/house/House";
+import OwnerList from "./pages/Admin/OwnerList";
+import RenterList from "./pages/Admin/RenterList";
+import ShowListUser from "./pages/Admin/ShowListUser";
+import SetPermisionForRenter from "./pages/Admin/SetPermisionForRenter";
 
 function App() {
     const dispatch = useDispatch();
@@ -39,6 +43,12 @@ function App() {
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
                 <Route path={'houses'} element={<House></House>}></Route>
+                <Route path={'ListOwner'} element={<OwnerList/>} />
+                <Route path={'ListRenter'} element={<RenterList/>} />
+                <Route path={'admin/UserManagement'} element={<ShowListUser/>} />
+                <Route path={'admin/SetPermisionForRenter'} element={<SetPermisionForRenter/>} />
+
+
             </Route>
             <Route path={'/api/registrationConfirm/:token'} element={<Registration/>} ></Route>
         </Routes>

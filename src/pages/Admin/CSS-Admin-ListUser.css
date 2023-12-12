@@ -1,0 +1,36 @@
+.container_table{
+    width: 85%;
+   margin: 0 auto;
+}
+.Header_table {
+    align-items: center;
+    color: #ff385c;
+    vertical-align: middle;
+}
+.stt{
+    width: 2%;
+}
+.account{
+    width: 15%;
+}
+.name{
+    width: 25%;
+}
+.address{
+    width: 10%;
+}
+.email{
+    width: 5%;
+}
+.phone{
+    width: 10%;
+}
+.image{
+    width: 5%;
+}
+.status{
+    width: 20%;
+}
+.bottom2{
+    width: 7%;
+}
