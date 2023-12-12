@@ -45,6 +45,7 @@ const userSlice = createSlice({
             })
             .addCase(editDetailUser.fulfilled, (state, action) => {
                 state.userDetail = action.payload.data
+                state.currentUser = action.payload.data
                 state.isActiveEdit = false;
             })
             .addCase(editPasswordUser.fulfilled, (state, action) => {

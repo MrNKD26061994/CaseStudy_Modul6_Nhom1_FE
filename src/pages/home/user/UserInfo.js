@@ -322,21 +322,12 @@ export default function UserInfo() {
                                         event.target.files[0] && setFileFront(event.target.files[0].name);
                                         uploadIdentify(event)
                                     }} hidden accept={"image/jpeg ,image/png"}/>
-                                    {avatar ?
-                                        <img src={avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
-                                        :
+                                    {user.avatar ?
                                         <img src={user.avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
-
+                                        :
+                                        <MdCloudUpload />
                                     }
                                 </form>
-
-
-                                {/*<img className={'avatar-form'} src={user.avatar} alt=""/>*/}
-
-
-
-
-
 
                             </div>
                         </div>

@@ -17,7 +17,7 @@ function Header() {
     const navigate = useNavigate();
 
     const user = useSelector(state => {
-        console.log("BBBBB",state.user.currentUser)
+        // console.log("BBBBB",state.user.currentUser)
         return state.user.currentUser
     })
 
