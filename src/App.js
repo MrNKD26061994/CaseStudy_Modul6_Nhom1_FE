@@ -7,7 +7,7 @@ import HomeUser from "./pages/home/user/HomeUser";
 import UserInfo from "./pages/home/user/UserInfo";
 import Registration from "./pages/Registration";
 import {useEffect} from "react";
-import {findUserById} from "./services/userService";
+import {findAdminById, findUserById} from "./services/userService";
 import {useDispatch} from "react-redux";
 
 function App() {
@@ -17,11 +17,11 @@ function App() {
         if(localStorage.getItem('user') != null) {
             let user = JSON.parse(localStorage.getItem('user'));
             if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
-
+                dispatch(findAdminById(user.id));
             } else {
-
+                dispatch(findUserById(user.id));
             }
-
+            navigate('/')
 
             console.log("AAAAAAAAA",user)
             // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);

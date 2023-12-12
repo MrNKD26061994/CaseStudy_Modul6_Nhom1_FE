@@ -52,9 +52,17 @@ export const editPasswordUser = createAsyncThunk (
     }
 )
 export const findUserById = createAsyncThunk (
-    'user/findById',
+    'user/findUserById',
     async (id) => {
         const res = await customAxios.get('users/' + id);
+        console.log(res)
+        return res;
+    }
+)
+export const findAdminById = createAsyncThunk (
+    'user/findAdminById',
+    async (id) => {
+        const res = await customAxios.get('admin/' + id);
         return res;
     }
 )

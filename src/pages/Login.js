@@ -19,17 +19,13 @@ export default function Login() {
 
     const handleLogin = async (values, {resetForm}) => {
         dispatch(login(values)).then((res) => {
-            console.log(res);
             if (res.type === 'user/login/rejected') {
                 navigate('')
                 toast.error("Đăng nhập thất bại!");
                 resetForm();
             }
             else {
-                if(res.payload.data.roles[0].authority==="ROLE_ADMIN"){
-                    navigate('/admin/listUser')
-                } else {
-                navigate('')}
+                navigate('')
                 toast.success("Đăng nhập thành công!");
                 setShowLoginModal(false);
             }

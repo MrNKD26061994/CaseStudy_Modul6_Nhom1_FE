@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {
     closeFormEdit,
     editDetailUser,
-    editPasswordUser,
+    editPasswordUser, findAdminById,
     findUserById, getName,
     login,
     logout, openFormEdit,
@@ -51,6 +51,9 @@ const userSlice = createSlice({
                 state.userDetail = action.payload.data
             })
             .addCase(findUserById.fulfilled, (state, action) => {
+                state.userDetail = action.payload.data
+            })
+            .addCase(findAdminById.fulfilled, (state, action) => {
                 state.userDetail = action.payload.data
             })
             ;

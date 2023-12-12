@@ -31,6 +31,10 @@ function Header() {
 
     }
 
+    function handleManageUser() {
+        navigate('manage-user')
+    }
+
     return (
         <>
             <header>
@@ -73,11 +77,12 @@ function Header() {
                                 </>
                                 :
                                 <>
+                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
                                 {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
                                     // Form Admin
                                     <>
                                         <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
-                                        <div onClick={handleLogout} className="sub-login-item">Quản lý User</div>
+                                        <div onClick={handleManageUser} className="sub-login-item">Quản lý User</div>
                                         <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
                                         <div onClick={handleLogout} className="sub-login-item">Xem danh sách chủ nhà</div>
                                         <div onClick={handleLogout} className="sub-login-item">Xem danh sách người thuê nhà</div>
@@ -90,7 +95,6 @@ function Header() {
                                             // Form Renter
                                             <>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
 
                                                 <ChangePassword nameClass={'sub-login-item'}/>
                                             </>

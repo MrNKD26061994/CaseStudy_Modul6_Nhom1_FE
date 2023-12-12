@@ -14,36 +14,38 @@ const ShowListUser = () => {
     }, []);
     return (
         <>
-            <table className="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">STT</th>
-                    <th scope="col">Tên tài khoản</th>
-                    <th scope="col">Họ và tên</th>
-                    <th scope="col">Địa chỉ</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Số điện thoại</th>
-                    <th scope="col">Ảnh đại diện</th>
-                    <th style={{width:100, columnSpan:2}}></th>
-
-                </tr>
-                </thead>
-                <tbody>
-                {listUser.map((item, index)=>(
+            <div className="container">
+                <table className="table table-striped">
+                    <thead>
                     <tr>
-                        <th scope="row">{index+1}</th>
-                        <td>{item.username}</td>
-                        <td>{item.firstname+" "+item.lastname}</td>
-                        <td>{item.province + "/"+item.district + "/"+ item.ward  + "/"+item.address}</td>
-                        <td>{item.email}</td>
-                        <td>{item.phone}</td>
-                        <td><img style={{width:50,height: 50}} src={item.avatar} alt="Avatar"/></td>
-                        <td><button style={{width:150}} type="button" className="btn btn-outline-primary">Xem chi tiết</button></td>
-                        <td><button style={{width:150}} type="button" className="btn btn-outline-primary">Khóa tài khoản</button></td>
+                        <th scope="col">STT</th>
+                        <th scope="col">Tài khoản</th>
+                        <th scope="col">Họ và tên</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Điện thoại</th>
+                        <th scope="col">Ảnh</th>
+                        <th style={{width:100, columnSpan:2}}></th>
+
                     </tr>
-                ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {listUser.map((item, index)=>(
+                        <tr>
+                            <th scope="row">{index+1}</th>
+                            <td>{item.username}</td>
+                            <td>{item.firstname+" "+item.lastname}</td>
+                            <td>{item.province + "/"+item.district + "/"+ item.ward  + "/"+item.address}</td>
+                            <td>{item.email}</td>
+                            <td>{item.phone}</td>
+                            <td><img style={{width:50,height: 50}} src={item.avatar} alt="Avatar"/></td>
+                            <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Xem</button></td>
+                            <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
         </>
     );
 };
