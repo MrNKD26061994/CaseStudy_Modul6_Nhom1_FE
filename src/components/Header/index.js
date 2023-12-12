@@ -32,7 +32,16 @@ function Header() {
     }
 
     function handleManageUser() {
-        navigate('manage-user')
+        navigate('admin/UserManagement');
+    }
+    function handleListOwner(){
+        navigate("ListOwner");
+    }
+    function handleListRenter(){
+        navigate("ListRenter");
+    }
+    function handleSetPermisionForRenter(){
+        navigate("admin/SetPermisionForRenter")
     }
 
     return (
@@ -78,14 +87,14 @@ function Header() {
                                 :
                                 <>
                                     <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
+                                    <ChangePassword nameClass={'sub-login-item'}/>
                                 {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
                                     // Form Admin
                                     <>
-                                        <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
                                         <div onClick={handleManageUser} className="sub-login-item">Quản lý User</div>
-                                        <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
-                                        <div onClick={handleLogout} className="sub-login-item">Xem danh sách chủ nhà</div>
-                                        <div onClick={handleLogout} className="sub-login-item">Xem danh sách người thuê nhà</div>
+                                        <div onClick={handleListOwner} className="sub-login-item">Xem danh sách chủ nhà</div>
+                                        <div onClick={handleListRenter} className="sub-login-item">Xem danh sách người thuê nhà</div>
+                                        <div onClick={handleSetPermisionForRenter} className="sub-login-item">Xem chờ xác nhận</div>
                                     </>
                                     :
                                     <>
@@ -95,8 +104,6 @@ function Header() {
                                             // Form Renter
                                             <>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
-
-                                                <ChangePassword nameClass={'sub-login-item'}/>
                                             </>
                                         }
                                     </>

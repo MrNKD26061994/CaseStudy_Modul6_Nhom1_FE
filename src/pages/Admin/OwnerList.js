@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import customAxios from "../../services/api";
 import "./CSS-Admin-ListUser.css";
-const ShowListUser = () => {
-    const dispatch = useDispatch();
+
+const OwnerList = () => {
     const navigate = useNavigate();
     const [listUser, setListUser]= useState([]);
     useEffect(() => {
-        customAxios.get('admin/users').then(res => {
+        customAxios.get('admin/owners').then(res => {
             setListUser(res.data)
         })
     }, []);
@@ -18,14 +17,14 @@ const ShowListUser = () => {
                 <table className="table table-striped">
                     <thead>
                     <tr className={"Header_table"}>
-                        <th scope="col">STT</th>
-                        <th scope="col">Tài khoản</th>
-                        <th scope="col">Họ và tên</th>
-                        <th scope="col">Địa chỉ</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Điện thoại</th>
-                        <th scope="col">Ảnh</th>
-                        <th style={{width:100, columnSpan:2}}></th>
+                        <th scope="col" className={"stt"}>STT</th>
+                        <th scope="col" className={"account"}>Tài khoản</th>
+                        <th scope="col" className={"name"}>Họ và tên</th>
+                        <th scope="col" className={"address"}>Địa chỉ</th>
+                        <th scope="col" className={"email"}>Email</th>
+                        <th scope="col" className={"phone"}>Điện thoại</th>
+                        <th scope="col" className={"image"}>Ảnh</th>
+                        <th style={{width:100, columnSpan:2}} className={"bottom2"}></th>
 
                     </tr>
                     </thead>
@@ -49,4 +48,5 @@ const ShowListUser = () => {
         </>
     );
 };
-export default ShowListUser;
+
+export default OwnerList;
