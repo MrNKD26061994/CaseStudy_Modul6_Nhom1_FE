@@ -9,6 +9,7 @@ import Registration from "./pages/Registration";
 import {useEffect} from "react";
 import {findAdminById, findUserById} from "./services/userService";
 import {useDispatch} from "react-redux";
+import House from "./pages/home/house/House";
 
 function App() {
     const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
                 <Route path={''} element={<HomeUser />} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
+                <Route path={'houses'} element={<House></House>}></Route>
             </Route>
             <Route path={'/api/registrationConfirm/:token'} element={<Registration/>} ></Route>
         </Routes>

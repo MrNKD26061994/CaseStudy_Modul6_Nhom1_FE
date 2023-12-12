@@ -89,10 +89,15 @@ function Header() {
                                     </>
                                     :
                                     <>
+                                        <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
+
                                         {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
-                                            <>Chủ nhà</>
+                                            <>
+                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/houses"}>Thông tin căn nhà<span className="sr-only">(current)</span></Link>
+                                            </>
                                             :
                                             // Form Renter
+
                                             <>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
 
