@@ -26,6 +26,11 @@ function Header() {
             toast.success("Logout successful!");
         })
     }
+
+    function handleHomeOwner() {
+
+    }
+
     return (
         <>
             <header>
@@ -64,7 +69,7 @@ function Header() {
 
                                     <Register nameClass={"sub-login-item"}/>
                                     <hr/>
-                                    <div className="sub-login-item">Cho thuê chỗ ở qua Airbnb</div>
+                                    <div onClick={handleHomeOwner} className="sub-login-item">Cho thuê chỗ ở qua Airbnb</div>
                                 </>
                                 :
                                 <>

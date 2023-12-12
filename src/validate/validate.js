@@ -4,11 +4,11 @@ import {checkEmail, checkUsername} from "../services/userService";
 export const FirstLastNameSchema = Yup.object().shape({
     firstname: Yup.string()
         .required('Vui lòng không được để trống')
-        .matches(/^[a-zA-ZÀ-ỹ ]+$/, 'Họ không được chứa kí tự đặc biệt')
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Họ không được chứa kí tự đặc biệt')
     ,
     lastname: Yup.string()
         .required('Vui lòng không được để trống')
-        .matches(/^[a-zA-ZÀ-ỹ ]+$/, 'Tên không được chứa kí tự đặc biệt'),
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Tên không được chứa kí tự đặc biệt'),
 })
 
 export const EmailSchema = Yup.object().shape({
@@ -33,7 +33,7 @@ export const PhoneSchema = Yup.object().shape({
 export const RegisterUserSchema = Yup.object().shape({
     username: Yup.string()
         .required('Vui lòng nhập tên đăng nhập')
-        .matches(/^[a-zA-ZÀ-ỹ ]+$/, 'Tên đăng nhập không được chứa kí tự đặc biệt')
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Tên đăng nhập không được chứa kí tự đặc biệt')
         .test('uniqueUsername', 'Tên đăng nhập đã tồn tại', async (value) => {
             try {
                 await checkUsername(value);
@@ -71,7 +71,7 @@ export const RegisterUserSchema = Yup.object().shape({
 export const LoginUserSchema = Yup.object().shape({
     username: Yup.string()
         .required('Vui lòng nhập tên đăng nhập')
-        .matches(/^[a-zA-ZÀ-ỹ ]+$/, 'Tên đăng nhập không được chứa kí tự đặc biệt')
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Tên đăng nhập không được chứa kí tự đặc biệt')
         ,
 
     password: Yup.string()

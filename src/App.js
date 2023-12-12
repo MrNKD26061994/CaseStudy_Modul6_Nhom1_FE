@@ -16,7 +16,14 @@ function App() {
     useEffect(() => {
         if(localStorage.getItem('user') != null) {
             let user = JSON.parse(localStorage.getItem('user'));
-            console.log(user)
+            if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
+
+            } else {
+
+            }
+
+
+            console.log("AAAAAAAAA",user)
             // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
         } else {
             navigate('/')
