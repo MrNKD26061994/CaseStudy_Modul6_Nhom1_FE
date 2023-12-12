@@ -17,9 +17,9 @@ export default function UserInfo() {
         return state.userDetail.userDetail
     })
 
-    useEffect(() => {
-        dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id));
-    },[])
+    // useEffect(() => {
+    //     dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id));
+    // },[])
 
     const attributeName = useSelector(state => {
         return state.nameEditOne.nameEditOne

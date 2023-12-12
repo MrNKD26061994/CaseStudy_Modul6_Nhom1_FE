@@ -68,32 +68,33 @@ function Header() {
                                 </>
                                 :
                                 <>
+                                {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
+                                    // Form Admin
+                                    <>
+                                        <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
+                                        <div onClick={handleLogout} className="sub-login-item">Quản lý User</div>
+                                        <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
+                                        <div onClick={handleLogout} className="sub-login-item">Xem danh sách chủ nhà</div>
+                                        <div onClick={handleLogout} className="sub-login-item">Xem danh sách người thuê nhà</div>
+                                    </>
+                                    :
+                                    <>
+                                        {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
+                                            <>Chủ nhà</>
+                                            :
+                                            // Form Renter
+                                            <>
+                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
+                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
 
-                                    {user.roles[0].authority === "ROLE_ADMIN" ?
-                                        // giao dien Admin
-                                        <>
-                                            <div onClick={handleLogout} className="sub-login-item">Thông tin Admin</div>
-                                            <div onClick={handleLogout} className="sub-login-item">Quản lý User</div>
-                                            <div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>
-                                            <div onClick={handleLogout} className="sub-login-item">Xem danh sách chủ nhà</div>
-                                            <div onClick={handleLogout} className="sub-login-item">Xem danh sách người thuê nhà</div>
-
-                                        </>
-                                        :
-                                        //Giao dien User
-                                        <>
-                                            <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
-                                            <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
-
-                                            <ChangePassword nameClass={'sub-login-item'}/>
-
-                                            {/*<div onClick={handleLogout} className="sub-login-item">Đổi mật khẩu</div>*/}
-                                        </>
-                                    }
+                                                <ChangePassword nameClass={'sub-login-item'}/>
+                                            </>
+                                        }
+                                    </>
+                                }
                                     <div onClick={handleLogout} className="sub-login-item">Đăng xuất</div>
                                 </>
                             }
-
                         </div>
                     </div>
                 </div>
