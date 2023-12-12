@@ -31,25 +31,25 @@ export default function House(){
                         <th scope="col">Bathroom</th>
                     </tr>
                     </thead>
-                    {/*<tbody>*/}
-                    {/*{*/}
-                    {/*    house?.map((item,index) => (*/}
-                    {/*        <tr>*/}
-                    {/*            <th scope="row">{index +1}</th>*/}
-                    {/*            <td>{item.name}</td>*/}
-                    {/*            <td>{item.address}</td>*/}
-                    {/*            <td>{item.province}</td>*/}
-                    {/*            <td>{item.district}</td>*/}
-                    {/*            <td>{item.acreage}</td>*/}
-                    {/*            <td>{item.bedroom}</td>*/}
-                    {/*            <td>{item.bed}</td>*/}
-                    {/*            <td>{item.bathroom}</td>*/}
+                    <tbody>
+                    {
+                        house?.map((item,index) => (
+                            <tr>
+                                <th scope="row">{index +1}</th>
+                                <td>{item.name}</td>
+                                <td>{item.address}</td>
+                                <td>{item.province}</td>
+                                <td>{item.district}</td>
+                                <td>{item.acreage}</td>
+                                <td>{item.bedroom}</td>
+                                <td>{item.bed}</td>
+                                <td>{item.bathroom}</td>
 
-                    {/*        </tr>*/}
+                            </tr>
 
-                    {/*    ))*/}
-                    {/*}*/}
-                    {/*</tbody>*/}
+                        ))
+                    }
+                    </tbody>
                 </table>
 
             </div>
