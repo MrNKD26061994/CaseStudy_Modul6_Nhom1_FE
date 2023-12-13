@@ -19,6 +19,7 @@ export default function Login() {
 
     const handleLogin = async (values, {resetForm}) => {
         dispatch(login(values)).then((res) => {
+            console.log(res);
             if (res.type === 'user/login/rejected') {
                 navigate('')
                 toast.error("Đăng nhập thất bại!");

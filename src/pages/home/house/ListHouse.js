@@ -4,7 +4,7 @@ import {useEffect} from "react";
 import {getHouses} from "../../../services/houseService";
 
 
-export default function House(){
+export default function ListHouse(){
     const dispatch = useDispatch();
     const house = useSelector( state => {
         console.log(state.house.house.data)

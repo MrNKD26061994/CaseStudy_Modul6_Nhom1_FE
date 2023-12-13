@@ -9,3 +9,10 @@ export const getHouses = createAsyncThunk(
         return res;
     }
 )
+export const addHouse = createAsyncThunk(
+    'house/addHouse',
+    async (data) => {
+        const res = await customAxios.post('house' + data);
+        return data;
+    }
+)
