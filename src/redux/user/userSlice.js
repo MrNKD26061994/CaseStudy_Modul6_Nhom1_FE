@@ -1,12 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
+    AdminApproveRenterToOwner,
     closeFormEdit,
     editDetailUser,
     editPasswordUser, findAdminById,
     findUserById, getName,
     login,
     logout, openFormEdit,
-    register,
+    register, ShowListUserAreWaitingConfirmed,
 } from "../../services/userService";
 
 
@@ -16,6 +17,7 @@ const initialState = {
     userDetail: {},
     isActiveEdit: false,
     nameEditOne: "",
+    listUser:[],
 }
 
 const userSlice = createSlice({
@@ -56,6 +58,19 @@ const userSlice = createSlice({
             })
             .addCase(findAdminById.fulfilled, (state, action) => {
                 state.userDetail = action.payload.data
+            })
+            .addCase(AdminApproveRenterToOwner.fulfilled, (state, action) => {
+                // state.userDetail = action.payload
+                state.listUser = state.listUser.map((item) => {
+                    if(item.id === action.payload.id) {
+                        return action.payload
+                    } else {
+                        return item;
+                    }
+                });
+            })
+            .addCase(ShowListUserAreWaitingConfirmed.fulfilled, (state, action) => {
+                state.listUser = action.payload
             })
             ;
     }

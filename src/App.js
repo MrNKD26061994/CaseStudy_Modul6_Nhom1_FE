@@ -29,8 +29,6 @@ function App() {
                 dispatch(findUserById(user.id));
             }
             navigate('/')
-
-            console.log("AAAAAAAAA",user)
             // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
         } else {
             navigate('/')
