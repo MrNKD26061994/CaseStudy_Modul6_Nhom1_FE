@@ -4,6 +4,12 @@ import heartIcon from "../../assets/imgs/container/heart-icon.png"
 import starIcon from "../../assets/imgs/container/icon-star.png"
 import house1 from "../../assets/imgs/container/house1.png"
 import house2 from "../../assets/imgs/container/house2.png"
+import house3 from "../../assets/imgs/container/A1.webp"
+import house4 from "../../assets/imgs/container/A11.webp"
+import house5 from "../../assets/imgs/container/A2.webp"
+import house6 from "../../assets/imgs/container/a22.webp"
+import house7 from "../../assets/imgs/container/A3.webp"
+import house8 from "../../assets/imgs/container/A33.webp"
 
 function Container() {
 
@@ -15,13 +21,13 @@ function Container() {
                         <div id="carouselExampleControls" className="carousel slide carouselExampleControls" data-ride="carousel" data-interval="false">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
-                                    <img src={house1} className="d-block w-100" alt="..."/>
+                                    <img src={house3} className="d-block w-100" alt="..."/>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src={house2} className="d-block w-100" alt="..."/>
+                                    <img src={house4} className="d-block w-100" alt="..."/>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src={house1} className="d-block w-100" alt="..."/>
+                                    <img src={house3} className="d-block w-100" alt="..."/>
                                 </div>
                             </div>
 
@@ -59,13 +65,13 @@ function Container() {
                         <div id="carouselExampleControls1" className="carousel slide carouselExampleControls" data-ride="carousel" data-interval="false">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
-                                    <img src={house1} className="d-block w-100" alt="..."/>
+                                    <img src={house5} className="d-block w-100" alt="..."/>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src={house2} className="d-block w-100" alt="..."/>
+                                    <img src={house6} className="d-block w-100" alt="..."/>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src={house1} className="d-block w-100" alt="..."/>
+                                    <img src={house5} className="d-block w-100" alt="..."/>
                                 </div>
                             </div>
 
@@ -103,13 +109,13 @@ function Container() {
                         <div id="carouselExampleControls2" className="carousel slide carouselExampleControls" data-ride="carousel" data-interval="false">
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
-                                    <img src={house1} className="d-block w-100" alt="..."/>
+                                    <img src={house7} className="d-block w-100" alt="..."/>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src={house2} className="d-block w-100" alt="..."/>
+                                    <img src={house8} className="d-block w-100" alt="..."/>
                                 </div>
                                 <div className="carousel-item">
-                                    <img src={house1} className="d-block w-100" alt="..."/>
+                                    <img src={house7} className="d-block w-100" alt="..."/>
                                 </div>
                             </div>
 

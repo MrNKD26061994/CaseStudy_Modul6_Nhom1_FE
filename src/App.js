@@ -50,6 +50,9 @@ function App() {
                 <Route path={'admin/UserManagement'} element={<ShowListUser/>} />
                 <Route path={'admin/SetPermisionForRenter'} element={<SetPermisionForRenter/>} />
 
+                <Route path={'add-house'} element={<HouseForm/>} />
+
+
                 <Route path={'test'} element={<Test />} />
             </Route>
             <Route path={'/api/registrationConfirm/:token'} element={<Registration/>} ></Route>
