@@ -7,11 +7,11 @@ const SetPermisionForRenter = () => {
     const navigate = useNavigate();
     const [listUser, setListUser]= useState([]);
     function approveRenterAccount(user){
-        console.log(user)
-        customAxios.put('admin/allowOwnerUserToBeActive',user).then(res=>{
-            toast("Bạn đã duyệt thành công cho tài khoản", res.data.username);
-        })
+            customAxios.put('admin/allowOwnerUserToBeActive',user).then(res=>{
+                toast("Bạn đã duyệt thành công cho tài khoản", res.data.username);
+            })
     }
+
     useEffect(() =>  {
         customAxios.get('admin/showListAccountAreWaitingConfirm').then(res => {
             setListUser(res.data)
