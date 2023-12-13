@@ -24,7 +24,7 @@ export default function AddHouse() {
         let data = {...values, owner: {id: id}}
         // console.log(data)
         await dispatch(addHouse(data))
-        navigate('/')
+        navigate('/houses')
     }
     return (
         <div className={'row'}>

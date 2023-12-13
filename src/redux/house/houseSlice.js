@@ -26,7 +26,7 @@ const houseSlice = createSlice({
                 state.house = action.payload
             })
             .addCase(addHouse.fulfilled,(state, action) => {
-                state.house.push(action.payload)
+                    state['house'].push(action.payload);
             })
             .addCase(addInfoHouse.fulfilled,(state, action) => {
                 state.house = action.payload
