@@ -1,6 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addHouse, getHouses} from "../../services/houseService";
-import {addInfoHouse, getHouses} from "../../services/houseService";
+import {addHouse, getHouses, addInfoHouse} from "../../services/houseService";
 import {closeFormEdit, getName, openFormEdit} from "../../services/userService";
 
 const initialState = {

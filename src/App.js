@@ -9,7 +9,6 @@ import Registration from "./pages/Registration";
 import {useEffect} from "react";
 import {findAdminById, findUserById} from "./services/userService";
 import {useDispatch} from "react-redux";
-import House from "./pages/home/house/House";
 import OwnerList from "./pages/Admin/OwnerList";
 import RenterList from "./pages/Admin/RenterList";
 import ShowListUser from "./pages/Admin/ShowListUser";
@@ -46,7 +45,6 @@ function App() {
                 <Route path={'user-info'} element={<UserInfo />} />
                 <Route path={'add-house'} element={<AddHouse></AddHouse>}></Route>
                 <Route path={'houses'} element={<ListHouse></ListHouse>}></Route>
-                <Route path={'houses'} element={<House></House>}></Route>
                 <Route path={'ListOwner'} element={<OwnerList/>} />
                 <Route path={'ListRenter'} element={<RenterList/>} />
                 <Route path={'admin/UserManagement'} element={<ShowListUser/>} />
