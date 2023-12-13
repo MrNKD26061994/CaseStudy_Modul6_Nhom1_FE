@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import customAxios from "../../services/api";
 import "./CSS-Admin-ListUser.css";
 const RenterList = () => {
@@ -38,7 +38,7 @@ const RenterList = () => {
                             <td>{item.phone}</td>
                             <td><img style={{width: 50, height: 50}} src={item.avatar} alt="Avatar"/></td>
                             <td>{item.status=="AdminConfirm"?"Chờ xác nhận":""}</td>
-                            <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Xem</button></td>
+                            <td><Link className={"btn btn-outline-primary"} to={"/admin/showUserDetail/"+item.id}>Xem</Link></td>
                             <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
 
                         </tr>

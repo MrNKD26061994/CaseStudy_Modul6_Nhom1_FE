@@ -1,16 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import customAxios from "../../services/api";
 import "./CSS-Admin-ListUser.css";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../validate/validate";
+import ViewUserDetail from "./ViewUserDetail";
 
 const OwnerList = () => {
     const navigate = useNavigate();
     const [listUser, setListUser]= useState([]);
+
     useEffect(() => {
         customAxios.get('admin/owners').then(res => {
             setListUser(res.data)
         })
     }, []);
+    function getUserByID(id){
+        localStorage.setItem("idUser", id)
+        navigate()
+    }
     return (
         <>
             <div className="container_table">
@@ -38,7 +46,9 @@ const OwnerList = () => {
                             <td>{item.email}</td>
                             <td>{item.phone}</td>
                             <td><img style={{width:50,height: 50}} src={item.avatar} alt="Avatar"/></td>
-                            <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Xem</button></td>
+                            <td>
+                                <Link className={"btn btn-outline-primary"} to={"/admin/showUserDetail/"+item.id}>Xem</Link>
+                            </td>
                             <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
                         </tr>
                     ))}

@@ -15,6 +15,7 @@ import RenterList from "./pages/Admin/RenterList";
 import ShowListUser from "./pages/Admin/ShowListUser";
 import SetPermisionForRenter from "./pages/Admin/SetPermisionForRenter";
 import Test from "./firebase/Test";
+import ViewUserDetail from "./pages/Admin/ViewUserDetail";
 
 function App() {
     const dispatch = useDispatch();
@@ -48,7 +49,7 @@ function App() {
                 <Route path={'ListRenter'} element={<RenterList/>} />
                 <Route path={'admin/UserManagement'} element={<ShowListUser/>} />
                 <Route path={'admin/SetPermisionForRenter'} element={<SetPermisionForRenter/>} />
-
+                <Route path={'admin/showUserDetail/:id'} element={<ViewUserDetail/>} />
 
                 <Route path={'test'} element={<Test />} />
             </Route>

@@ -2,13 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import customAxios from "../../services/api";
 import "./CSS-Admin-ListUser.css";
+import {toast} from "react-toastify";
 const SetPermisionForRenter = () => {
     const navigate = useNavigate();
     const [listUser, setListUser]= useState([]);
-    useEffect(() => {
+    function approveRenterAccount(user){
+        console.log(user)
+        customAxios.put('admin/allowOwnerUserToBeActive',user).then(res=>{
+            toast("Bạn đã duyệt thành công cho tài khoản", res.data.username);
+        })
+    }
+    useEffect(() =>  {
         customAxios.get('admin/showListAccountAreWaitingConfirm').then(res => {
             setListUser(res.data)
-        })
+        });
+
     }, []);
     return (
         <>
@@ -38,7 +46,7 @@ const SetPermisionForRenter = () => {
                             <td>{item.phone}</td>
                             <td><img style={{width: 50, height: 50}} src={item.avatar} alt="Avatar"/></td>
                             <td>{item.status=="AdminConfirm"?"Chờ xác nhận":""}</td>
-                            <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Duyệt</button></td>
+                            <td><button onClick={() => {approveRenterAccount(item)}} style={{width:"80px"}} type="button" className="btn btn-outline-primary">Duyệt</button></td>
                             <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Hủy</button></td>
 
                         </tr>
