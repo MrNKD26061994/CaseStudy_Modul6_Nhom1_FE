@@ -18,18 +18,18 @@ export default function AddHouse() {
         return state;
     })
 
-    const handleAddHouse = (values) => {
+    const handleAddHouse = async (values) => {
         let id = JSON.parse(localStorage.getItem("user")).id
-        console.log(localStorage.getItem("user"))
+        // console.log(localStorage.getItem("user"))
         let data = {...values, owner: {id: id}}
-        console.log(data)
-        dispatch(addHouse.data)
-        navigate('/house')
+        // console.log(data)
+        await dispatch(addHouse(data))
+        navigate('/')
     }
     return (
         <div className={'row'}>
             <div className="offset-3 col-6 mt-5">
-                <h1 style={{textAlign: 'center'}}>Add Blog</h1>
+                <h1 style={{textAlign: 'center'}}>Thêm nhà</h1>
                 <Formik initialValues={{name: '', address: '', bedroom: '', bathroom: '',description: '', price: ''}} onSubmit={(values) => {
                     handleAddHouse(values)
                 }}>
