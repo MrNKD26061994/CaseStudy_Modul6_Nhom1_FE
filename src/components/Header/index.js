@@ -64,7 +64,8 @@ function Header() {
                 </div>
 
                 <div className="header-right">
-                    <div className="headerRight-left">Cho thuê chỗ ở qua Airbnb</div>
+                    {/*<div className="headerRight-left">Cho thuê chỗ ở qua Airbnb</div>*/}
+                    <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/add-house"}>Cho thuê chỗ ở qua Airbnb</Link>
                     <div className="user">
                         <img className="user-left-icon" src={nav} alt=""/>
                         {user == null ?
@@ -87,7 +88,7 @@ function Header() {
                                 </>
                                 :
                                 <>
-                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/test"}>Test<span className="sr-only">(current)</span></Link>
+                                    {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/test"}>Test<span className="sr-only">(current)</span></Link>*/}
                                     <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
                                     <ChangePassword nameClass={'sub-login-item'}/>
                                 {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
@@ -100,7 +101,7 @@ function Header() {
                                     </>
                                     :
                                     <>
-                                        <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
+                                        {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>*/}
 
                                         {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
                                             <>

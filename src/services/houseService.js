@@ -9,3 +9,10 @@ export const getHouses = createAsyncThunk(
         return res;
     }
 )
+export const addInfoHouse = createAsyncThunk(
+    'add/info',
+    async (data) => {
+        console.log(data)
+        return data;
+    }
+)

@@ -105,7 +105,7 @@ export default function UserInfo() {
 
 
                 <div className="user-info">
-                    <div className={`user-info-left`}>
+                    <div className={`user-info-left w-70`}>
 
                         <div className={`info-item ${(attributeName === `Name`) ?
                                                     isActiveEdit ? `noneEdit` : `blogEdit`
@@ -334,7 +334,7 @@ export default function UserInfo() {
 
 
                     </div>
-                    <div className="user-info-right">
+                    <div className="user-info-right w-25">
                         Right
                     </div>
                 </div>
