@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {addHouse, getHouses} from "../../services/houseService";
 import {addInfoHouse, getHouses} from "../../services/houseService";
 import {closeFormEdit, getName, openFormEdit} from "../../services/userService";
 
@@ -24,6 +25,9 @@ const houseSlice = createSlice({
             })
             .addCase(getHouses.fulfilled,(state, action) => {
                 state.house = action.payload
+            })
+            .addCase(addHouse.fulfilled,(state, action) => {
+                state.house.push(action.payload)
             })
             .addCase(addInfoHouse.fulfilled,(state, action) => {
                 state.house = action.payload

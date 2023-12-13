@@ -2,9 +2,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getHouses} from "../../../services/houseService";
+import "./CSS-ListHouse.css";
 
 
-export default function House(){
+export default function ListHouse(){
     const dispatch = useDispatch();
     const house = useSelector( state => {
         console.log(state.house.house.data)
@@ -15,12 +16,12 @@ export default function House(){
     }, []);
 
     return(
-        <div className={'row'}>
+        <div className={'container_table'}>
             <div className="col-12">
-                <table className="table table-dark">
+                <table className="table table-striped">
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
+                    <tr className={"Header_table"}>
+                        <th scope="col">STT</th>
                         <th scope="col">Name</th>
                         <th scope="col">Address</th>
                         <th scope="col">Province</th>
@@ -29,6 +30,7 @@ export default function House(){
                         <th scope="col">Bedroom</th>
                         <th scope="col">Bed</th>
                         <th scope="col">Bathroom</th>
+                        <th style={{width:100, columnSpan:2}} className={"bottom2"}></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,6 +46,8 @@ export default function House(){
                                 <td>{item.bedroom}</td>
                                 <td>{item.bed}</td>
                                 <td>{item.bathroom}</td>
+                                <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Xem</button></td>
+                                <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
 
                             </tr>
 
