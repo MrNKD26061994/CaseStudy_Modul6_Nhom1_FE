@@ -48,7 +48,8 @@ export default function UserInfo() {
             }
         })
         await dispatch(editDetailUser(data)).then((res) => {
-            if(res.type === 'user/login/rejected') {
+            console.log("aaaaa",res)
+            if(res.type === 'user/edit/rejected') {
                 navigate('/user-info')
                 toast.error("Cập nhật thất bại!");
             } else {

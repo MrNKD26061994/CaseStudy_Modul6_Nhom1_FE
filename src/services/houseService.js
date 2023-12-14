@@ -24,3 +24,26 @@ export const addInfoHouse = createAsyncThunk(
         return data;
     }
 )
+export const openFormEdit = createAsyncThunk(
+    'house/openFormEdit',
+    async () => {
+    }
+)
+export const closeFormEdit = createAsyncThunk(
+    'house/closeFormEdit',
+    async () => {
+    }
+)
+export const editDetailHouse = createAsyncThunk(
+    'house/edit',
+    async (data) => {
+        const res = await customAxios.put('house' + data.id ,data);
+        return res;
+    }
+)
+export const getName = createAsyncThunk(
+    'house/getName',
+    async (name) => {
+        return name;
+    }
+)

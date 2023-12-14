@@ -34,3 +34,21 @@
 .bottom2{
     width: 7%;
 }
+.house-info {
+    display: flex;
+    justify-content: space-between;
+}
+.house-info-left {
+    text-align: left;
+}
+.infoItem-left {
+    width: 80%;
+}
+
+.infoItem-right {
+}
+.editBtn {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}

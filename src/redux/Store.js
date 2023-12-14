@@ -10,6 +10,8 @@ export const store = configureStore({
         userDetail: userReducer,
         isActiveEdit: userReducer,
         nameEditOne: userReducer,
-        house: houseReducer
+        house: houseReducer,
+        houseDetail: houseReducer
+
     }
 })
