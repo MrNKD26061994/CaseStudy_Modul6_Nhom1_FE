@@ -1,15 +1,28 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import customAxios from "../../services/api";
 import "./CSS-Admin-ListUser.css";
+import {useDispatch, useSelector} from "react-redux";
+import {AdminBlockUser, AdminGetListOwner, AdminGetListRenter, AdminOpenUser} from "../../services/userService";
+import {toast} from "react-toastify";
 const RenterList = () => {
-    const navigate = useNavigate();
-    const [listUser, setListUser]= useState([]);
-    useEffect(() => {
-        customAxios.get('admin/renters').then(res => {
-            setListUser(res.data)
-        })
+    const dispatch = useDispatch();
+    const  AdminOpenUserHTML = async (user) =>{
+        await dispatch(AdminBlockUser(user));
+        await dispatch(AdminGetListRenter());
+        await toast("Thao tác thành công!")
+    }
+    const  AdminBlockUserHTML = async (user) =>{
+        await dispatch(AdminOpenUser(user));
+        await dispatch(AdminGetListRenter());
+        await toast("Thao tác thành công!")
+    }
+
+    useEffect(() =>  {
+        dispatch(AdminGetListRenter())
     }, []);
+    const listUser = useSelector(state=>{
+        return state.users.listUser.data;
+    })
     return (
         <>
             <div className="container_table">
@@ -24,11 +37,12 @@ const RenterList = () => {
                         <th scope="col" className={"phone"}>Điện thoại</th>
                         <th scope="col" className={"image"}>Ảnh</th>
                         <th scope="col" className={"status"}>Trạng thái</th>
-                        <th style={{width: 100, columnSpan: 2}} className={"bottom2"}></th>
+                        <th scope="col" className={"image"}>Xem</th>
+                        <th scope="col" className={"image"}>Khóa</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {listUser.map((item, index) => (
+                    {listUser && listUser.map((item, index) => (
                         <tr>
                             <th scope="row">{index + 1}</th>
                             <td>{item.username}</td>
@@ -39,7 +53,19 @@ const RenterList = () => {
                             <td><img style={{width: 50, height: 50}} src={item.avatar} alt="Avatar"/></td>
                             <td>{item.status=="AdminConfirm"?"Chờ xác nhận":""}</td>
                             <td><Link className={"btn btn-outline-primary"} to={"/admin/showUserDetail/"+item.id}>Xem</Link></td>
-                            <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
+                            <td>
+                                <div className="form-check form-switch mt-2">
+                                    {item.status == ("Blocked") ?
+                                        <input onClick={() => {
+                                            AdminOpenUserHTML(item)
+                                        }} className="form-check-input" type="checkbox" id="switchDisabled"
+                                               checked={false}/> :
+                                        <input onClick={() => {
+                                            AdminBlockUserHTML(item)
+                                        }} className="form-check-input" type="checkbox" id="switchDisabled"
+                                               checked={true}/>}
+                                </div>
+                            </td>
 
                         </tr>
                     ))}

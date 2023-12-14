@@ -89,11 +89,11 @@ function Header() {
                                 :
                                 <>
                                     {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/test"}>Test<span className="sr-only">(current)</span></Link>*/}
-                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
                                     <ChangePassword nameClass={'sub-login-item'}/>
                                 {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
                                     // Form Admin
                                     <>
+                                        <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/admin/currentAdminDetail"}>Xem thông tin Admin<span className="sr-only">(current)</span></Link>
                                         <div onClick={handleManageUser} className="sub-login-item">Quản lý User</div>
                                         <div onClick={handleListOwner} className="sub-login-item">Xem danh sách chủ nhà</div>
                                         <div onClick={handleListRenter} className="sub-login-item">Xem danh sách người thuê nhà</div>
@@ -105,12 +105,14 @@ function Header() {
 
                                         {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
                                             <>
+                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/houses"}>Thông tin căn nhà<span className="sr-only">(current)</span></Link>
                                             </>
                                             :
                                             // Form Renter
 
                                             <>
+                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
                                             </>
                                         }

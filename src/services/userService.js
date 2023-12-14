@@ -83,13 +83,27 @@ export const checkUsername = (username) => {
     return res;
 }
 
-// export const AdminApproveRenterToOwner = (user) => {
-//     let res = customAxios.put(`admin/allowOwnerUserToBeActive`, user)
-//     return res;
-// }
-//
-
-
+export const AdminGetListOwner = createAsyncThunk (
+    'admin/owners',
+    async () => {
+        const res = await customAxios.get(`admin/owners`);
+        return res;
+    }
+)
+export const AdminGetListRenter = createAsyncThunk (
+    'admin/renters',
+    async () => {
+        const res = await customAxios.get(`admin/renters`);
+        return res;
+    }
+)
+export const AdminGetListUser = createAsyncThunk (
+    'admin/users',
+    async () => {
+        const res = await customAxios.get(`admin/users`);
+        return res;
+    }
+)
 
 export const AdminApproveRenterToOwner =  createAsyncThunk (
     'admin/allowOwnerUserToBeActive',
@@ -103,6 +117,22 @@ export const ShowListUserAreWaitingConfirmed =  createAsyncThunk (
     'admin/ShowListUserAreWaitingConfirmed',
     async (user) => {
         const res = await customAxios.get('admin/showListAccountAreWaitingConfirm');
+        return res.data;
+    }
+)
+
+export const AdminBlockUser =  createAsyncThunk (
+    'admin/blockUser',
+    async (user) => {
+        const res = await customAxios.put('admin/blockUser',user);
+        return res.data;
+    }
+)
+
+export const AdminOpenUser =  createAsyncThunk (
+    'admin/openUser',
+    async (user) => {
+        const res = await customAxios.put('admin/openUser',user);
         return res.data;
     }
 )

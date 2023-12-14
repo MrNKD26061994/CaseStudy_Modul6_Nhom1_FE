@@ -1,26 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import customAxios from "../../services/api";
 import "./CSS-Admin-ListUser.css";
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
 import {AdminApproveRenterToOwner, ShowListUserAreWaitingConfirmed} from "../../services/userService";
 const SetPermisionForRenter = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const  approveRenterAccount = async (user) =>{
           await dispatch(AdminApproveRenterToOwner(user));
         await  dispatch(ShowListUserAreWaitingConfirmed());
            toast("bạn đã câp quyền chủ nhà thành công!")
     }
-
     useEffect(() =>  {
         dispatch(ShowListUserAreWaitingConfirmed())
     }, []);
 
     const listUser = useSelector(state=>{
-        console.log("AAAAAAAAAAAAA", state.users.listUser);
-        return state.users.listUser;
+        return state.users.listUserWaitingConfirm;
     })
     return (
         <>
@@ -35,7 +30,8 @@ const SetPermisionForRenter = () => {
                         <th scope="col" className={"email"}>Email</th>
                         <th scope="col" className={"phone"}>Điện thoại</th>
                         <th scope="col" className={"image"} colSpan="2">Chứng minh thư</th>
-                        <th style={{width: 100, columnSpan: 2}} className={"bottom2"}></th>
+                        <th scope="col" className={"image"}>Duyệt</th>
+                        <th scope="col" className={"image"}>Hủy</th>
                     </tr>
                     </thead>
                     <tbody>
