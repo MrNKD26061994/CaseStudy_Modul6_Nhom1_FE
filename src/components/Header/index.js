@@ -106,7 +106,6 @@ function Header() {
                                         {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
                                             <>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/add-house"}>Tạo mới nhà cho thuê<span className="sr-only">(current)</span></Link>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/houses"}>Thông tin căn nhà<span className="sr-only">(current)</span></Link>
                                             </>
                                             :

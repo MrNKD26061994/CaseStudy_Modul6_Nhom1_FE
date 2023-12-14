@@ -18,7 +18,7 @@ const ShowAdminDetail = () => {
 
                 <div className="user-info">
                     <div className="AvatarImageClass">
-                        <img src={user.avatar} alt="Avatar"/>
+                        <img src={currentAdminUser.avatar} alt="Avatar"/>
                     </div>
                     <div className={`user-info-left`}>
 

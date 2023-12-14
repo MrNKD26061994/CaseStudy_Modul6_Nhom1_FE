@@ -4,6 +4,7 @@ import "./CSS-Admin-ListUser.css";
 import {useDispatch, useSelector} from "react-redux";
 import {AdminBlockUser, AdminGetListOwner, AdminGetListRenter, AdminOpenUser} from "../../services/userService";
 import {toast} from "react-toastify";
+import eyeImage from "../../assets/imgs/container/1-1-2.png";
 const RenterList = () => {
     const dispatch = useDispatch();
     const  AdminOpenUserHTML = async (user) =>{
@@ -52,7 +53,9 @@ const RenterList = () => {
                             <td>{item.phone}</td>
                             <td><img style={{width: 50, height: 50}} src={item.avatar} alt="Avatar"/></td>
                             <td>{item.status=="AdminConfirm"?"Chờ xác nhận":""}</td>
-                            <td><Link className={"btn btn-outline-primary"} to={"/admin/showUserDetail/"+item.id}>Xem</Link></td>
+                            <td><Link  to={"/admin/showUserDetail/" + item.id}>
+                                <img className={"eyeImageCSS"} src={eyeImage} alt=""/>
+                            </Link></td>
                             <td>
                                 <div className="form-check form-switch mt-2">
                                     {item.status == ("Blocked") ?

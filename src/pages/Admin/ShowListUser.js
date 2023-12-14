@@ -11,6 +11,8 @@ import {
     AdminOpenUser
 } from "../../services/userService";
 import {toast} from "react-toastify";
+import eyeImage from "../../assets/imgs/container/1-1-2.png";
+import {logDOM} from "@testing-library/react";
 const ShowListUser = () => {
     const dispatch = useDispatch();
     const  AdminOpenUserHTML = async (user) =>{
@@ -28,7 +30,9 @@ const ShowListUser = () => {
         dispatch(AdminGetListUser())
     }, []);
     const listUser = useSelector(state=>{
+        console.log(state, "DXsddsgfdhgfdsgfdsgds");
         return state.users.listUser.data;
+
     })
     return (
         <>
@@ -49,6 +53,7 @@ const ShowListUser = () => {
                     </thead>
                     <tbody>
                     {listUser && listUser.map((item, index)=>(
+                         item.roles[0].name !=="ROLE_ADMIN" ?
                         <tr>
                             <th scope="row">{index+1}</th>
                             <td>{item.username}</td>
@@ -57,9 +62,11 @@ const ShowListUser = () => {
                             <td>{item.email}</td>
                             <td>{item.phone}</td>
                             <td><img style={{width:50,height: 50}} src={item.avatar} alt="Avatar"/></td>
-                            <td><Link className={"btn btn-outline-primary"} to={"/admin/showUserDetail/"+item.id}>Xem</Link></td>
+                            <td><Link  to={"/admin/showUserDetail/" + item.id}>
+                                <img className={"eyeImageCSS"} src={eyeImage} alt=""/>
+                            </Link></td>
                             <td>
-                                <div className="form-check form-switch mt-2">
+                            <div className="form-check form-switch mt-2">
                                     {item.status == ("Blocked") ?
                                         <input onClick={() => {
                                             AdminOpenUserHTML(item)
@@ -71,7 +78,7 @@ const ShowListUser = () => {
                                                checked={true}/>}
                                 </div>
                             </td>
-                        </tr>
+                        </tr>:""
                     ))}
                     </tbody>
                 </table>

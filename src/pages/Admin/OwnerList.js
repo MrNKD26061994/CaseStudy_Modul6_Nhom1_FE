@@ -8,6 +8,7 @@ import {
     ShowListUserAreWaitingConfirmed
 } from "../../services/userService";
 import {toast} from "react-toastify";
+import eyeImage from "../../assets/imgs/container/1-1-2.png"
 
 const OwnerList = () => {
     const dispatch = useDispatch();
@@ -56,7 +57,8 @@ const OwnerList = () => {
                             <td>{item.phone}</td>
                             <td><img style={{width:50,height: 50}} src={item.avatar} alt="Avatar"/></td>
                             <td>
-                                <Link className={"btn btn-outline-primary"} to={"/admin/showUserDetail/"+item.id}>Xem</Link>
+                                <Link to={"/admin/showUserDetail/"+item.id}><img className={"eyeImageCSS"}
+                                    src={eyeImage} alt=""/></Link>
                             </td>
 
                             <td>
