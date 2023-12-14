@@ -13,15 +13,14 @@ import {v4} from "uuid";
 import icon1 from "../../../assets/imgs/container/1.png"
 import icon2 from "../../../assets/imgs/container/1-1.png"
 import icon3 from "../../../assets/imgs/container/1-1-2.png"
+import become from "../../../assets/imgs/container/become-an-owner.png"
 
 
-export default function UserInfo() {
-
+export default function BecomeOwner() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const user = useSelector(state => {
-        // console.log(state.userDetail.userDetail)
         return state.userDetail.userDetail
     })
 
@@ -44,7 +43,6 @@ export default function UserInfo() {
 
     async function handleEdit(values, {resetForm}) {
         let data = {...user, ...values}
-        console.log(data)
         await dispatch(editDetailUser(data)).then((res) => {
             if(res.type === 'user/edit/rejected') {
                 navigate('/user-info')
@@ -57,6 +55,22 @@ export default function UserInfo() {
         navigate('')
     }
 
+     function handleProfileOwner() {
+        let data = {...user}
+         data.status = "AdminConfirm";
+        console.log(data)
+        dispatch(editDetailUser(data)).then((res) => {
+            if (res.type === 'user/edit/rejected') {
+                navigate('/')
+                toast.error("Đăng ký thành chủ nhà thất bại!");
+            } else {
+                navigate('/')
+                toast.success("Đăng ký thành chủ nhà thành công!");
+            }
+        })
+        navigate('')
+    }
+
     const uploadIdentify = (event) => {
         if (event.target.files[0] == null) return;
         const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
@@ -64,11 +78,17 @@ export default function UserInfo() {
         toast.info("Đang tải ảnh lên", {autoClose: 500,});
         uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
             getDownloadURL(snapshot.ref).then(async (url) => {
-
                 let data = {...user}
-                data.avatar = url;
+                if (name === "frontside") {
+                    data.frontside = url;
+                } else if (name === "backside") {
+                    data.backside = url;
+                } else if (name === "avatar") {
+                    data.avatar = url;
+                }
+
                 await dispatch(editDetailUser(data)).then((res) => {
-                    if (res.type === 'user/login/rejected') {
+                    if (res.type === 'user/edit/rejected') {
                         navigate('/user-info')
                         toast.error("Cập nhật thất bại!");
                     } else {
@@ -79,6 +99,34 @@ export default function UserInfo() {
                 navigate('')
             });
         })
+    }
+
+    function handleBecomeOwner() {
+        if (!user.frontside) {
+            document.getElementById("frontside-errors").innerHTML = "Bạn chưa chọn mặt trước CCCD";
+        } else {
+            document.getElementById("frontside-errors").innerHTML = "";
+
+        }
+        if (!user.backside) {
+            document.getElementById("backside-errors").innerHTML = "Bạn chưa chọn mặt sau CCCD";
+        } else {
+            document.getElementById("backside-errors").innerHTML = "";
+        }
+        if(!user.avatar) {
+            document.getElementById("avatar-errors").innerHTML = "Bạn chưa chọn mặt sau ảnh đại diện";
+        } else {
+            document.getElementById("avatar-errors").innerHTML = "";
+        }
+        if(!user.address) {
+            document.getElementById("address-errors").innerHTML = "Bạn cần nhập địa chỉ";
+        } else {
+            document.getElementById("address-errors").innerHTML = "";
+        }
+
+        if(user.backside && user.frontside && user.avatar && user.address) {
+            handleProfileOwner();
+        }
     }
 
     return (
@@ -99,8 +147,8 @@ export default function UserInfo() {
                     <div className={`user-info-left w-65`}>
 
                         <div className={`info-item ${(attributeName === `Name`) ?
-                                                    isActiveEdit ? `noneEdit` : `blogEdit`
-                                                    : `blogEdit`}`}>
+                            isActiveEdit ? `noneEdit` : `blogEdit`
+                            : `blogEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Tên pháp lý</p>
                                 {user.lastname || user.firstname ?
@@ -119,8 +167,8 @@ export default function UserInfo() {
                             </div>
                         </div>
                         <div className={`info-item ${(attributeName === `Name`) ?
-                                                    isActiveEdit ? `blogEdit` : `noneEdit`
-                                                    : `noneEdit`}`}>
+                            isActiveEdit ? `blogEdit` : `noneEdit`
+                            : `noneEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Tên pháp lý</p>
                                 <p className="color-grey">Đây là tên trên giấy tờ thông hành của bạn, có thể là giấy phép hoặc hộ chiếu</p>
@@ -174,8 +222,8 @@ export default function UserInfo() {
                             </div>
                         </div>
                         <div className={`info-item ${(attributeName === `Email`) ?
-                                                isActiveEdit ? `blogEdit` : `noneEdit`
-                                                : `noneEdit`}`}>
+                            isActiveEdit ? `blogEdit` : `noneEdit`
+                            : `noneEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Địa chỉ email</p>
                                 <p className="color-grey">Sử dụng địa chỉ mà bạn luôn có quyền truy cập.</p>
@@ -228,8 +276,8 @@ export default function UserInfo() {
                                 <></>}
                         </div>
                         <div className={`info-item ${(attributeName === `Phone`) ?
-                                            isActiveEdit ? `blogEdit` : `noneEdit`
-                                            : `noneEdit`}`}>
+                            isActiveEdit ? `blogEdit` : `noneEdit`
+                            : `noneEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Số điện thoại</p>
                                 <p className="color-grey">Thêm số điện thoại để khách đã xác nhận và Airbnb có thể liên hệ với bạn. Bạn có thể thêm các số điện thoại khác và chọn mục đích sử dụng tương ứng.</p>
@@ -259,8 +307,8 @@ export default function UserInfo() {
 
 
                         <div className={`info-item ${(attributeName === `Address`) ?
-                                        isActiveEdit ? `noneEdit` : `blogEdit`
-                                        : `blogEdit`}`}>
+                            isActiveEdit ? `noneEdit` : `blogEdit`
+                            : `blogEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Địa chỉ</p>
                                 {user.address ?
@@ -268,6 +316,7 @@ export default function UserInfo() {
                                     :
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
+                                <span id='address-errors' className={'text-danger'}/>
                             </div>
                             <div className="infoItem-right">
                                 {user.address ?
@@ -308,26 +357,72 @@ export default function UserInfo() {
                         <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
                             <div className="infoItem-left">
                                 <p>Ảnh đại diện</p>
+                                <span id='avatar-errors' className={'text-danger'}/>
+                            </div>
+                            <div className="infoItem-right">
+
+                                <form className='identify'
+                                      onClick={() => document.querySelector("#avatarSideFile").click()}>
+                                    <input type="file" id="avatarSideFile" name="avatar" onChange={(event) => {
+                                        uploadIdentify(event)
+                                    }} hidden accept={"image/jpeg ,image/png"}/>
+                                    {user.avatar ?
+                                        <img src={user.avatar} id="frontside" width={'80px'} height={'80px'} alt={'img'}/>
+                                        :
+                                        <MdCloudUpload color={"#1475cf"} size={80} />
+                                    }
+                                </form>
+                            </div>
+                        </div>
+
+                        <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
+                            <div className="infoItem-left">
+                                <p>CCCD mặt trước</p>
+                                <span id='frontside-errors' className={'text-danger'}/>
                             </div>
                             <div className="infoItem-right">
 
                                 <form className='identify'
                                       onClick={() => document.querySelector("#frontSideFile").click()}>
-                                    <input type="file" id="frontSideFile" name="avatar" onChange={(event) => {
+                                    <input type="file" id="frontSideFile" name="frontside" onChange={(event) => {
                                         uploadIdentify(event)
                                     }} hidden accept={"image/jpeg ,image/png"}/>
-                                    {user.avatar ?
-                                        <img src={user.avatar} id="frontside" width={'150px'} height={'150px'} alt={'img'}/>
+                                    {user.frontside ?
+                                        <img src={user.frontside} id="frontside" width={'80px'} height={'80px'} alt={'img'}/>
                                         :
-                                        <MdCloudUpload />
+                                        <MdCloudUpload color={"#1475cf"} size={80}/>
                                     }
                                 </form>
-
                             </div>
                         </div>
 
+                        <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
+                            <div className="infoItem-left">
+                                <p>CCCD mặt sau</p>
+                                <span id='backside-errors' className={'text-danger'}/>
+                            </div>
+                            <div className="infoItem-right">
 
+                                <form className='identify'
+                                      onClick={() => document.querySelector("#backSideFile").click()}>
+                                    <input type="file" id="backSideFile" name="backside" onChange={(event) => {
+                                        uploadIdentify(event)
+                                    }} hidden accept={"image/jpeg ,image/png"}/>
+                                    {user.backside ?
+                                        <img src={user.backside} id="frontside" width={'80px'} height={'80px'} alt={'img'}/>
+                                        :
+                                        <MdCloudUpload color={"#1475cf"} size={80}/>
+                                    }
+                                </form>
+                            </div>
+                        </div>
+
+                        <div style={{width: '100%', marginTop: '16px', display: "flex", justifyContent: 'center', alignItems: 'center'}}>
+                            <div style={{fontWeight: '700', padding: '16px 16px'}} className="btn btn-danger" onClick={handleBecomeOwner}><img style={{marginRight: '16px'}} src={become} alt=""/>Làm chủ nhà tại Airbnb</div>
+                        </div>
                     </div>
+
+
                     <div className="user-info-right w-30">
                         <div className="user-right">
                             <div className="user-right-item">

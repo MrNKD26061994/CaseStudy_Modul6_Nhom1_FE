@@ -47,6 +47,26 @@
 }
 
 .user-info-right {
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+}
+.user-right{
+    padding: 24px;
+}
+.user-right-item{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+.user-right-item h5{
+    margin: 16px 0 0 0;
+}
+.user-right-item p{
+    margin: 16px 0 0 0;
+}
+.user-right hr {
+    margin: 32px 0;
 }
 
 
