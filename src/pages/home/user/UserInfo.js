@@ -280,7 +280,7 @@ export default function UserInfo() {
                         <div className={`info-item ${(attributeName === `Address`) ?
                             isActiveEdit ? `blogEdit` : `noneEdit`
                             : `noneEdit`}`}>
-                            <div className="infoItem-left">
+                            <div className="infoItem-left w-65">
                                 <p>Địa chỉ</p>
                                 <p className="color-grey">Sử dụng địa chỉ thường trú để nhận thư.</p>
                                 <Formik initialValues={{address: user.address}}

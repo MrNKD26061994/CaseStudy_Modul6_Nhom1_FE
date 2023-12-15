@@ -17,10 +17,10 @@ const ShowAdminDetail = () => {
                 <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
 
                 <div className="user-info">
-                    <div className="AvatarImageClass">
+                    <div className="AvatarImageClass w-30">
                         <img src={currentAdminUser.avatar} alt="Avatar"/>
                     </div>
-                    <div className={`user-info-left`}>
+                    <div className={`user-info-left w-30`}>
 
                         <div className={`info-item blogEdit`}>
                             <div className="infoItem-left">
@@ -71,7 +71,7 @@ const ShowAdminDetail = () => {
 
 
                     </div>
-                    <div className="user-info-right">
+                    <div className="user-info-right w-30">
                         <div className="user-right">
                             <div className="user-right-item">
                                 <img src={icon1} alt=""/>
