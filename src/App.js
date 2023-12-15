@@ -9,7 +9,6 @@ import Registration from "./pages/Registration";
 import {useEffect} from "react";
 import {findAdminById, findUserById} from "./services/userService";
 import {useDispatch} from "react-redux";
-import House from "./pages/home/house/House";
 import OwnerList from "./pages/Admin/OwnerList";
 import RenterList from "./pages/Admin/RenterList";
 import ShowListUser from "./pages/Admin/ShowListUser";
