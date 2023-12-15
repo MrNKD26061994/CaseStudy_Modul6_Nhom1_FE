@@ -18,6 +18,7 @@ import ViewUserDetail from "./pages/Admin/ViewUserDetail";
 import ShowAdminDetail from "./pages/Admin/ShowAdminDetail";
 import ListHouse from "./pages/home/house/ListHouse";
 import AddHouse from "./pages/home/house/AddHouse";
+import EditHouse from "./pages/home/house/EditHouse";
 import BecomeOwner from "./pages/home/user/BecomeOwner";
 import HouseDetail from "./pages/home/web/HouseDetail";
 
@@ -46,6 +47,7 @@ function App() {
                 <Route path={''} element={<HomeUser />} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
+                <Route path={'edit-house/:id'} element={<EditHouse></EditHouse>}></Route>
                 <Route path={'add-house'} element={<AddHouse></AddHouse>}></Route>
                 <Route path={'houses'} element={<ListHouse></ListHouse>}></Route>
                 <Route path={'ListOwner'} element={<OwnerList/>} />

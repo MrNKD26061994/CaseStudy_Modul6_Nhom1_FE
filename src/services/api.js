@@ -8,6 +8,7 @@ customAxios.interceptors.request.use(config => {
     if (account && account.accessToken){
         config.headers.Authorization = `Bearer ${account.accessToken}`;
     }
+    console.log(config)
     return config;
 })
 

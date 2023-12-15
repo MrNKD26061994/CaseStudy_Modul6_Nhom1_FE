@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addHouse, getHouses, addInfoHouse} from "../../services/houseService";
-import {closeFormEdit, getName, openFormEdit} from "../../services/userService";
+import {addHouse, getHouses, addInfoHouse, editDetailHouse, findHouseById} from "../../services/houseService";
+import {closeFormEdit, openFormEdit, getName} from "../../services/houseService";
+import {findUserById} from "../../services/userService";
 
 const initialState = {
     house: [],
@@ -26,12 +27,19 @@ const houseSlice = createSlice({
                 state.house = action.payload
             })
             .addCase(addHouse.fulfilled,(state, action) => {
-                    state['house'].push(action.payload);
+                state['house'].push(action.payload);
             })
             .addCase(addInfoHouse.fulfilled,(state, action) => {
                 state.house = action.payload
                 state.isActiveEdit = false
                 state.nameEditOne = ""
+            })
+            .addCase(editDetailHouse.fulfilled,(state, action) => {
+                state.houseDetail = action.payload.data
+                state.isActiveEdit = false;
+            })
+            .addCase(findHouseById.fulfilled, (state, action) => {
+                state.houseDetail = action.payload.data
             })
 
     }

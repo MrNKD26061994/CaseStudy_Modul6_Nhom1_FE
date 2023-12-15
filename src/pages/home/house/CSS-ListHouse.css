@@ -34,3 +34,88 @@
 .bottom2{
     width: 7%;
 }
+.house-info {
+    display: flex;
+    justify-content: space-between;
+}
+.house-info-left {
+    text-align: left;
+}
+.infoItem-left {
+    width: 80%;
+}
+
+.infoItem-right {
+}
+.editBtn {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}
+.house-info-right {
+}
+.blogEdit {
+    display: flex;
+}
+
+.noneEdit {
+    display: none;
+}
+
+.color-grey {
+    color: #717171;
+}
+
+.color-red {
+    color: rgb(193, 53, 21);
+}
+
+.user-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-info-left {
+    text-align: left;
+}
+
+.info-item {
+    justify-content: space-between;
+    border-bottom: 1px solid #ebebeb;
+    margin-top: 16px;
+}
+
+.user-info-item {
+
+}
+
+.infoItem-left {
+    width: 80%;
+}
+
+.infoItem-right {
+}
+
+.editBtn {
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.user-info-right {
+}
+
+
+
+
+
+
+
+
+.breadcrumb-item+.breadcrumb-item::before {
+    float: left;
+    padding-right: .5rem;
+    color: #6c757d;
+    content: ">";
+}
+

@@ -1,8 +1,9 @@
 
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {getHouses} from "../../../services/houseService";
 import "./CSS-ListHouse.css";
+import {Link} from "react-router-dom";
 
 
 export default function ListHouse(){
@@ -46,7 +47,7 @@ export default function ListHouse(){
                                 <td>{item.bedroom}</td>
                                 <td>{item.bed}</td>
                                 <td>{item.bathroom}</td>
-                                <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Xem</button></td>
+                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/edit-house/"+ item.id}>Chỉnh sửa căn nhà<span className="sr-only">(current)</span></Link>
                                 <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
 
                             </tr>
