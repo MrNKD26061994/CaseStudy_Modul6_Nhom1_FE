@@ -44,7 +44,7 @@ function App() {
                 <Route path={''} element={<HomeUser />} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
-                <Route path={'edit-house'} element={<EditHouse></EditHouse>}></Route>
+                <Route path={'edit-house/:id'} element={<EditHouse></EditHouse>}></Route>
                 <Route path={'add-house'} element={<AddHouse></AddHouse>}></Route>
                 <Route path={'houses'} element={<ListHouse></ListHouse>}></Route>
                 <Route path={'ListOwner'} element={<OwnerList/>} />

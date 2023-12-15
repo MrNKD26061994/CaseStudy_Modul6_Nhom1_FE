@@ -1,59 +1,55 @@
-import "./style.css"
+import "./CSS-ListHouse.css"
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
-import {Link, useNavigate} from "react-router-dom";
-import {closeFormEdit, editDetailUser, findUserById, getName, openFormEdit} from "../../../services/userService";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {closeFormEdit, editDetailHouse, findHouseById, getName, openFormEdit} from "../../../services/houseService";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
-import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
+// import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
 import {MdCloudUpload} from "react-icons/md";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "../../../firebase/firebase";
 import {v4} from "uuid";
+import {findUserById} from "../../../services/userService";
 
 export default function EditHouse() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const user = useSelector(state => {
-        // console.log(state.userDetail.userDetail)
-        return state.userDetail.userDetail
+    let {id} = useParams();
+    useEffect(() => {
+        dispatch(findHouseById(id))
+    })
+    const house = useSelector(state => {
+        return state.house.houseDetail
     })
 
     const attributeName = useSelector(state => {
-        return state.nameEditOne.nameEditOne
+        return state.house.nameEditOne
     })
     const isActiveEdit = useSelector(state => {
-        return state.isActiveEdit.isActiveEdit
+        return state.house.isActiveEdit
     })
 
-    const showFormEdit = async (attribute) =>{
+    const showFormEditHouse = async (attribute) =>{
         dispatch(openFormEdit()).then(() => {})
         dispatch(getName(attribute)).then(() => {})
 
     }
-    function offFormEdit() {
+    function offFormEditHouse() {
         dispatch(closeFormEdit()).then(() => {})
         dispatch(getName("")).then(() => {})
     }
 
-    async function handleEdit(values, {resetForm}) {
-        let dataTemp = {...values};
-        console.log(dataTemp)
-        let data = {...user}
-        Object.keys(data).map(key => {
-            if(dataTemp[key] !== undefined) {
-                data[key] = dataTemp[key];
-            }
-        })
-        await dispatch(editDetailUser(data)).then((res) => {
-            console.log("aaaaa",res)
-            if(res.type === 'user/edit/rejected') {
-                navigate('/user-info')
+    async function handleEditHouse(values, {resetForm}) {
+        let data = {...house,...values}
+        console.log(data)
+        await dispatch(editDetailHouse(data)).then((res) => {
+            if(res.type === 'house/edit/rejected') {
+                navigate('/edit-house')
                 toast.error("Cập nhật thất bại!");
             } else {
-                navigate('/user-info')
+                navigate('/edit-house')
                 toast.success("Cập nhật thành công!");
             }
         })
@@ -63,33 +59,33 @@ export default function EditHouse() {
     const [fileFront, setFileFront] = useState(null);
     const [avatar, setAvatar] = useState(null);
 
-    const uploadIdentify = (event) => {
-        if (event.target.files[0] == null) return;
-        const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
-        const {name} = event.target;
-        toast.info("Đang tải ảnh lên", {autoClose: 500,});
-        uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then(async (url) => {
-                // toast.success("Tải ảnh thành công", {position: "top-center", autoClose: 2000,});
-                await setAvatar(url);
-                let data = {...user}
-
-                data.avatar = url;
-                console.log(data)
-
-                await dispatch(editDetailUser(data)).then((res) => {
-                    if (res.type === 'user/login/rejected') {
-                        navigate('/user-info')
-                        toast.error("Cập nhật thất bại!");
-                    } else {
-                        navigate('/user-info')
-                        toast.success("Cập nhật thành công!");
-                    }
-                })
-                navigate('')
-            });
-        })
-    }
+    // const uploadIdentify = (event) => {
+    //     if (event.target.files[0] == null) return;
+    //     const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
+    //     const {name} = event.target;
+    //     toast.info("Đang tải ảnh lên", {autoClose: 500,});
+    //     uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
+    //         getDownloadURL(snapshot.ref).then(async (url) => {
+    //             // toast.success("Tải ảnh thành công", {position: "top-center", autoClose: 2000,});
+    //             await setAvatar(url);
+    //             let data = {...user}
+    //
+    //             data.avatar = url;
+    //             console.log(data)
+    //
+    //             await dispatch(editDetailHouse(data)).then((res) => {
+    //                 if (res.type === 'user/login/rejected') {
+    //                     navigate('/user-info')
+    //                     toast.error("Cập nhật thất bại!");
+    //                 } else {
+    //                     navigate('/user-info')
+    //                     toast.success("Cập nhật thành công!");
+    //                 }
+    //             })
+    //             navigate('')
+    //         });
+    //     })
+    // }
 
     return (
         <>
@@ -113,18 +109,18 @@ export default function EditHouse() {
                             : `blogEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Tên ngôi nhà</p>
-                                {user.lastname || user.firstname ?
-                                    <p className='color-grey'>{user.lastname}</p>
+                                {house.name ?
+                                    <p className='color-grey'>{house.name}</p>
                                     :
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
 
                             <div className="infoItem-right">
-                                {user.lastname || user.firstname ?
-                                    <div onClick={() => showFormEdit('Name')} className="editBtn">Chỉnh sửa</div>
+                                {house.name ?
+                                    <div onClick={() => showFormEditHouse('Name')} className="editBtn">Chỉnh sửa</div>
                                     :
-                                    <div onClick={() => showFormEdit('Name')} className="editBtn">Thêm</div>
+                                    <div onClick={() => showFormEditHouse('Name')} className="editBtn">Thêm</div>
                                 }
                             </div>
                         </div>
@@ -133,29 +129,25 @@ export default function EditHouse() {
                             : `noneEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Tên ngôi nhà</p>
-                                <p className="color-grey">Tên ngôi nhà của bạn trên giấy tờ</p>
-                                <Formik initialValues={{firstname: user.firstname}}
+                                <p className="color-grey">Đây là tên ngôi nhà của bạn trên giấy tờ</p>
+                                <Formik initialValues={{name: house.name}}
                                         enableReinitialize={true}
-                                        validationSchema={FirstLastNameSchema}
                                         onSubmit={(values,formikBag) => {
-                                            handleEdit(values, formikBag);
+                                            handleEditHouse(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-md-6 color-red">
-                                                <Field name={'firstname'} type="text" className={'form-control'} placeholder={'First Name:'} />
-                                                <ErrorMessage name={'firstname'}></ErrorMessage>
+                                            <div className="form-group col-md-12 color-red">
+                                                <Field name={'name'} type="text" className={'form-control'} placeholder={'Tên ngôi nhà:'} />
+                                                <ErrorMessage name={'name'}></ErrorMessage>
                                             </div>
-
                                         </div>
-
                                         <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>
-
                                     </Form>
                                 </Formik>
                             </div>
                             <div className="infoItem-right">
-                                <div onClick={offFormEdit} className="editBtn">Hủy</div>
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
                             </div>
                         </div>
 
@@ -164,18 +156,18 @@ export default function EditHouse() {
                             isActiveEdit ? `noneEdit` : `blogEdit`
                             : `blogEdit`}`}>
                             <div className="infoItem-left">
-                                <p>Địa chỉ email</p>
-                                {user.email ?
-                                    <p className='color-grey'>{user.email}</p>
+                                <p>Địa chỉ</p>
+                                {house.address ?
+                                    <p className='color-grey'>{house.address}</p>
                                     :
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
                             <div className="infoItem-right">
-                                {user.email ?
-                                    <div onClick={() => showFormEdit('Address')} className="editBtn">Chỉnh sửa</div>
+                                {house.address ?
+                                    <div onClick={() => showFormEditHouse('Address')} className="editBtn">Chỉnh sửa</div>
                                     :
-                                    <div onClick={() => showFormEdit('Address')} className="editBtn">Thêm</div>
+                                    <div onClick={() => showFormEditHouse('Address')} className="editBtn">Thêm</div>
                                 }
                             </div>
                         </div>
@@ -183,13 +175,13 @@ export default function EditHouse() {
                             isActiveEdit ? `blogEdit` : `noneEdit`
                             : `noneEdit`}`}>
                             <div className="infoItem-left">
-                                <p>Địa chỉ email</p>
+                                <p>Địa chỉ </p>
                                 <p className="color-grey">Địa chỉ ngôi nhà của bạn</p>
-                                <Formik initialValues={{email: user.email}}
+                                <Formik initialValues={{address: house.address}}
                                         enableReinitialize={true}
-                                        validationSchema={EmailSchema}
+                                        // validationSchema={EmailSchema}
                                         onSubmit={(values,formikBag) => {
-                                            handleEdit(values, formikBag);
+                                            handleEditHouse(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
@@ -198,14 +190,12 @@ export default function EditHouse() {
                                                 <ErrorMessage name={'email'}></ErrorMessage>
                                             </div>
                                         </div>
-
                                         <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>
-
                                     </Form>
                                 </Formik>
                             </div>
                             <div className="infoItem-right">
-                                <div onClick={offFormEdit} className="editBtn">Hủy</div>
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
                             </div>
                         </div>
 
@@ -215,17 +205,17 @@ export default function EditHouse() {
                             : `blogEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Số phòng ngủ</p>
-                                {user.phone ?
-                                    <p className='color-grey'>{user.phone}</p>
+                                {house.bedroom ?
+                                    <p className='color-grey'>{house.bedroom}</p>
                                     :
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
                             <div className="infoItem-right">
-                                {user.phone ?
-                                    <div onClick={() => showFormEdit('Bedroom')} className="editBtn">Chỉnh sửa</div>
+                                {house.bedroom ?
+                                    <div onClick={() => showFormEditHouse('Bedroom')} className="editBtn">Chỉnh sửa</div>
                                     :
-                                    <div onClick={() => showFormEdit('Bedroom')} className="editBtn">Thêm</div>
+                                    <div onClick={() => showFormEditHouse('Bedroom')} className="editBtn">Thêm</div>
                                 }
                             </div>
                         </div>
@@ -235,17 +225,17 @@ export default function EditHouse() {
                             <div className="infoItem-left">
                                 <p>Số phòng ngủ</p>
                                 <p className="color-grey">Số phòng ngủ trong ngôi nhà của bạn</p>
-                                <Formik initialValues={{phone: user.phone}}
+                                <Formik initialValues={{bedroom: house.bedroom}}
                                         enableReinitialize={true}
-                                        validationSchema={PhoneSchema}
+                                        // validationSchema={PhoneSchema}
                                         onSubmit={(values,formikBag) => {
-                                            handleEdit(values, formikBag);
+                                            handleEditHouse(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
                                             <div className="form-group col-12 color-red">
-                                                <Field name={'phone'} type="text" className={'form-control'} placeholder={'Số phòng ngủ:'} />
-                                                <ErrorMessage name={'phone'}></ErrorMessage>
+                                                <Field name={'bedroom'} type="text" className={'form-control'} placeholder={'Số phòng ngủ:'} />
+                                                <ErrorMessage name={'bedroom'}></ErrorMessage>
                                             </div>
                                         </div>
 
@@ -255,7 +245,7 @@ export default function EditHouse() {
                                 </Formik>
                             </div>
                             <div className="infoItem-right">
-                                <div onClick={offFormEdit} className="editBtn">Hủy</div>
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
                             </div>
                         </div>
 
@@ -265,17 +255,17 @@ export default function EditHouse() {
                             : `blogEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Số phòng tắm</p>
-                                {user.address ?
-                                    <p className='color-grey'>{user.address}</p>
+                                {house.bathroom ?
+                                    <p className='color-grey'>{house.bathroom}</p>
                                     :
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
                             <div className="infoItem-right">
-                                {user.address ?
-                                    <div onClick={() => showFormEdit('Bathroom')} className="editBtn">Chỉnh sửa</div>
+                                {house.bathroom ?
+                                    <div onClick={() => showFormEditHouse('Bathroom')} className="editBtn">Chỉnh sửa</div>
                                     :
-                                    <div onClick={() => showFormEdit('Bathroom')} className="editBtn">Thêm</div>
+                                    <div onClick={() => showFormEditHouse('Bathroom')} className="editBtn">Thêm</div>
                                 }
                             </div>
                         </div>
@@ -285,15 +275,15 @@ export default function EditHouse() {
                             <div className="infoItem-left">
                                 <p>Số phòng tắm</p>
                                 <p className="color-grey">Số phòng tắm trong ngôi nhà của bạn</p>
-                                <Formik initialValues={{address: user.address}}
+                                <Formik initialValues={{bathroom: house.bathroom}}
                                         enableReinitialize={true}
                                         onSubmit={(values,formikBag) => {
-                                            handleEdit(values, formikBag);
+                                            handleEditHouse(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
                                             <div className="form-group col-12 color-red">
-                                                <Field name={'address'} type="text" className={'form-control'} placeholder={'Số phòng tắm:'} />
+                                                <Field name={'bathroom'} type="text" className={'form-control'} placeholder={'Số phòng tắm:'} />
                                             </div>
                                         </div>
 
@@ -303,7 +293,7 @@ export default function EditHouse() {
                                 </Formik>
                             </div>
                             <div className="infoItem-right">
-                                <div onClick={offFormEdit} className="editBtn">Hủy</div>
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
                             </div>
                         </div>
 
@@ -312,17 +302,17 @@ export default function EditHouse() {
                             : `blogEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Mô tả chung</p>
-                                {user.address ?
-                                    <p className='color-grey'>{user.address}</p>
+                                {house.description ?
+                                    <p className='color-grey'>{house.description}</p>
                                     :
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
                             <div className="infoItem-right">
-                                {user.address ?
-                                    <div onClick={() => showFormEdit('Description')} className="editBtn">Chỉnh sửa</div>
+                                {house.description ?
+                                    <div onClick={() => showFormEditHouse('Description')} className="editBtn">Chỉnh sửa</div>
                                     :
-                                    <div onClick={() => showFormEdit('Description')} className="editBtn">Thêm</div>
+                                    <div onClick={() => showFormEditHouse('Description')} className="editBtn">Thêm</div>
                                 }
                             </div>
                         </div>
@@ -332,15 +322,15 @@ export default function EditHouse() {
                             <div className="infoItem-left">
                                 <p>Mô tả chung</p>
                                 <p className="color-grey">Mô tả chung về ngôi nhà của bạn</p>
-                                <Formik initialValues={{address: user.address}}
+                                <Formik initialValues={{description: house.description}}
                                         enableReinitialize={true}
                                         onSubmit={(values,formikBag) => {
-                                            handleEdit(values, formikBag);
+                                            handleEditHouse(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
                                             <div className="form-group col-12 color-red">
-                                                <Field name={'address'} type="text" className={'form-control'} placeholder={'Mô tả chung về ngôi nhà của bạn:'} />
+                                                <Field name={'description'} type="text" className={'form-control'} placeholder={'Mô tả chung về ngôi nhà của bạn:'} />
                                             </div>
                                         </div>
 
@@ -350,7 +340,7 @@ export default function EditHouse() {
                                 </Formik>
                             </div>
                             <div className="infoItem-right">
-                                <div onClick={offFormEdit} className="editBtn">Hủy</div>
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
                             </div>
                         </div>
 
@@ -359,17 +349,17 @@ export default function EditHouse() {
                             : `blogEdit`}`}>
                             <div className="infoItem-left">
                                 <p>Giá nhà </p>
-                                {user.address ?
-                                    <p className='color-grey'>{user.address}</p>
+                                {house.price ?
+                                    <p className='color-grey'>{house.price}</p>
                                     :
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
                             <div className="infoItem-right">
-                                {user.address ?
-                                    <div onClick={() => showFormEdit('Price')} className="editBtn">Chỉnh sửa</div>
+                                {house.price ?
+                                    <div onClick={() => showFormEditHouse('Price')} className="editBtn">Chỉnh sửa</div>
                                     :
-                                    <div onClick={() => showFormEdit('Price')} className="editBtn">Thêm</div>
+                                    <div onClick={() => showFormEditHouse('Price')} className="editBtn">Thêm</div>
                                 }
                             </div>
                         </div>
@@ -379,10 +369,10 @@ export default function EditHouse() {
                             <div className="infoItem-left">
                                 <p>Giá nhà</p>
                                 <p className="color-grey">Giá ngôi nhà của bạn </p>
-                                <Formik initialValues={{address: user.address}}
+                                <Formik initialValues={{price: house.price}}
                                         enableReinitialize={true}
                                         onSubmit={(values,formikBag) => {
-                                            handleEdit(values, formikBag);
+                                            handleEditHouse(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
@@ -397,31 +387,31 @@ export default function EditHouse() {
                                 </Formik>
                             </div>
                             <div className="infoItem-right">
-                                <div onClick={offFormEdit} className="editBtn">Hủy</div>
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
                             </div>
                         </div>
 
-                        <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
-                            <div className="infoItem-left">
-                                <p>Ảnh đại diện</p>
-                            </div>
-                            <div className="infoItem-right">
+                        {/*<div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>*/}
+                        {/*    <div className="infoItem-left">*/}
+                        {/*        <p>Ảnh đại diện</p>*/}
+                        {/*    </div>*/}
+                        {/*    <div className="infoItem-right">*/}
 
-                                <form className='identify'
-                                      onClick={() => document.querySelector("#frontsideFile").click()}>
-                                    <input type="file" id="frontsideFile" name="avatar" onChange={(event) => {
-                                        event.target.files[0] && setFileFront(event.target.files[0].name);
-                                        uploadIdentify(event)
-                                    }} hidden accept={"image/jpeg ,image/png"}/>
-                                    {user.avatar ?
-                                        <img src={user.avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
-                                        :
-                                        <MdCloudUpload />
-                                    }
-                                </form>
+                        {/*        <form className='identify'*/}
+                        {/*              onClick={() => document.querySelector("#frontsideFile").click()}>*/}
+                        {/*            <input type="file" id="frontsideFile" name="avatar" onChange={(event) => {*/}
+                        {/*                event.target.files[0] && setFileFront(event.target.files[0].name);*/}
+                        {/*                uploadIdentify(event)*/}
+                        {/*            }} hidden accept={"image/jpeg ,image/png"}/>*/}
+                        {/*            {house.avatar ?*/}
+                        {/*                <img src={house.avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>*/}
+                        {/*                :*/}
+                        {/*                <MdCloudUpload />*/}
+                        {/*            }*/}
+                        {/*        </form>*/}
 
-                            </div>
-                        </div>
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
 
                     </div>

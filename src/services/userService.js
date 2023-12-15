@@ -55,7 +55,6 @@ export const findUserById = createAsyncThunk (
     'user/findUserById',
     async (id) => {
         const res = await customAxios.get('users/' + id);
-        console.log(res)
         return res;
     }
 )

@@ -13,14 +13,12 @@ export const addHouse = createAsyncThunk(
     'house/addHouse',
     async (data) => {
         const res = await customAxios.post('house', data);
-        console.log("AAAAAAAAAAAA",res.data)
         return res.data;
     }
 )
 export const addInfoHouse = createAsyncThunk(
     'add/info',
     async (data) => {
-        console.log(data)
         return data;
     }
 )
@@ -37,7 +35,9 @@ export const closeFormEdit = createAsyncThunk(
 export const editDetailHouse = createAsyncThunk(
     'house/edit',
     async (data) => {
-        const res = await customAxios.put('house' + data.id ,data);
+        console.log(data)
+
+        const res = await customAxios.put('house/' + data.id ,data);
         return res;
     }
 )
@@ -45,5 +45,13 @@ export const getName = createAsyncThunk(
     'house/getName',
     async (name) => {
         return name;
+    }
+)
+export const findHouseById =createAsyncThunk(
+    'get/house/id',
+    async (id) => {
+        const res = await customAxios.get('house/' + id);
+        console.log(res)
+        return res;
     }
 )

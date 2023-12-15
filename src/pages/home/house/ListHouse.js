@@ -47,7 +47,7 @@ export default function ListHouse(){
                                 <td>{item.bedroom}</td>
                                 <td>{item.bed}</td>
                                 <td>{item.bathroom}</td>
-                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/edit-house"}>Chỉnh sửa căn nhà<span className="sr-only">(current)</span></Link>
+                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/edit-house/"+ item.id}>Chỉnh sửa căn nhà<span className="sr-only">(current)</span></Link>
                                 <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
 
                             </tr>

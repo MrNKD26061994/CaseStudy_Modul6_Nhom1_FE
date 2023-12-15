@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {addHouse, getHouses, addInfoHouse, editDetailHouse} from "../../services/houseService";
+import {addHouse, getHouses, addInfoHouse, editDetailHouse, findHouseById} from "../../services/houseService";
 import {closeFormEdit, openFormEdit, getName} from "../../services/houseService";
+import {findUserById} from "../../services/userService";
 
 const initialState = {
     house: [],
@@ -36,6 +37,9 @@ const houseSlice = createSlice({
             .addCase(editDetailHouse.fulfilled,(state, action) => {
                 state.houseDetail = action.payload.data
                 state.isActiveEdit = false;
+            })
+            .addCase(findHouseById.fulfilled, (state, action) => {
+                state.houseDetail = action.payload.data
             })
 
     }

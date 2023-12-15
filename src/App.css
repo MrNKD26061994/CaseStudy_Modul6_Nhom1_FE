@@ -56,3 +56,11 @@
 .w-50 {
   width: 50%;
 }
+
+.blogEdit {
+  display: flex;
+}
+
+.noneEdit {
+  display: none;
+}
