@@ -97,6 +97,7 @@ function Header() {
                                 {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
                                     // Form Admin
                                     <>
+                                        <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/admin/currentAdminDetail"}>Xem thông tin Admin<span className="sr-only">(current)</span></Link>
                                         <div onClick={handleManageUser} className="sub-login-item">Quản lý User</div>
                                         <div onClick={handleListOwner} className="sub-login-item">Xem danh sách chủ nhà</div>
                                         <div onClick={handleListRenter} className="sub-login-item">Xem danh sách người thuê nhà</div>

@@ -1,6 +1,6 @@
 .container_table{
     width: 85%;
-   margin: 0 auto;
+    margin: 0 auto;
 }
 .Header_table {
     align-items: center;
@@ -33,9 +33,4 @@
 }
 .bottom2{
     width: 7%;
-}
-.eyeImageCSS{
-    width: 30px;
-    height: 20px;
-    margin-top: 12px;
 }

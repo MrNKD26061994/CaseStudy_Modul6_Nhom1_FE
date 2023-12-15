@@ -1,12 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
+    AdminApproveRenterToOwner,
+    AdminBlockUser,
+    AdminGetListOwner,
+    AdminGetListRenter, AdminGetListUser,
+    AdminOpenUser,
     closeFormEdit,
     editDetailUser,
-    editPasswordUser, findAdminById,
-    findUserById, getName,
+    editPasswordUser,
+    findAdminById,
+    findUserById,
+    getName,
     login,
-    logout, openFormEdit,
+    logout,
+    openFormEdit,
     register,
+    ShowListUserAreWaitingConfirmed,
 } from "../../services/userService";
 
 
@@ -16,6 +25,8 @@ const initialState = {
     userDetail: {},
     isActiveEdit: false,
     nameEditOne: "",
+    listUser:[],
+    listUserWaitingConfirm:[],
 }
 
 const userSlice = createSlice({
@@ -56,6 +67,33 @@ const userSlice = createSlice({
             })
             .addCase(findAdminById.fulfilled, (state, action) => {
                 state.userDetail = action.payload.data
+            })
+            .addCase(AdminApproveRenterToOwner.fulfilled, (state, action) => {
+                state.listUserWaitingConfirm = state.listUserWaitingConfirm.map((item) => {
+                    if(item.id === action.payload.id) {
+                        return action.payload
+                    } else {
+                        return item;
+                    }
+                });
+            })
+            .addCase(ShowListUserAreWaitingConfirmed.fulfilled, (state, action) => {
+                state.listUserWaitingConfirm = action.payload
+            })
+            .addCase(AdminGetListOwner.fulfilled, (state, action) => {
+                state.listUser = action.payload
+            })
+            .addCase(AdminGetListRenter.fulfilled, (state, action) => {
+                state.listUser = action.payload
+            })
+            .addCase(AdminGetListUser.fulfilled, (state, action) => {
+                state.listUser = action.payload
+            })
+            .addCase(AdminBlockUser.fulfilled, (state, action) => {
+                state.userDetail = action.payload
+            })
+            .addCase(AdminOpenUser.fulfilled, (state, action) => {
+                state.userDetail = action.payload
             })
             ;
     }

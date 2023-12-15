@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import customAxios from "../../services/api";
+import "../Admin/ViewUserDetailSetting.css"
+import icon1 from "../../assets/imgs/container/1.png"
+import icon2 from "../../assets/imgs/container/1-1.png"
+import icon3 from "../../assets/imgs/container/1-1-2.png"
 
 
 const ViewUserDetail = () => {
@@ -17,9 +21,13 @@ const ViewUserDetail = () => {
     return (
         <>
             <div className="container">
-            <h1>Thông tin cá nhân</h1>
-            <div className="user-info">
-                <div className={`user-info-left`}>
+            <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
+
+                <div className="user-info">
+                    <div className="AvatarImageClass">
+                        <img src={user.avatar} alt=""/>
+                    </div>
+                    <div className={`user-info-left`}>
 
                     <div className={`info-item blogEdit`}>
                         <div className="infoItem-left">
@@ -71,7 +79,25 @@ const ViewUserDetail = () => {
 
                 </div>
                 <div className="user-info-right">
-                    Right
+                    <div className="user-right">
+                        <div className="user-right-item">
+                            <img src={icon1} alt=""/>
+                            <h5>Tại sao thông tin của tôi không được hiển thị ở đây?</h5>
+                            <p>Chúng tôi đang ẩn một số thông tin tài khoản để bảo vệ danh tính của bạn.</p>
+                        </div>
+                        <hr/>
+                        <div className="user-right-item">
+                            <img src={icon2} alt=""/>
+                            <h5>Tại sao thông tin của tôi không được hiển thị ở đây?</h5>
+                            <p>Chúng tôi đang ẩn một số thông tin tài khoản để bảo vệ danh tính của bạn.</p>
+                        </div>
+                        <hr/>
+                        <div className="user-right-item">
+                            <img src={icon3} alt=""/>
+                            <h5>Tại sao thông tin của tôi không được hiển thị ở đây?</h5>
+                            <p>Chúng tôi đang ẩn một số thông tin tài khoản để bảo vệ danh tính của bạn.</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>

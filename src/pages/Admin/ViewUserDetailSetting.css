@@ -1,0 +1,47 @@
+.user-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+#UserInformation{
+    padding-bottom: 50px;
+    padding-top: 10px;
+}
+
+.AvatarImageClass{
+    width: 30%;
+}
+.AvatarImageClass img{
+    width: 100%;
+}
+
+.user-info-left{
+width: 30%;
+}
+
+.user-info-right{
+width: 30%;
+}
+
+.user-info-right {
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+}
+.user-right{
+    padding: 24px;
+}
+.user-right-item{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+.user-right-item h5{
+    margin: 16px 0 0 0;
+}
+.user-right-item p{
+    margin: 16px 0 0 0;
+}
+.user-right hr {
+    margin: 32px 0;
+}

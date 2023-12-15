@@ -1,23 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import customAxios from "../../services/api";
 import "./CSS-Admin-ListUser.css";
 import {toast} from "react-toastify";
+import {useDispatch, useSelector} from "react-redux";
+import {AdminApproveRenterToOwner, ShowListUserAreWaitingConfirmed} from "../../services/userService";
 const SetPermisionForRenter = () => {
-    const navigate = useNavigate();
-    const [listUser, setListUser]= useState([]);
-    function approveRenterAccount(user){
-        console.log(user)
-        customAxios.put('admin/allowOwnerUserToBeActive',user).then(res=>{
-            toast("Bạn đã duyệt thành công cho tài khoản", res.data.username);
-        })
+    const dispatch = useDispatch();
+    const  approveRenterAccount = async (user) =>{
+          await dispatch(AdminApproveRenterToOwner(user));
+        await  dispatch(ShowListUserAreWaitingConfirmed());
+           toast("bạn đã câp quyền chủ nhà thành công!")
     }
     useEffect(() =>  {
-        customAxios.get('admin/showListAccountAreWaitingConfirm').then(res => {
-            setListUser(res.data)
-        });
-
+        dispatch(ShowListUserAreWaitingConfirmed())
     }, []);
+
+    const listUser = useSelector(state=>{
+        return state.users.listUserWaitingConfirm;
+    })
     return (
         <>
             <div className="container_table">
@@ -30,13 +29,13 @@ const SetPermisionForRenter = () => {
                         <th scope="col" className={"address"}>Địa chỉ</th>
                         <th scope="col" className={"email"}>Email</th>
                         <th scope="col" className={"phone"}>Điện thoại</th>
-                        <th scope="col" className={"image"}>Ảnh</th>
-                        <th scope="col" className={"status"}>Trạng thái</th>
-                        <th style={{width: 100, columnSpan: 2}} className={"bottom2"}></th>
+                        <th scope="col" className={"image"} colSpan="2">Chứng minh thư</th>
+                        <th scope="col" className={"image"}>Duyệt</th>
+                        <th scope="col" className={"image"}>Hủy</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {listUser.map((item, index) => (
+                    {listUser && listUser.map((item, index) => (
                         <tr>
                             <th scope="row">{index + 1}</th>
                             <td>{item.username}</td>
@@ -44,9 +43,11 @@ const SetPermisionForRenter = () => {
                             <td>{item.province + "/" + item.district + "/" + item.ward + "/" + item.address}</td>
                             <td>{item.email}</td>
                             <td>{item.phone}</td>
-                            <td><img style={{width: 50, height: 50}} src={item.avatar} alt="Avatar"/></td>
-                            <td>{item.status=="AdminConfirm"?"Chờ xác nhận":""}</td>
-                            <td><button onClick={() => {approveRenterAccount(item)}} style={{width:"80px"}} type="button" className="btn btn-outline-primary">Duyệt</button></td>
+                            <td><img style={{width: 50, height: 50}} src={item.frontside} /></td>
+                            <td><img style={{width: 50, height: 50}} src={item.backside} /></td>
+                            <td>
+                                <button onClick={() => {
+                                    approveRenterAccount(item)}} style={{width:"80px"}} type="button" className="btn btn-outline-primary">Duyệt</button></td>
                             <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Hủy</button></td>
 
                         </tr>
