@@ -17,6 +17,7 @@ import Test from "./firebase/Test";
 import ViewUserDetail from "./pages/Admin/ViewUserDetail";
 import ListHouse from "./pages/home/house/ListHouse";
 import AddHouse from "./pages/home/house/AddHouse";
+import EditHouse from "./pages/home/house/EditHouse";
 
 function App() {
     const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
                 <Route path={''} element={<HomeUser />} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
+                <Route path={'edit-house'} element={<EditHouse></EditHouse>}></Route>
                 <Route path={'add-house'} element={<AddHouse></AddHouse>}></Route>
                 <Route path={'houses'} element={<ListHouse></ListHouse>}></Route>
                 <Route path={'ListOwner'} element={<OwnerList/>} />
