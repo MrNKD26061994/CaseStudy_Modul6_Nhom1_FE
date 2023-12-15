@@ -17,26 +17,27 @@ import SetPermisionForRenter from "./pages/Admin/SetPermisionForRenter";
 import Test from "./firebase/Test";
 import ViewUserDetail from "./pages/Admin/ViewUserDetail";
 import BecomeOwner from "./pages/home/user/BecomeOwner";
+import HouseDetail from "./pages/home/web/HouseDetail";
 
 function App() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    useEffect(() => {
-        if(localStorage.getItem('user') != null) {
-            let user = JSON.parse(localStorage.getItem('user'));
-            if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
-                dispatch(findAdminById(user.id));
-            } else {
-                dispatch(findUserById(user.id));
-            }
-            navigate('/')
-
-            console.log("AAAAAAAAA",user)
-            // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
-        } else {
-            navigate('/')
-        }
-    },[])
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // useEffect(() => {
+    //     if(localStorage.getItem('user') != null) {
+    //         let user = JSON.parse(localStorage.getItem('user'));
+    //         if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
+    //             dispatch(findAdminById(user.id));
+    //         } else {
+    //             dispatch(findUserById(user.id));
+    //         }
+    //         navigate('/')
+    //
+    //         console.log("AAAAAAAAA",user)
+    //         // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
+    //     } else {
+    //         navigate('/')
+    //     }
+    // },[])
   return (
     <div className="App myContainer">
         <ToastContainer />
@@ -52,6 +53,7 @@ function App() {
                 <Route path={'admin/SetPermisionForRenter'} element={<SetPermisionForRenter/>} />
                 <Route path={'admin/showUserDetail/:id'} element={<ViewUserDetail/>} />
                 <Route path={'become-an-owner'} element={<BecomeOwner />} />
+                <Route path={'house-detail'} element={<HouseDetail />} />
 
                 <Route path={'test'} element={<Test />} />
             </Route>
