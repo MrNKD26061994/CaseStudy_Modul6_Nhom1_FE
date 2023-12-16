@@ -7,6 +7,8 @@ import icon1 from "../../../assets/imgs/web/1.png"
 import icon2 from "../../../assets/imgs/web/1-1.png"
 import icon3 from "../../../assets/imgs/web/1-1-2.png"
 import flower from "../../../assets/imgs/web/flower.png"
+import CalendarTest from "../../../components/CalendarTest";
+
 export default function HouseDetail() {
     return (
         <>
@@ -69,7 +71,7 @@ export default function HouseDetail() {
                                     <img src="https://a0.muscache.com/im/pictures/user/608b7b18-f017-45c5-a265-0f5201997939.jpg?im_w=240" alt=""/>
                                     <div className={'d-flex flex-column align-items-start ml-4'}>
                                         <h5>Chủ nhà/Người tổ chức: Raşit</h5>
-                                        <span>Chủ nhà siêu cấp2 năm kinh nghiệm đón tiếp khách</span>
+                                        <span>Chủ nhà siêu cấp 2 năm kinh nghiệm đón tiếp khách</span>
                                     </div>
                                 </div>
                             <div className="house-info d-flex flex-column">
@@ -77,7 +79,7 @@ export default function HouseDetail() {
                                         <img src={icon1} alt=""/>
                                         <div className="d-flex flex-column align-items-start ml-4">
                                             <h5>Chủ nhà/Người tổ chức: Raşit</h5>
-                                            <span>Chủ nhà siêu cấp2 năm kinh nghiệm đón tiếp khách</span>
+                                            <span>Chủ nhà siêu cấp 2 năm kinh nghiệm đón tiếp khách</span>
                                         </div>
                                     </div>
                                     <div className={'house-info-item d-flex mb-4 justify-content-between'}>
@@ -126,8 +128,10 @@ export default function HouseDetail() {
                                 <button type="button" className="btn btn-outline-secondary mt-5">Hiển thị tất cả 36 tiện nghi</button>
                             </div>
 
-                            <div className="">
-
+                            <div style={{height: '600px', position: "relative"}}>
+                                <h4>1 đêm tại House</h4>
+                                <p>Ngày</p>
+                                <CalendarTest></CalendarTest>
                             </div>
                         </div>
 
