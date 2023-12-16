@@ -1,43 +1,163 @@
 import "./style.css"
 import iconShare from "../../../assets/imgs/web/share.png"
 import iconSave from "../../../assets/imgs/web/save.png"
+import iconAllImg from "../../../assets/imgs/web/all-img.png"
+import iconStar from "../../../assets/imgs/container/icon-star.png"
+import icon1 from "../../../assets/imgs/web/1.png"
+import icon2 from "../../../assets/imgs/web/1-1.png"
+import icon3 from "../../../assets/imgs/web/1-1-2.png"
+import flower from "../../../assets/imgs/web/flower.png"
 export default function HouseDetail() {
     return (
         <>
-            <div className="container">
-                <div className="head-container">
-                    <h4>La Casa Antigua</h4>
-                    <div className="btn-share-save">
-                        <div className="b-share">
-                            <img src={iconShare} alt=""/>
-                            Chia sẻ
-                        </div>
-                        <div className="b-save">
-                            <img src={iconSave} alt=""/>
-                            Lưu
+            <div className="container" style={{height: '2000px'}}>
+                    <div className="head-container">
+                        <h4>La Casa Antigua</h4>
+                        <div className="btn-share-save">
+                            <div className="b-share">
+                                <img src={iconShare} alt=""/>
+                                Chia sẻ
+                            </div>
+                            <div className="b-save">
+                                <img src={iconSave} alt=""/>
+                                Lưu
+                            </div>
                         </div>
                     </div>
-                </div>
                     <div className="row house-img">
                         <div className="img-left col-md-6 p-0">
                             <img src="https://a0.muscache.com/im/pictures/miso/Hosting-611964103002302908/original/ede7b8fc-9f6a-40ec-8f58-45b19d941a18.jpeg?im_w=1200" alt=""/>
                         </div>
                         <div className="img-right col-md-6 p-0">
-                            <div className="row m-0">
-                                <div className="img-right-item col-md-6 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                            <div className="row m-0 h-100">
+                                <div className="img-right-top d-flex pb-2 pl-0 pr-0">
+                                    <div className="img-right-item col-md-6 pl-2 p-0">
+                                        <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    </div>
+                                    <div className="img-right-item col-md-6 pl-2 p-0">
+                                        <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    </div>
                                 </div>
-                                <div className="img-right-item col-md-6 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
-                                </div>
-                                <div className="img-right-item col-md-6 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
-                                </div>
-                                <div className="img-right-item col-md-6 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                <div className="img-right-bottom d-flex p-0">
+                                    <div className="img-right-item col-md-6 pl-2 p-0">
+                                        <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    </div>
+                                    <div className="img-right-item col-md-6 pl-2 p-0">
+                                        <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    </div>
+                                    <div className="all-img">
+                                        <img src={iconAllImg} alt=""/>
+                                        <span>Hiển thị tất cả ảnh</span>
+                                    </div>
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                    <div className="house-content">
+
+                        <div className="house-content-left w-65">
+                            <div className="house-info d-flex flex-column">
+                                    <h2>Toàn bộ nhà tại Ortahisar, Thổ Nhĩ Kỳ</h2>
+                                    <span>7 khách 3 phòng ngủ 4 giường 3 phòng tắm</span>
+                                    <div className='house-info-rating d-flex justify-content-center align-items-center' >
+                                        <img src={iconStar} alt=""/>
+                                        <span>4,87</span><span className={'house-rating'}>119 đánh giá</span>
+                                    </div>
+                                </div>
+                            <div className="house-info-c d-flex align-items-center">
+                                    <img src="https://a0.muscache.com/im/pictures/user/608b7b18-f017-45c5-a265-0f5201997939.jpg?im_w=240" alt=""/>
+                                    <div className={'d-flex flex-column align-items-start ml-4'}>
+                                        <h5>Chủ nhà/Người tổ chức: Raşit</h5>
+                                        <span>Chủ nhà siêu cấp2 năm kinh nghiệm đón tiếp khách</span>
+                                    </div>
+                                </div>
+                            <div className="house-info d-flex flex-column">
+                                    <div className={'house-info-item d-flex mb-4 justify-content-between'}>
+                                        <img src={icon1} alt=""/>
+                                        <div className="d-flex flex-column align-items-start ml-4">
+                                            <h5>Chủ nhà/Người tổ chức: Raşit</h5>
+                                            <span>Chủ nhà siêu cấp2 năm kinh nghiệm đón tiếp khách</span>
+                                        </div>
+                                    </div>
+                                    <div className={'house-info-item d-flex mb-4 justify-content-between'}>
+                                        <img src={icon2} alt=""/>
+                                        <div className="d-flex flex-column align-items-start ml-4">
+                                            <h5>İsmail Hakkı là Chủ nhà siêu cấp</h5>
+                                            <span>Chủ nhà siêu cấp là những Chủ nhà dày dạn kinh nghiệm, được đánh giá cao.</span>
+                                        </div>
+                                    </div>
+                                    <div className={'house-info-item d-flex mb-4 justify-content-between'}>
+                                        <img src={icon3} alt=""/>
+                                        <div className="d-flex flex-column align-items-start ml-4">
+                                            <h5>Địa điểm tuyệt vời</h5>
+                                            <span>90% khách gần đây đã xếp hạng 5 sao cho vị trí này.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div className="house-info">
+                                <h3 style={{textAlign: 'left', paddingBottom: '24px'}}>Nơi này có những gì cho bạn</h3>
+                                <div className="house-utilities d-flex">
+                                    <div className="utili-left w-50 d-flex flex-column">
+                                        <div className="utili-item w-50 pb-3">
+                                            <img src={flower} alt=""/>
+                                            <span>Hướng nhìn ra vườn</span>
+                                        </div>
+                                        <div className="utili-item w-50 pb-3">
+                                            <img src={flower} alt=""/>
+                                            <span>Hướng nhìn ra vườn</span>
+                                        </div>
+                                    </div>
+                                    <div className="utili-right w-50 d-flex flex-column">
+                                        <div className="utili-item w-50 pb-3">
+                                            <img src={flower} alt=""/>
+                                            <span>Hướng nhìn ra vườn</span>
+                                        </div>
+                                        <div className="utili-item w-50 pb-3">
+                                            <img src={flower} alt=""/>
+                                            <span>Hướng nhìn ra vườn</span>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <button type="button" className="btn btn-outline-secondary mt-5">Hiển thị tất cả 36 tiện nghi</button>
+                            </div>
+
+                            <div className="">
+
+                            </div>
+                        </div>
+
+                        <div className="house-content-right w-30">
+                            <div className='house-right-content'>
+                                <div className="right-content">
+                                    <h4 className={'mb-4'}>$21 / đêm</h4>
+                                    <div className={'d-flex date-booking'}>
+                                        <div className="house-start w-50 border-date">
+                                            <div>Nhận phòng</div>
+                                            <div>12/30/2023</div>
+                                        </div>
+
+                                        <div className="house-finish w-50">
+                                            <div>Trả phòng</div>
+                                            <div>1/1/2024</div>
+                                        </div>
+                                    </div>
+                                    <div className="btn btn-danger mt-4 w-100">Đặt phòng</div>
+
+                                    <div className="house-price d-flex justify-content-between mt-4 w-100 mb-4">
+                                        <div className="house-price-left">$21 x 2 đêm</div>
+                                        <div className="house-price-right">$42</div>
+                                    </div>
+                                    <div className="price-pay d-flex justify-content-between w-100 pt-4">
+                                        <div className="price-pay-left">Tổng tiền</div>
+                                        <div className="price-pay-right">$42</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </div>
