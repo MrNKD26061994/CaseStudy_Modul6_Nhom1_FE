@@ -23,22 +23,22 @@ import BecomeOwner from "./pages/home/user/BecomeOwner";
 import HouseDetail from "./pages/home/web/HouseDetail";
 
 function App() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    useEffect(() => {
-        if(localStorage.getItem('user') != null) {
-            let user = JSON.parse(localStorage.getItem('user'));
-            if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
-                dispatch(findAdminById(user.id));
-            } else {
-                dispatch(findUserById(user.id));
-            }
-            navigate('/')
-            // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
-        } else {
-            navigate('/')
-        }
-    },[])
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // useEffect(() => {
+    //     if(localStorage.getItem('user') != null) {
+    //         let user = JSON.parse(localStorage.getItem('user'));
+    //         if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
+    //             dispatch(findAdminById(user.id));
+    //         } else {
+    //             dispatch(findUserById(user.id));
+    //         }
+    //         navigate('/')
+    //         // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
+    //     } else {
+    //         navigate('/')
+    //     }
+    // },[])
   return (
     <div className="App myContainer">
         <ToastContainer />

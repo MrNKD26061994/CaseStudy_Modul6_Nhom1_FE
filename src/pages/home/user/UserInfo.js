@@ -21,7 +21,6 @@ export default function UserInfo() {
     const navigate = useNavigate();
 
     const user = useSelector(state => {
-        // console.log(state.userDetail.userDetail)
         return state.userDetail.userDetail
     })
 

@@ -5,7 +5,6 @@ export const getHouses = createAsyncThunk(
     'house/house',
     async (id) => {
         const res = await customAxios.get('house/houses/' + id);
-        console.log("AAAA", res)
         return res;
     }
 )
@@ -35,8 +34,6 @@ export const closeFormEdit = createAsyncThunk(
 export const editDetailHouse = createAsyncThunk(
     'house/edit',
     async (data) => {
-        console.log(data)
-
         const res = await customAxios.put('house/' + data.id ,data);
         return res;
     }
@@ -51,7 +48,6 @@ export const findHouseById =createAsyncThunk(
     'get/house/id',
     async (id) => {
         const res = await customAxios.get('house/' + id);
-        console.log(res)
         return res;
     }
 )

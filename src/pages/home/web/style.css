@@ -1,5 +1,6 @@
 .house-img img {
     width: 100%;
+    height: 100%;
 }
 .head-container {
     display: flex;
@@ -16,4 +17,132 @@
 
 .b-save {
 
+}
+
+.house-img {
+    height: 540px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0;
+}
+
+.img-left {
+
+}
+
+.img-right {
+
+}
+
+.img-right-top {
+}
+
+.img-right-item {
+
+}
+
+.img-right-bottom {
+
+}
+
+.all-img{
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #222222;
+    font-weight: 500;
+    font-size: 14px;
+}
+.all-img img {
+    width: 16px;
+    height: 16px;
+    margin: 7px 8px 7px 15px;
+}
+.all-img span {
+    margin-right: 15px;
+}
+
+.house-content {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dddddd;
+}
+
+.house-content-left {
+
+}
+
+.house-info {
+    align-items: flex-start;
+    border-bottom: 1px solid #dddddd;
+    padding: 32px 0;
+}
+.house-info-c {
+    align-items: flex-start;
+    padding: 24px 0;
+    border-bottom: 1px solid #dddddd;
+}
+.house-info-c > img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.house-info-rating img {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+}
+.house-info-rating {
+    font-weight: 700;
+}
+.house-info .house-rating {
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.house-info-item {
+
+}
+.house-info-item img {
+    width: 24px;
+    height: 24px;
+    margin: 0 8px;
+}
+
+.house-content-right {
+    margin-top: 32px;
+    position: sticky;
+    top: 80px;
+}
+
+.house-right-content {
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;}
+
+.right-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.date-booking {
+    border: 1px solid #b0b0b0;
+    border-radius: 10px;
+    width: 100%;
+}
+.border-date {
+    border-right: 1px solid #b0b0b0;
+}
+.price-pay {
+    border-top: 1px solid rgb(221, 221, 221);
+    font-weight: 600;
 }
