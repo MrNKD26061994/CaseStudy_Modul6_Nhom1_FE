@@ -1,15 +1,17 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
+    CancelBookingTheHouse,
     createBooking,
     findBookingNotCheckin,
     getStartEndDate,
-    toggleCheckNextDate
+    toggleCheckNextDate, UserWantToSeeBookingHistory
 } from "../../services/bookingService";
 
 const initialState = {
     listDay: [],
     booking: {},
     checkNextDate: "",
+    bookings:[],
     // booking: {startTime: new Date()},
 }
 
@@ -28,6 +30,12 @@ const bookingSlice = createSlice({
                 state.checkNextDate = action.payload;
             })
             .addCase(createBooking.fulfilled, (state, action) => {
+                state.booking = action.payload;
+            })
+            .addCase(UserWantToSeeBookingHistory.fulfilled, (state, action) => {
+                state.bookings = action.payload;
+            })
+            .addCase(CancelBookingTheHouse.fulfilled, (state, action) => {
                 state.booking = action.payload;
             })
         ;

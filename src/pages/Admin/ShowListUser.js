@@ -30,7 +30,6 @@ const ShowListUser = () => {
         dispatch(AdminGetListUser())
     }, []);
     const listUser = useSelector(state=>{
-        console.log("List user ", state);
         return state.users.listUser.data;
 
     })
