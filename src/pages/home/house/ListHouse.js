@@ -1,9 +1,10 @@
-
+import "./CSS-ListHouse.css"
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
 import {getHouses} from "../../../services/houseService";
 import "./CSS-ListHouse.css";
 import {Link} from "react-router-dom";
+import eyeImage from "../../../assets/imgs/container/1-1-2.png";
 
 
 export default function ListHouse(){
@@ -31,7 +32,8 @@ export default function ListHouse(){
                         <th scope="col">Bedroom</th>
                         <th scope="col">Bed</th>
                         <th scope="col">Bathroom</th>
-                        <th style={{width:100, columnSpan:2}} className={"bottom2"}></th>
+                        <th className={"bottom2"}></th>
+                        <th  className={"bottom2"}></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -47,7 +49,9 @@ export default function ListHouse(){
                                 <td>{item.bedroom}</td>
                                 <td>{item.bed}</td>
                                 <td>{item.bathroom}</td>
-                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/edit-house/"+ item.id}>Chỉnh sửa căn nhà<span className="sr-only">(current)</span></Link>
+                                <td><Link  to={"/edit-house/"+ item.id}>
+                                    <img className={"eyeImageCSS"} src={eyeImage} alt=""/>
+                                </Link></td>
                                 <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
 
                             </tr>

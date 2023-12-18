@@ -11,6 +11,9 @@ import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "../../../firebase/firebase";
 import {v4} from "uuid";
 import {findUserById} from "../../../services/userService";
+import icon1 from "../../../assets/imgs/container/1.png";
+import icon2 from "../../../assets/imgs/container/1-1.png";
+import icon3 from "../../../assets/imgs/container/1-1-2.png";
 
 export default function EditHouse() {
 
@@ -59,33 +62,33 @@ export default function EditHouse() {
     const [fileFront, setFileFront] = useState(null);
     const [avatar, setAvatar] = useState(null);
 
-    // const uploadIdentify = (event) => {
-    //     if (event.target.files[0] == null) return;
-    //     const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
-    //     const {name} = event.target;
-    //     toast.info("Đang tải ảnh lên", {autoClose: 500,});
-    //     uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
-    //         getDownloadURL(snapshot.ref).then(async (url) => {
-    //             // toast.success("Tải ảnh thành công", {position: "top-center", autoClose: 2000,});
-    //             await setAvatar(url);
-    //             let data = {...user}
-    //
-    //             data.avatar = url;
-    //             console.log(data)
-    //
-    //             await dispatch(editDetailHouse(data)).then((res) => {
-    //                 if (res.type === 'user/login/rejected') {
-    //                     navigate('/user-info')
-    //                     toast.error("Cập nhật thất bại!");
-    //                 } else {
-    //                     navigate('/user-info')
-    //                     toast.success("Cập nhật thành công!");
-    //                 }
-    //             })
-    //             navigate('')
-    //         });
-    //     })
-    // }
+    const uploadIdentify = (event) => {
+        if (event.target.files[0] == null) return;
+        const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
+        const {name} = event.target;
+        toast.info("Đang tải ảnh lên", {autoClose: 500,});
+        uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then(async (url) => {
+                // toast.success("Tải ảnh thành công", {position: "top-center", autoClose: 2000,});
+                await setAvatar(url);
+                let data = {...house}
+
+                data.avatar = url;
+                console.log(data)
+
+                await dispatch(editDetailHouse(data)).then((res) => {
+                    if(res.type === 'house/login/rejected') {
+                        navigate('/edit-house')
+                        toast.error("Cập nhật thất bại!");
+                    } else {
+                        navigate('/edit-house')
+                        toast.success("Cập nhật thành công!");
+                    }
+                })
+                navigate('')
+            });
+        })
+    }
 
     return (
         <>
@@ -103,7 +106,6 @@ export default function EditHouse() {
 
                 <div className="user-info">
                     <div className={`user-info-left w-70`}>
-
                         <div className={`info-item ${(attributeName === `Name`) ?
                             isActiveEdit ? `noneEdit` : `blogEdit`
                             : `blogEdit`}`}>
@@ -115,7 +117,6 @@ export default function EditHouse() {
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
-
                             <div className="infoItem-right">
                                 {house.name ?
                                     <div onClick={() => showFormEditHouse('Name')} className="editBtn">Chỉnh sửa</div>
@@ -191,6 +192,104 @@ export default function EditHouse() {
                                             </div>
                                         </div>
                                         <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>
+                                    </Form>
+                                </Formik>
+                            </div>
+                            <div className="infoItem-right">
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
+                            </div>
+                        </div>
+
+                        <div className={`info-item ${(attributeName === `Province`) ?
+                            isActiveEdit ? `noneEdit` : `blogEdit`
+                            : `blogEdit`}`}>
+                            <div className="infoItem-left">
+                                <p>Tỉnh/Thành phố</p>
+                                {house.province ?
+                                    <p className='color-grey'>{house.province}</p>
+                                    :
+                                    <p className='color-grey'>Chưa được cung cấp</p>
+                                }
+                            </div>
+                            <div className="infoItem-right">
+                                {house.province ?
+                                    <div onClick={() => showFormEditHouse('Province')} className="editBtn">Chỉnh sửa</div>
+                                    :
+                                    <div onClick={() => showFormEditHouse('Province')} className="editBtn">Thêm</div>
+                                }
+                            </div>
+                        </div>
+                        <div className={`info-item ${(attributeName === `Province`) ?
+                            isActiveEdit ? `blogEdit` : `noneEdit`
+                            : `noneEdit`}`}>
+                            <div className="infoItem-left">
+                                <p>Tỉnh/Thành phố</p>
+                                <p className="color-grey">Tỉnh/Thành phố</p>
+                                <Formik initialValues={{province: house.province}}
+                                        enableReinitialize={true}
+                                    // validationSchema={PhoneSchema}
+                                        onSubmit={(values,formikBag) => {
+                                            handleEditHouse(values, formikBag);
+                                        }}>
+                                    <Form>
+                                        <div className="form-row">
+                                            <div className="form-group col-12 color-red">
+                                                <Field name={'province'} type="text" className={'form-control'} placeholder={'Tỉnh/Thành phố:'} />
+                                                <ErrorMessage name={'province'}></ErrorMessage>
+                                            </div>
+                                        </div>
+
+                                        <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>
+
+                                    </Form>
+                                </Formik>
+                            </div>
+                            <div className="infoItem-right">
+                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
+                            </div>
+                        </div>
+
+                        <div className={`info-item ${(attributeName === `District`) ?
+                            isActiveEdit ? `noneEdit` : `blogEdit`
+                            : `blogEdit`}`}>
+                            <div className="infoItem-left">
+                                <p>Quận/ Huyện</p>
+                                {house.district ?
+                                    <p className='color-grey'>{house.district}</p>
+                                    :
+                                    <p className='color-grey'>Chưa được cung cấp</p>
+                                }
+                            </div>
+                            <div className="infoItem-right">
+                                {house.district ?
+                                    <div onClick={() => showFormEditHouse('District')} className="editBtn">Chỉnh sửa</div>
+                                    :
+                                    <div onClick={() => showFormEditHouse('District')} className="editBtn">Thêm</div>
+                                }
+                            </div>
+                        </div>
+                        <div className={`info-item ${(attributeName === `District`) ?
+                            isActiveEdit ? `blogEdit` : `noneEdit`
+                            : `noneEdit`}`}>
+                            <div className="infoItem-left">
+                                <p>Quận/ Huyện</p>
+                                <p className="color-grey">Quận/ Huyện</p>
+                                <Formik initialValues={{district: house.district}}
+                                        enableReinitialize={true}
+                                    // validationSchema={PhoneSchema}
+                                        onSubmit={(values,formikBag) => {
+                                            handleEditHouse(values, formikBag);
+                                        }}>
+                                    <Form>
+                                        <div className="form-row">
+                                            <div className="form-group col-12 color-red">
+                                                <Field name={'district'} type="text" className={'form-control'} placeholder={'Quận/Huyện:'} />
+                                                <ErrorMessage name={'district'}></ErrorMessage>
+                                            </div>
+                                        </div>
+
+                                        <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>
+
                                     </Form>
                                 </Formik>
                             </div>
@@ -391,32 +490,50 @@ export default function EditHouse() {
                             </div>
                         </div>
 
-                        {/*<div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>*/}
-                        {/*    <div className="infoItem-left">*/}
-                        {/*        <p>Ảnh đại diện</p>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="infoItem-right">*/}
+                        <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
+                            <div className="infoItem-left">
+                                <p>Ảnh ngôi nhà</p>
+                            </div>
+                            <div className="infoItem-right">
 
-                        {/*        <form className='identify'*/}
-                        {/*              onClick={() => document.querySelector("#frontsideFile").click()}>*/}
-                        {/*            <input type="file" id="frontsideFile" name="avatar" onChange={(event) => {*/}
-                        {/*                event.target.files[0] && setFileFront(event.target.files[0].name);*/}
-                        {/*                uploadIdentify(event)*/}
-                        {/*            }} hidden accept={"image/jpeg ,image/png"}/>*/}
-                        {/*            {house.avatar ?*/}
-                        {/*                <img src={house.avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>*/}
-                        {/*                :*/}
-                        {/*                <MdCloudUpload />*/}
-                        {/*            }*/}
-                        {/*        </form>*/}
+                                <form className='identify'
+                                      onClick={() => document.querySelector("#frontsideFile").click()}>
+                                    <input type="file" id="frontsideFile" name="avatar" onChange={(event) => {
+                                        event.target.files[0] && setFileFront(event.target.files[0].name);
+                                        uploadIdentify(event)
+                                    }} hidden accept={"image/jpeg ,image/png"}/>
+                                    {house.avatar ?
+                                        <img src={house.avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
+                                        :
+                                        <MdCloudUpload />
+                                    }
+                                </form>
 
-                        {/*    </div>*/}
-                        {/*</div>*/}
+                            </div>
+                        </div>
 
 
                     </div>
                     <div className="user-info-right w-25">
-                        Right
+                        <div className="user-right">
+                            <div className="user-right-item">
+                                <img src={icon1} alt=""/>
+                                <h5>Tại sao thông tin của tôi không được hiển thị ở đây?</h5>
+                                <p>Chúng tôi đang ẩn một số thông tin tài khoản để bảo vệ danh tính của bạn.</p>
+                            </div>
+                            <hr/>
+                            <div className="user-right-item">
+                                <img src={icon2} alt=""/>
+                                <h5>Tại sao thông tin của tôi không được hiển thị ở đây?</h5>
+                                <p>Chúng tôi đang ẩn một số thông tin tài khoản để bảo vệ danh tính của bạn.</p>
+                            </div>
+                            <hr/>
+                            <div className="user-right-item">
+                                <img src={icon3} alt=""/>
+                                <h5>Tại sao thông tin của tôi không được hiển thị ở đây?</h5>
+                                <p>Chúng tôi đang ẩn một số thông tin tài khoản để bảo vệ danh tính của bạn.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
