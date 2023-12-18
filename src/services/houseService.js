@@ -5,7 +5,6 @@ export const getHouses = createAsyncThunk(
     'house/house',
     async (id) => {
         const res = await customAxios.get('house/houses/' + id);
-        console.log("AAAA", res)
         return res;
     }
 )
@@ -13,14 +12,27 @@ export const addHouse = createAsyncThunk(
     'house/addHouse',
     async (data) => {
         const res = await customAxios.post('house', data);
-        console.log("AAAAAAAAAAAA",res.data)
         return res.data;
     }
 )
 export const addInfoHouse = createAsyncThunk(
     'add/info',
     async (data) => {
-        console.log(data)
         return data;
+    }
+)
+
+export const showListHouseForUser = createAsyncThunk(
+    '/get/house/houses',
+    async (data) => {
+        const res = await customAxios.get('house/houses');
+        return res.data.content;
+    }
+)
+export const getAHouse = createAsyncThunk(
+    '/get/house/houses/{id}',
+    async (id) => {
+        const res = await customAxios.get('house/houses/'+id);
+        return res.data;
     }
 )

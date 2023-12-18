@@ -22,6 +22,7 @@ const RenterList = () => {
         dispatch(AdminGetListRenter())
     }, []);
     const listUser = useSelector(state=>{
+        console.log("List người thuê ", state);
         return state.users.listUser.data;
     })
     return (

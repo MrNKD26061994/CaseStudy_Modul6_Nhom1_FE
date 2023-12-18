@@ -1,6 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit";
 import userReducer from "./user/userSlice";
 import houseReducer from "./house/houseSlice";
+import bookingReducer from "./booking/bookingSlice"
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
         userDetail: userReducer,
         isActiveEdit: userReducer,
         nameEditOne: userReducer,
-        house: houseReducer
+        house: houseReducer,
+        booking: bookingReducer,
     }
 })
