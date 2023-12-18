@@ -7,15 +7,13 @@ import bookingReducer from "./booking/bookingSlice";
 export const store = configureStore({
     reducer: {
         user: userReducer,
-        house: houseReducer,
         bookings: bookingReducer,
 
         users: userReducer,
         userDetail: userReducer,
         isActiveEdit: userReducer,
         nameEditOne: userReducer,
-
-
-
+        house: houseReducer,
+        booking: bookingReducer,
     }
 })

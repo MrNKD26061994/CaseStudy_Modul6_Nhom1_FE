@@ -21,6 +21,9 @@ import AddHouse from "./pages/home/house/AddHouse";
 import EditHouse from "./pages/home/house/EditHouse";
 import BecomeOwner from "./pages/home/user/BecomeOwner";
 import HouseDetail from "./pages/home/web/HouseDetail";
+import ShowListHouseForHomePage from "./pages/home/house/ShowListHouseForHomePage";
+import BookAHouse from "./pages/home/Booking/BookAHouse";
+
 
 function App() {
     // const dispatch = useDispatch();
@@ -45,6 +48,7 @@ function App() {
         <Routes>
             <Route path={''} element={<Home></Home>}>
                 <Route path={''} element={<HomeUser />} />
+                <Route path={''} element={<ShowListHouseForHomePage />} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
                 <Route path={'edit-house/:id'} element={<EditHouse></EditHouse>}></Route>
@@ -58,6 +62,8 @@ function App() {
                 <Route path={'become-an-owner'} element={<BecomeOwner />} />
                 <Route path={'house-detail'} element={<HouseDetail />} />
                 <Route path={'admin/currentAdminDetail'} element={<ShowAdminDetail/>} />
+                <Route path={'bookAHouse/:id'} element={<BookAHouse/>} />
+
 
                 <Route path={'test'} element={<Test />} />
             </Route>

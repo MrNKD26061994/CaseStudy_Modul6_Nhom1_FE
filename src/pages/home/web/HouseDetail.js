@@ -59,7 +59,8 @@ export default function HouseDetail() {
         let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "checked"}
         dispatch(createBooking(value))
         toast.success("Đặt tour thành công!");
-        navigate("/")
+        console.log(booking,"lllll");
+        navigate("/bookAHouse/"+booking.id)
     }
 
     return (

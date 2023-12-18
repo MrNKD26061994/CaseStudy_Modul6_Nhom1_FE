@@ -19,8 +19,7 @@ export const createBooking = createAsyncThunk(
     'post/booking',
     async (booking) => {
         const res = await customAxios.post('booking', booking);
-        console.log(res)
-        return res;
+        return res.data;
     }
 )
 export const getStartEndDate = createAsyncThunk(
@@ -35,3 +34,19 @@ export const toggleCheckNextDate = createAsyncThunk(
         return value;
     }
 )
+export const getABooking = createAsyncThunk(
+    'booking/{id}',
+    async (id) => {
+        const res = await customAxios.get('booking/' + id);
+        return res;
+    }
+)
+
+export const updateStartTimeAndEndTimeOfABooking = createAsyncThunk(
+    'booking/updateStartTimeAndEndTimeOfABooking',
+    async (booking) => {
+        const res = await customAxios.put('booking/updateStartTimeAndEndTimeOfABooking' + booking);
+        return res;
+    }
+)
+

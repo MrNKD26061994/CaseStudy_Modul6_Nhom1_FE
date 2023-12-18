@@ -15,9 +15,6 @@ const ViewUserDetail = () => {
             setUser(res.data);
             console.log("uswe", res.data);
         })}, []);
-
-
-
     return (
         <>
             <div className="container">
