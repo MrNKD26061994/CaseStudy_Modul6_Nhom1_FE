@@ -29,35 +29,57 @@ export default function AddHouse() {
     return (
         <div className={'row'}>
             <div className="offset-3 col-6 mt-5">
-                <h1 style={{textAlign: 'center'}}>Thêm nhà</h1>
+                <h1 style={{textAlign: 'center'}}>Thêm căn nhà</h1>
                 <Formik initialValues={{name: '', address: '', bedroom: '', bathroom: '',description: '', price: ''}} onSubmit={(values) => {
                     handleAddHouse(values)
                 }}>
                     <Form>
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Tên Nhà</label>
-                            <Field type="text" className={'form-control'} name={'name'}/>
+                            <label htmlFor="name" className="form-label">Tên nhà</label>
+                            <Field type="text" className="form-control" id="name" placeholder="Nhập tên nhà"
+                                   name="name"/>
+                            <ErrorMessage name="name" className="text-danger" component="small"/>
                         </div>
+
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Địa chỉ</label>
-                            <Field type="text" className={'form-control'} name={'address'}/>
+                            <Field type="text" className={'form-control'} name={'address'} placeholder="Nhập địa chỉ"/>
                         </div>
+
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Số Phòng ngủ</label>
-                            <Field type="text" className={'form-control'} name={'bedroom'}/>
+                            <label htmlFor="bedroom" className="form-label">Số phòng ngủ</label>
+                            <Field as="select" className="form-select" name="bedroom">
+                                <option value="">---Vui lòng chọn---</option>
+                                {Array.from({length: 10}, (v, i) => (
+                                    <option value={i + 1} key={i + 1}>{i + 1}</option>
+                                ))}
+                            </Field>
+                            <ErrorMessage name="bedroom" className="text-danger" component="small"/>
                         </div>
+
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Số phòng tắm</label>
-                            <Field type="text" className={'form-control'} name={'bathroom'}/>
+                            <label htmlFor="bathroom" className="form-label">Số phòng tắm</label>
+                            <Field as="select" className="form-select" name="bathroom">
+                                <option value="">---Vui lòng chọn---</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </Field>
+                            <ErrorMessage name="bathroom" className="text-danger" component="small"/>
                         </div>
+
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Mô tả chi tiết</label>
-                            <Field type="text" className={'form-control'} name={'description'}/>
+                            <Field type="text" className={'form-control'} name={'description'} placeholder="Nhập mô tả" />
                         </div>
+
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Giá Nhà</label>
-                            <Field type="text" className={'form-control'} name={'price'}/>
+                            <label className="form-label" htmlFor="price">Giá tiền (VNĐ/ngày)</label>
+                            <Field className="form-control" id="price" type="number" name="price"
+                                   placeholder="Nhập giá tiền"/>
+                            <ErrorMessage name="price" className="text-danger" component="small"/>
                         </div>
+
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </Form>
                 </Formik>
