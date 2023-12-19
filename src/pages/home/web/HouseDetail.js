@@ -60,7 +60,7 @@ export default function HouseDetail() {
         dispatch(createBooking(value))
         toast.success("Đặt tour thành công!");
         console.log(booking,"lllll");
-        navigate("/bookAHouse/"+booking.id)
+        navigate("/")
     }
 
     return (

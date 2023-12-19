@@ -48,8 +48,8 @@ function Header() {
     return (
         <>
             <header>
-                <div className="header-left">
-                    <img id="logo" src={logo} alt=""/>
+                <div onClick={()=>navigate("/")} className="header-left">
+               <img id="logo" src={logo} alt=""/>
                 </div>
 
                 <div className="header-mid">

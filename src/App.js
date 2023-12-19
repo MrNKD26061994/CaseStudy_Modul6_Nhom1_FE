@@ -67,7 +67,7 @@ function App() {
                 <Route path={'UserSeeBookingHistory'} element={<UserSeeBookingHistory/>} />
 
 
-                <Route path={'test'} element={<Test />} />
+                {/*<Route path={'test'} element={<Test />} />*/}
             </Route>
             <Route path={'/api/registrationConfirm/:token'} element={<Registration/>} ></Route>
         </Routes>

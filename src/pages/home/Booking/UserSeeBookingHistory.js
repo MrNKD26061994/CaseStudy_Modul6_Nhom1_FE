@@ -60,7 +60,7 @@ const UserSeeBookingHistory = () => {
                             <td>{item.house.province + "-" + item.house.district + "-" + item.house.ward + "-" + item.house.address}</td>
                             <td>{item.status}</td>
 
-                            <td><Link to={"/admin/showUserDetail/" + item.id}>
+                            <td><Link to={"/house-detail/" + item.id}>
                                 <img className={"eyeImageCSS"} src={eyeImage} alt=""/>
                             </Link></td>
 
