@@ -17,8 +17,8 @@ export default function uploadIMG(event) {
             uploadPromises.push(
                 new Promise((resolve, reject) => {
                     uploadTask.then((snapshot) => {
-                        getDownloadURL(snapshot.ref).then((url) => {
-                            resolve(url);
+                        getDownloadURL(snapshot.ref).then((urls) => {
+                            resolve(urls);
                         }).catch((error) => {
                             reject(error);
                         });
