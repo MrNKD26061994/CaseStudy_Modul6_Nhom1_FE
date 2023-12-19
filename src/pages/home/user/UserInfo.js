@@ -45,13 +45,7 @@ export default function UserInfo() {
         let data = {...user, ...values}
         console.log(data)
         await dispatch(editDetailUser(data)).then((res) => {
-            if(res.type === 'user/edit/rejected') {
-                navigate('/user-info')
-                toast.error("Cập nhật thất bại!");
-            } else {
-                navigate('/user-info')
-                toast.success("Cập nhật thành công!");
-            }
+
         })
         navigate('')
     }

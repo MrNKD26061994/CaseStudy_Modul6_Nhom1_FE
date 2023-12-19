@@ -44,6 +44,12 @@ export const getName = createAsyncThunk(
         return name;
     }
 )
+export const pushImage = createAsyncThunk(
+    'house/pushImage',
+    async (urls) => {
+        return urls;
+    }
+)
 export const findHouseById =createAsyncThunk(
     'get/house/id',
     async (id) => {

@@ -1,12 +1,12 @@
 import {toast} from "react-toastify";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
-import {v4} from "uuid" ;
+import {v4} from "uuid";
 import {storage} from "./firebase";
-import {useState} from "react";
-import { MdCloudUpload } from "react-icons/md";
-import {forEach} from "react-bootstrap/ElementChildren";
+import {MdCloudUpload} from "react-icons/md";
 import uploadIMG from "./uploadIMG";
+
 export default function Test() {
+
     const uploadIdentify = (event) => {
         return new Promise((resolve, reject) => {
             let files = event.target.files;
@@ -34,8 +34,8 @@ export default function Test() {
             }
             Promise.all(uploadPromises)
                 .then((urls) => {
-                    console.log("AAAAAAAAAA")
                     toast.success("Tải ảnh thành công", { position: "top-center", autoClose: 2000 });
+                    console.log(urls)
                     resolve(urls);
                 })
                 .catch((error) => {
@@ -47,25 +47,36 @@ export default function Test() {
 
 
 
-    let input = document.querySelector("#frontSideFile");
-
-    input && input.addEventListener('change', function (event) {
-         uploadIMG(event)
-             .then((urls) => {
-                 toast.success("Tải ảnh thành công", { position: "top-center", autoClose: 2000 });
-                 console.log("Urls:", urls);
-             })
-             .catch((error) => {
-                 console.error("Lỗi:", error);
-             });
-    });
+    // let input = document.querySelector("#frontSideFile");
+    // console.log(input)
+    // input && input.addEventListener('change', function (event) {
+    //      uploadIMG(event)
+    //          .then((urls) => {
+    //              toast.success("Tải ảnh thành công", { position: "top-center", autoClose: 2000 });
+    //              console.log("Urls:", urls);
+    //          })
+    //          .catch((error) => {
+    //              console.error("Lỗi:", error);
+    //          });
+    // });
 
     return (
         <>
             AAAAAAAAA
             <form className='identify'
                   onClick={() => document.querySelector("#frontSideFile").click()}>
-                <input multiple={true} type="file" id="frontSideFile" name="frontSide" hidden accept={"image/jpeg ,image/png"}/>
+                <input multiple={true} type="file" id="frontSideFile" name="frontSide" hidden accept={"image/jpeg ,image/png"}
+                    onChange={(event) => {
+                        uploadIMG(event)
+                            .then((urls) => {
+                                toast.success("Tải ảnh thành công", { position: "top-center", autoClose: 2000 });
+                                console.log("Urls:", urls);
+                            })
+                            .catch((error) => {
+                                console.error("Lỗi:", error);
+                            });
+                    }}
+                />
 
 
 

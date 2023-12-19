@@ -5,17 +5,18 @@ import {
     addInfoHouse,
     showListHouseForUser,
     getAHouse,
-    editDetailHouse, findHouseById
+    editDetailHouse, findHouseById,
+    pushImage
 } from "../../services/houseService";
 import {closeFormEdit, getName, openFormEdit} from "../../services/userService";
 import {findUserById} from "../../services/userService";
 
 const initialState = {
     house: [],
+    images: [],
     houseDetail: {},
     isActiveEdit: false,
     nameEditOne: "",
-    houses:[],
 }
 const houseSlice = createSlice({
     name: 'house',
@@ -48,6 +49,9 @@ const houseSlice = createSlice({
             })
             .addCase(findHouseById.fulfilled, (state, action) => {
                 state.houseDetail = action.payload.data
+            })
+            .addCase(pushImage.fulfilled, (state, action) => {
+                state.images = action.payload;
             })
             .addCase(showListHouseForUser.fulfilled,(state, action) => {
                 state.houses = action.payload
