@@ -62,33 +62,33 @@ export default function EditHouse() {
     const [fileFront, setFileFront] = useState(null);
     const [avatar, setAvatar] = useState(null);
 
-    const uploadIdentify = (event) => {
-        if (event.target.files[0] == null) return;
-        const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
-        const {name} = event.target;
-        toast.info("Đang tải ảnh lên", {autoClose: 500,});
-        uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
-            getDownloadURL(snapshot.ref).then(async (url) => {
-                // toast.success("Tải ảnh thành công", {position: "top-center", autoClose: 2000,});
-                await setAvatar(url);
-                let data = {...house}
-
-                data.avatar = url;
-                console.log(data)
-
-                await dispatch(editDetailHouse(data)).then((res) => {
-                    if(res.type === 'house/login/rejected') {
-                        navigate('/edit-house')
-                        toast.error("Cập nhật thất bại!");
-                    } else {
-                        navigate('/edit-house')
-                        toast.success("Cập nhật thành công!");
-                    }
-                })
-                navigate('')
-            });
-        })
-    }
+    // const uploadIdentify = (event) => {
+    //     if (event.target.files[0] == null) return;
+    //     const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
+    //     const {name} = event.target;
+    //     toast.info("Đang tải ảnh lên", {autoClose: 500,});
+    //     uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
+    //         getDownloadURL(snapshot.ref).then(async (url) => {
+    //             // toast.success("Tải ảnh thành công", {position: "top-center", autoClose: 2000,});
+    //             await setAvatar(url);
+    //             let data = {...house}
+    //
+    //             data.avatar = url;
+    //             console.log(data)
+    //
+    //             await dispatch(editDetailHouse(data)).then((res) => {
+    //                 if(res.type === 'house/login/rejected') {
+    //                     navigate('/edit-house')
+    //                     toast.error("Cập nhật thất bại!");
+    //                 } else {
+    //                     navigate('/edit-house')
+    //                     toast.success("Cập nhật thành công!");
+    //                 }
+    //             })
+    //             navigate('')
+    //         });
+    //     })
+    // }
 
     return (
         <>
@@ -490,27 +490,27 @@ export default function EditHouse() {
                             </div>
                         </div>
 
-                        <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
-                            <div className="infoItem-left">
-                                <p>Ảnh ngôi nhà</p>
-                            </div>
-                            <div className="infoItem-right">
+                        {/*<div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>*/}
+                        {/*    <div className="infoItem-left">*/}
+                        {/*        <p>Ảnh ngôi nhà</p>*/}
+                        {/*    </div>*/}
+                        {/*    <div className="infoItem-right">*/}
 
-                                <form className='identify'
-                                      onClick={() => document.querySelector("#frontsideFile").click()}>
-                                    <input type="file" id="frontsideFile" name="avatar" onChange={(event) => {
-                                        event.target.files[0] && setFileFront(event.target.files[0].name);
-                                        uploadIdentify(event)
-                                    }} hidden accept={"image/jpeg ,image/png"}/>
-                                    {house.avatar ?
-                                        <img src={house.avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
-                                        :
-                                        <MdCloudUpload />
-                                    }
-                                </form>
+                        {/*        <form className='identify'*/}
+                        {/*              onClick={() => document.querySelector("#frontsideFile").click()}>*/}
+                        {/*            <input type="file" id="frontsideFile" name="avatar" onChange={(event) => {*/}
+                        {/*                event.target.files[0] && setFileFront(event.target.files[0].name);*/}
+                        {/*                uploadIdentify(event)*/}
+                        {/*            }} hidden accept={"image/jpeg ,image/png"}/>*/}
+                        {/*            {house.avatar ?*/}
+                        {/*                <img src={house.avatar} id="frontside" width={'100%'} height={'100%'} alt={'img'}/>*/}
+                        {/*                :*/}
+                        {/*                <MdCloudUpload />*/}
+                        {/*            }*/}
+                        {/*        </form>*/}
 
-                            </div>
-                        </div>
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
 
                     </div>

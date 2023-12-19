@@ -48,7 +48,7 @@ function App() {
         <Routes>
             <Route path={''} element={<Home></Home>}>
                 <Route path={''} element={<HomeUser />} />
-                <Route path={''} element={<ShowListHouseForHomePage />} />
+                {/*<Route path={''} element={<ShowListHouseForHomePage />} />*/}
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
                 <Route path={'edit-house/:id'} element={<EditHouse></EditHouse>}></Route>

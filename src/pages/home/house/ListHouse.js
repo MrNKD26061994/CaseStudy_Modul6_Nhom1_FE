@@ -5,6 +5,7 @@ import {getHouses} from "../../../services/houseService";
 import "./CSS-ListHouse.css";
 import {Link} from "react-router-dom";
 import eyeImage from "../../../assets/imgs/container/1-1-2.png";
+import {Field} from "formik";
 
 
 export default function ListHouse(){
@@ -32,8 +33,8 @@ export default function ListHouse(){
                         <th scope="col">Bedroom</th>
                         <th scope="col">Bed</th>
                         <th scope="col">Bathroom</th>
-                        <th className={"bottom2"}></th>
-                        <th  className={"bottom2"}></th>
+                        <th scope="col" className={"bottom2"}>House Detail</th>
+                        <th scope="col" className={"bottom2"}>Status</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,7 +53,15 @@ export default function ListHouse(){
                                 <td><Link  to={"/edit-house/"+ item.id}>
                                     <img className={"eyeImageCSS"} src={eyeImage} alt=""/>
                                 </Link></td>
-                                <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Khóa</button></td>
+                                <td>
+                                    <select  className="form-select">
+                                        <option value="">---Vui lòng chọn---</option>
+                                        <option value="fix">Đang bảo trì</option>
+                                        <option value="busy">Đã được thuê</option>
+                                        <option value="free">Nhà còn trống</option>
+                                    </select>
+
+                                </td>
 
                             </tr>
 
