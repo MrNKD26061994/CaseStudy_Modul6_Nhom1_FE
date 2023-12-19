@@ -23,6 +23,7 @@ import BecomeOwner from "./pages/home/user/BecomeOwner";
 import HouseDetail from "./pages/home/web/HouseDetail";
 import ShowListHouseForHomePage from "./pages/home/house/ShowListHouseForHomePage";
 import BookAHouse from "./pages/home/Booking/BookAHouse";
+import UserSeeBookingHistory from "./pages/home/Booking/UserSeeBookingHistory";
 
 
 function App() {
@@ -63,9 +64,10 @@ function App() {
                 <Route path={'house-detail'} element={<HouseDetail />} />
                 <Route path={'admin/currentAdminDetail'} element={<ShowAdminDetail/>} />
                 <Route path={'bookAHouse/:id'} element={<BookAHouse/>} />
+                <Route path={'UserSeeBookingHistory'} element={<UserSeeBookingHistory/>} />
 
 
-                <Route path={'test'} element={<Test />} />
+                {/*<Route path={'test'} element={<Test />} />*/}
             </Route>
             <Route path={'/api/registrationConfirm/:token'} element={<Registration/>} ></Route>
         </Routes>

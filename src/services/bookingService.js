@@ -50,3 +50,24 @@ export const updateStartTimeAndEndTimeOfABooking = createAsyncThunk(
     }
 )
 
+export const UserWantToSeeBookingHistory = createAsyncThunk(
+    'booking/UserWantToSeeBookingHistory',
+    async (userID) => {
+        const res = await customAxios.post('booking/UserWantToSeeBookingHistory' , userID);
+        return res;
+    }
+)
+export const CancelBookingTheHouse = createAsyncThunk(
+    'booking/CancelBookingTheHouse',
+    async (booking) => {
+        const res = await customAxios.put('booking/CancelBookingTheHouse' , booking);
+        return res;
+    }
+)
+export const Top5HouseBooking = createAsyncThunk(
+    'booking/Top5HouseBooking',
+    async () => {
+        const res = await customAxios.get('booking/Top5HouseBooking' );
+        return res;
+    }
+)

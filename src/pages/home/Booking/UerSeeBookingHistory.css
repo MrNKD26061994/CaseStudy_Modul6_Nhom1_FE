@@ -39,4 +39,9 @@
     height: 20px;
     margin-top: 12px;
 }
-
+.item-line-table{
+    height: 20px;
+    overflow: hidden; /* Ẩn nội dung vượt quá chiều cao */
+    text-overflow: ellipsis; /* Hiển thị dấu ba chấm khi chữ bị ẩn */
+    white-space: nowrap; /* Ngăn chữ tự động wrap */
+}

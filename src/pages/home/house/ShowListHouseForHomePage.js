@@ -27,7 +27,6 @@ const ShowListHouseForHomePage = () => {
 
     return (
         <div>
-
             <div id="container" className="container-fluid">
                 <div className="row">
                     {ListHouse && ListHouse.map((house, index)=>(

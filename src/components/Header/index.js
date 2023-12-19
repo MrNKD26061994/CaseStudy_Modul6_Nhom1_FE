@@ -48,8 +48,8 @@ function Header() {
     return (
         <>
             <header>
-                <div className="header-left">
-                    <img id="logo" src={logo} alt=""/>
+                <div onClick={()=>navigate("/")} className="header-left">
+               <img id="logo" src={logo} alt=""/>
                 </div>
 
                 <div className="header-mid">
@@ -115,6 +115,7 @@ function Header() {
 
                                             <>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
+                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/UserSeeBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
                                             </>
                                         }
                                     </>
