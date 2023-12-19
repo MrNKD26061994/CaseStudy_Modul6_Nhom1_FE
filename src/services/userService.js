@@ -119,6 +119,13 @@ export const ShowListUserAreWaitingConfirmed =  createAsyncThunk (
         return res.data;
     }
 )
+export const refuseUserBecomeOwner =  createAsyncThunk (
+    'admin/refuseUserBecomeOwner',
+    async (user) => {
+        const res = await customAxios.put('admin/refuseUserBecomeOwner', user);
+        return res.data;
+    }
+)
 
 export const AdminBlockUser =  createAsyncThunk (
     'admin/blockUser',

@@ -13,6 +13,7 @@ const initialState = {
     checkNextDate: "",
     bookings:[],
     listLong:[],
+    Top5:[],
     // booking: {startTime: new Date()},
 }
 
@@ -40,7 +41,7 @@ const bookingSlice = createSlice({
                 state.booking = action.payload;
             })
             .addCase(Top5HouseBooking.fulfilled, (state, action) => {
-                state.listLong = action.payload;
+                state.Top5 = action.payload;
             })
         ;
     }
