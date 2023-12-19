@@ -21,9 +21,11 @@ const ShowListUser = () => {
         await toast("Thao tác thành công!")
     }
     const  AdminBlockUserHTML = async (user) =>{
-        await dispatch(AdminOpenUser(user));
-        await dispatch(AdminGetListUser());
-        await toast("Thao tác thành công!")
+        if (window.confirm("Bạn chắc chăn muốn khóa tài khoản này???")) {
+            await dispatch(AdminOpenUser(user));
+            await dispatch(AdminGetListUser());
+            await toast("Thao tác thành công!")
+        }
     }
 
     useEffect(() =>  {

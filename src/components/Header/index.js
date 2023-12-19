@@ -44,6 +44,10 @@ function Header() {
     function handleSetPermisionForRenter(){
         navigate("admin/SetPermisionForRenter")
     }
+    function ShowTop5House(){
+        navigate("ShowTop5HouseBooking")
+    }
+
 
     return (
         <>
@@ -100,6 +104,8 @@ function Header() {
                                         <div onClick={handleListOwner} className="sub-login-item">Xem danh sách chủ nhà</div>
                                         <div onClick={handleListRenter} className="sub-login-item">Xem danh sách người thuê nhà</div>
                                         <div onClick={handleSetPermisionForRenter} className="sub-login-item">Xem chờ xác nhận</div>
+                                        <div onClick={ShowTop5House} className="sub-login-item"> Xem 6 ngôi nhà được đặt nhiều nhất</div>
+
                                     </>
                                     :
                                     <>

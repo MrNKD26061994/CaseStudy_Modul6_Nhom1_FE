@@ -67,3 +67,4 @@ export const getAHouse = createAsyncThunk(
         return res.data;
     }
 )
+
