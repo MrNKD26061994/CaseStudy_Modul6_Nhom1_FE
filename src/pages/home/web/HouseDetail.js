@@ -14,18 +14,18 @@ import {findHouseById} from "../../../services/houseService";
 import {getDaysBetweenTwoDates, getNumberOfNights, totalMoney} from "../../../function/function";
 import {createBooking, findBookingNotCheckin, getStartEndDate} from "../../../services/bookingService";
 import dayjs from "dayjs";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 
 export default function HouseDetail() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // const id = 2;
+    const {id} = useParams('id');
 
     useEffect(() => {
-        dispatch(findHouseById(2))
-        dispatch(findBookingNotCheckin(2))
+        dispatch(findHouseById(id))
+        dispatch(findBookingNotCheckin(id))
     }, []);
 
     const user = useSelector(state => {
@@ -50,17 +50,18 @@ export default function HouseDetail() {
     //     dispatch(getStartEndDate(undefined, undefined));
     // }
 
-    // console.log(booking)
-
-    // console.log(checkNextDate)
-
-    function handBooking() {
+    async function handBooking() {
         let total = totalMoney(booking.startTime, booking.endTime, house.price)
-        let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "checked"}
-        dispatch(createBooking(value))
-        toast.success("Đặt tour thành công!");
-        console.log(booking,"lllll");
-        navigate("/bookAHouse/"+booking.id)
+        let value = {startTime: dayjs(booking.startTime).add(7, 'hour'), endTime: dayjs(booking.endTime).add(7, 'hour'), create_at: dayjs().add(7, 'hour'), house: house, user: user, total: total, status: "checked"}
+        await dispatch(createBooking(value)).then((res) => {
+            if(res.type === 'user/edit/rejected') {
+                navigate('/')
+                toast.error("Cập nhật thất bại!");
+            } else {
+                navigate("/bookAHouse/"+ res.payload.id)
+                toast.success("Đặt nhà thành công!");
+            }
+        })
     }
 
     return (

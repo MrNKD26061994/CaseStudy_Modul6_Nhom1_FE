@@ -1,6 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import customAxios from "./api";
-import dayjs from "dayjs";
 import {getDaysBetweenTwoDates} from "../function/function";
 
 export const findBookingNotCheckin = createAsyncThunk(
@@ -12,7 +11,7 @@ export const findBookingNotCheckin = createAsyncThunk(
         bookings.forEach((item) => {
             listDate.push(...getDaysBetweenTwoDates(item.startTime, item.endTime))
         });
-        return listDate;
+        return listDate.sort();
     }
 )
 export const createBooking = createAsyncThunk(
@@ -22,9 +21,17 @@ export const createBooking = createAsyncThunk(
         return res.data;
     }
 )
+export const updateBooking = createAsyncThunk(
+    'put/booking/id',
+    async (booking) => {
+        const res = await customAxios.put('booking/' + booking.id, booking);
+        return res.data;
+    }
+)
 export const getStartEndDate = createAsyncThunk(
     'booking/changeDate',
     async (date) => {
+        console.log("AAAAAAAAAA",date)
         return {startTime: date[0], endTime: date[1]};
     }
 )
@@ -38,6 +45,7 @@ export const getABooking = createAsyncThunk(
     'booking/{id}',
     async (id) => {
         const res = await customAxios.get('booking/' + id);
+        // console.log(res)
         return res;
     }
 )

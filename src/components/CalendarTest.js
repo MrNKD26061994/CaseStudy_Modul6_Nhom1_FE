@@ -15,42 +15,44 @@ export default function CalendarTest(listDay) {
         return state.bookings.booking;
     })
     const handleDateChange = async (date) => {
+        console.log("SSSSSSSSSSSS",date[0])
+        console.log("EEEEEEEEEEE",date[1])
+        console.log(list)
         if (dayjs(date[0]).add(1, 'day').format("YYYY-MM-DD") ===
             listDay.listDay.find((item) => dayjs(item) >= dayjs(date[0]))) {
             await dispatch(toggleCheckNextDate("Không thể nhận phòng ngày này."));
-            await dispatch(getStartEndDate([undefined,undefined]))
+            await dispatch(getStartEndDate([null,null]))
         } else {
             await dispatch(toggleCheckNextDate(""))
             await dispatch(getStartEndDate(date))
         }
     };
 
-
-
-
     //Chỗ này em lọc để loại bọ ngày không đủ điều kiện
     let list = listDay.listDay
-    const shouldDisableDate = (day) => {
-        return list.some(list => day.format('YYYY-MM-DD') === (list));
-    };
-    const uniqueSortedArray = [...new Set(list)].sort((a, b) => a - b);
-    let dateMax = null
-    let dateMin = booking.startTime
-    let startDate = booking.startTime
-    let endDate = booking.endTime
 
-    if(booking.endTime === undefined) {
-        endDate = null
+    //Loại bỏ những ngày đã nằm trong booking
+    const shouldDisableDate = (day) => {
+        return list.some(item => day.format('YYYY-MM-DD') === (item));
+    };
+    let dateMax = dayjs(null)
+    let dateMin = dayjs(booking.startTime)
+    let startDate = dayjs(booking.startTime)
+    let endDate = dayjs(booking.endTime)
+
+    if(booking.endTime === undefined && booking.startTime === undefined) {
+        startDate = dayjs(null)
+        endDate = dayjs(null)
     }
     if(booking.startTime === undefined) {
-        startDate = null
-        dateMax = null
+        startDate = dayjs(null)
+        dateMax = dayjs(null)
     } else if(booking.startTime & booking.endTime) {
-        dateMax = null
-        dateMin = null
+        dateMax = dayjs(null)
+        dateMin = dayjs(null)
         let flag = true;
-        for (let i = 0; i < uniqueSortedArray.length; i++) {
-            if((booking.startTime < dayjs(uniqueSortedArray[i])) && (booking.endTime > dayjs(uniqueSortedArray[i]))){
+        for (let i = 0; i < list.length; i++) {
+            if((dayjs(booking.startTime) < dayjs(list[i])) && (dayjs(booking.endTime) > dayjs(list[i]))){
                 flag = false;
                 break
             }
@@ -58,16 +60,18 @@ export default function CalendarTest(listDay) {
         if(flag === false) {
             dispatch(getStartEndDate([booking.startTime, undefined]))
         }
-    } else {
+    }
+    else {
         // Loại bỏ những ngày bị vướng tour gần nhất về sau
-        for (let i = 0; i < uniqueSortedArray.length; i++) {
-            const dateObject = new Date(uniqueSortedArray[i])
-            if(dateObject > booking.startTime) {
-                dateMax = uniqueSortedArray[i];
+        for (let i = 0; i < list.length; i++) {
+            const dateObject = new Date(list[i])
+            if(dayjs(dateObject) > dayjs(booking.startTime)) {
+                dateMax = dayjs(list[i]);
                 break;
             }
         }
     }
+
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <StaticDateRangePicker
@@ -77,11 +81,11 @@ export default function CalendarTest(listDay) {
                 calendars={2}
                 disablePast={true}
                 disableHighlightToday={true}
-                shouldDisableDate={shouldDisableDate}
                 onChange={handleDateChange}
-                maxDate={dayjs(dateMax)}
-                minDate={dayjs(dateMin)}
-                value={[startDate, dayjs(endDate)]}
+                shouldDisableDate={shouldDisableDate}
+                maxDate={dateMax}
+                minDate={dateMin}
+                value={[startDate, endDate]}
 
             />
         </LocalizationProvider>

@@ -60,7 +60,7 @@ function App() {
                 <Route path={'admin/SetPermisionForRenter'} element={<SetPermisionForRenter/>} />
                 <Route path={'admin/showUserDetail/:id'} element={<ViewUserDetail/>} />
                 <Route path={'become-an-owner'} element={<BecomeOwner />} />
-                <Route path={'house-detail'} element={<HouseDetail />} />
+                <Route path={'house-detail/:id'} element={<HouseDetail />} />
                 <Route path={'admin/currentAdminDetail'} element={<ShowAdminDetail/>} />
                 <Route path={'bookAHouse/:id'} element={<BookAHouse/>} />
 

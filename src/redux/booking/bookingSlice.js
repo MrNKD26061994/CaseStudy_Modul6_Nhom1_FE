@@ -1,9 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
     createBooking,
-    findBookingNotCheckin,
+    findBookingNotCheckin, getABooking,
     getStartEndDate,
-    toggleCheckNextDate
+    toggleCheckNextDate, updateBooking
 } from "../../services/bookingService";
 
 const initialState = {
@@ -22,12 +22,20 @@ const bookingSlice = createSlice({
                 state.listDay = action.payload;
             })
             .addCase(getStartEndDate.fulfilled, (state, action) => {
-                state.booking = {...state.booking, ...action.payload};
+                console.log(state.booking)
+                // console.log({...state.booking, ...action.payload})
+                state.booking.data = {...state.booking, ...action.payload};
             })
             .addCase(toggleCheckNextDate.fulfilled, (state, action) => {
                 state.checkNextDate = action.payload;
             })
             .addCase(createBooking.fulfilled, (state, action) => {
+                state.booking = action.payload;
+            })
+            .addCase(updateBooking.fulfilled, (state, action) => {
+                state.booking = action.payload;
+            })
+            .addCase(getABooking.fulfilled, (state, action) => {
                 state.booking = action.payload;
             })
         ;
