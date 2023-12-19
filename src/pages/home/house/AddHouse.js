@@ -26,7 +26,7 @@ export default function AddHouse() {
         let id = JSON.parse(localStorage.getItem("user")).id
         let data = {...values, owner: {id: id}}
         await dispatch(addHouse(data)).then((res) => {
-            console.log(res)
+            console.log(res.payload)
             if(res.type === 'house/addHouse/rejected') {
                 navigate('/user-info')
                 toast.error("Cập nhật thất bại!");
