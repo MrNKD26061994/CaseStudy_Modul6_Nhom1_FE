@@ -26,7 +26,7 @@ const UserSeeBookingHistory = () => {
         dispatch(CancelBookingTheHouse(item)).then(res=>{
             let err = res.type;
             if(err==="booking/CancelBookingTheHouse/rejected"){
-                toast("Quá sát ngày không tể hủy!")
+                toast("Quá sát ngày, bạn không thể hủy, Liên hệ chủ nhà để thực hiện thao tác này!")
 
             } else if(err==="booking/CancelBookingTheHouse/fulfilled"){
                 dispatch(UserWantToSeeBookingHistory(user));

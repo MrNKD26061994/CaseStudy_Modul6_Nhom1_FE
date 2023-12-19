@@ -64,3 +64,10 @@ export const CancelBookingTheHouse = createAsyncThunk(
         return res;
     }
 )
+export const Top5HouseBooking = createAsyncThunk(
+    'booking/Top5HouseBooking',
+    async () => {
+        const res = await customAxios.get('booking/Top5HouseBooking' );
+        return res;
+    }
+)

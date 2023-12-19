@@ -4,7 +4,7 @@ import {
     createBooking,
     findBookingNotCheckin,
     getStartEndDate,
-    toggleCheckNextDate, UserWantToSeeBookingHistory
+    toggleCheckNextDate, Top5HouseBooking, UserWantToSeeBookingHistory
 } from "../../services/bookingService";
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
     booking: {},
     checkNextDate: "",
     bookings:[],
+    listLong:[],
     // booking: {startTime: new Date()},
 }
 
@@ -37,6 +38,9 @@ const bookingSlice = createSlice({
             })
             .addCase(CancelBookingTheHouse.fulfilled, (state, action) => {
                 state.booking = action.payload;
+            })
+            .addCase(Top5HouseBooking.fulfilled, (state, action) => {
+                state.listLong = action.payload;
             })
         ;
     }
