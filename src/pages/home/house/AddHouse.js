@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {addHouse, addImages, editDetailHouse, pushImage, pushThumbnail} from "../../../services/houseService";
@@ -10,6 +10,10 @@ import {v4} from "uuid";
 import {storage} from "../../../firebase/firebase";
 import {getDownloadURL,ref,                                                        uploadBytesResumable} from "firebase/storage";
 import {editDetailUser} from "../../../services/userService";
+import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
+import icon1 from "../../../assets/imgs/container/aaa.webp";
+import icon2 from "../../../assets/imgs/container/bbb.webp";
+import icon3 from "../../../assets/imgs/container/ccc.webp";
 
 
 export default function AddHouse() {
@@ -60,112 +64,173 @@ export default function AddHouse() {
 
 
     return (
-        <div className={'row'}>
-            <div className="offset-3 col-6 mt-5">
-                <h1 style={{textAlign: 'center'}}>Thêm căn nhà</h1>
-                <Formik initialValues={{name: '', address: '', bedroom: '', bathroom: '',description: '', price: ''}} onSubmit={(values) => {
-                    handleAddHouse(values)
-                }}>
-                    <Form>
-                        <div className="form-group">
-                            <label htmlFor="name" className="form-label">Tên nhà</label>
-                            <Field type="text" className="form-control" id="name" placeholder="Nhập tên nhà"
-                                   name="name"/>
-                            <ErrorMessage name="name" className="text-danger" component="small"/>
-                        </div>
+        <>
+            <div className="container">
+                <div className="nav-userInfo">
+                    <nav style={{padding: '0'}} aria-label="breadcrumb">
+                        <ol className="breadcrumb" style={{background: 'none'}}>
+                            <li className="breadcrumb-item"><Link to={''}>Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Thêm căn nhà</li>
+                        </ol>
+                    </nav>
+                </div>
+                <h1>Thêm căn nhà</h1>
+                <div className="user-info">
+                    <div className={`user-info-left w-65`}>
+                        <Formik initialValues={{name: '', address: '', bedroom: '', bathroom: '',description: '', price: ''}} onSubmit={(values) => {
+                            handleAddHouse(values)
+                        }}>
+                            <Form>
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Tên nhà</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <Field type="text" className="form-control" placeholder="Nhập tên nhà"
+                                               name="name"/>
+                                        <ErrorMessage name="name" className="text-danger" component="small"/>
+                                    </div>
+                                </div>
 
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Địa chỉ</label>
-                            <Field type="text" className={'form-control'} name={'address'} placeholder="Nhập địa chỉ"/>
-                        </div>
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Địa chỉ</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <Field type="text" className={'form-control'} name={'address'} placeholder="Nhập địa chỉ"/>
+                                        <ErrorMessage name="name" className="text-danger" component="small"/>
+                                    </div>
+                                </div>
 
-                        <div className="form-group">
-                            <label htmlFor="bedroom" className="form-label">Số phòng ngủ</label>
-                            <Field as="select" className="form-select" name="bedroom">
-                                <option value="">---Vui lòng chọn---</option>
-                                {Array.from({length: 10}, (v, i) => (
-                                    <option value={i + 1} key={i + 1}>{i + 1}</option>
-                                ))}
-                            </Field>
-                            <ErrorMessage name="bedroom" className="text-danger" component="small"/>
-                        </div>
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Số phòng ngủ</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <Field as="select" className="form-select" name="bedroom">
+                                            <option value="">---Vui lòng chọn---</option>
+                                            {Array.from({length: 10}, (v, i) => (
+                                                <option value={i + 1} key={i + 1}>{i + 1}</option>
+                                            ))}
+                                        </Field>
+                                        <ErrorMessage name="bedroom" className="text-danger" component="small"/>
+                                    </div>
+                                </div>
 
-                        <div className="form-group">
-                            <label htmlFor="bathroom" className="form-label">Số phòng tắm</label>
-                            <Field as="select" className="form-select" name="bathroom">
-                                <option value="">---Vui lòng chọn---</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </Field>
-                            <ErrorMessage name="bathroom" className="text-danger" component="small"/>
-                        </div>
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Số phòng tắm</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <Field as="select" className="form-select" name="bathroom">
+                                            <option value="">---Vui lòng chọn---</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </Field>
+                                        <ErrorMessage name="bathroom" className="text-danger" component="small"/>
+                                    </div>
+                                </div>
 
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Mô tả chi tiết</label>
-                            <Field type="text" className={'form-control'} name={'description'} placeholder="Nhập mô tả" />
-                        </div>
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Mô tả chi tiết</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <Field type="text" className={'form-control'} name={'description'} placeholder="Nhập mô tả" />
+                                        <ErrorMessage name="description" className="text-danger" component="small"/>
+                                    </div>
+                                </div>
 
-                        <div className="form-group">
-                            <label className="form-label" htmlFor="price">Giá tiền (VNĐ/ngày)</label>
-                            <Field className="form-control" id="price" type="number" name="price"
-                                   placeholder="Nhập giá tiền"/>
-                            <ErrorMessage name="price" className="text-danger" component="small"/>
-                        </div>
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Giá tiền (VNĐ/ngày)</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <Field className="form-control" id="price" type="number" name="price"
+                                               placeholder="Nhập giá tiền"/>
+                                        <ErrorMessage name="price" className="text-danger" component="small"/>
+                                    </div>
+                                </div>
 
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Thêm ảnh</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <form className='identify'
+                                              onClick={() => document.querySelector("#frontSideFile").click()}>
+                                            <input multiple={true} type="file" id="frontSideFile" name="frontSide" hidden accept={"image/jpeg ,image/png"}
+                                                   onChange={(event) => {
+                                                       uploadIMG(event)
+                                                           .then((urls) => {
+                                                               toast.success("Tải ảnh thành công", { position: "top-center", autoClose: 2000 });
+                                                               dispatch(pushImage(urls));
+                                                           })
+                                                           .catch((error) => {
+                                                               console.error("Lỗi:", error);
+                                                           });
+                                                   }}
+                                            />
 
-                        <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Thêm ảnh</label>
-                            <form className='identify'
-                                  onClick={() => document.querySelector("#frontSideFile").click()}>
-                                <input multiple={true} type="file" id="frontSideFile" name="frontSide" hidden accept={"image/jpeg ,image/png"}
-                                       onChange={(event) => {
-                                           uploadIMG(event)
-                                               .then((urls) => {
-                                                   toast.success("Tải ảnh thành công", { position: "top-center", autoClose: 2000 });
-                                                   dispatch(pushImage(urls));
-                                               })
-                                               .catch((error) => {
-                                                   console.error("Lỗi:", error);
-                                               });
-                                       }}
-                                />
+                                            {null ?
+                                                <img id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
+                                                :
+                                                <MdCloudUpload
+                                                    color={"#1475cf"} size={60}/>
+                                            }
+                                        </form>
+                                    </div>
+                                </div>
 
-                                {null ?
-                                    <img id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
-                                    :
-                                    <MdCloudUpload
-                                        color={"#1475cf"} size={60}/>
-                                }
-                            </form>
-                        </div>
+                                <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
+                                    <div className="w-30 pb-3">
+                                        <div>Thêm ảnh bìa</div>
+                                    </div>
+                                    <div className="w-70 pb-3">
+                                        <form className='identify'
+                                              onClick={() => document.querySelector("#thumbnail").click()}>
+                                            <input type="file" id="thumbnail" name="thumbnail" onChange={(event) => {
+                                                uploadThumbnail(event)
+                                            }} hidden accept={"image/jpeg ,image/png"}/>
+                                            {house.thumbnail ?
+                                                <img src={house.thumbnail} id="frontside" width={'150px'} height={'150px'} alt={'img'}/>
+                                                :
+                                                <MdCloudUpload
+                                                color={"#1475cf"} size={60}/>
+                                            }
+                                        </form>
+                                    </div>
+                                </div>
+                                <button type="submit" className="btn btn-primary">Submit</button>
 
-                        <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
-                            <div className="infoItem-left">
-                                <p>Ảnh bìa</p>
+                            </Form>
+                        </Formik>
+                    </div>
+                    <div className="user-info-right w-30">
+                        <div className="user-right">
+                            <div className="user-right-item">
+                                <img style={{width: '80px', height: '60px'}} src={icon1} alt=""/>
+                                <h5>Chia sẻ thông tin về chỗ ở của bạn cho chúng tôi</h5>
+                                <p>Chia sẻ một số thông tin cơ bản, như vị trí của nhà/phòng cho thuê và số lượng khách có thể ở tại đó.</p>
                             </div>
-                            <div className="infoItem-right">
-
-                                <form className='identify'
-                                      onClick={() => document.querySelector("#thumbnail").click()}>
-                                    <input type="file" id="thumbnail" name="thumbnail" onChange={(event) => {
-                                        uploadThumbnail(event)
-                                    }} hidden accept={"image/jpeg ,image/png"}/>
-                                    {house.thumbnail ?
-                                        <img src={house.thumbnail} id="frontside" width={'150px'} height={'150px'} alt={'img'}/>
-                                        :
-                                        <MdCloudUpload />
-                                    }
-                                </form>
-
+                            <hr/>
+                            <div className="user-right-item">
+                                <img style={{width: '80px', height: '60px'}} src={icon2} alt=""/>
+                                <h5>Làm cho nhà/phòng cho thuê trở nên nổi bật</h5>
+                                <p>Thêm từ 5 ảnh trở lên cùng với tiêu đề và nội dung mô tả – chúng tôi sẽ giúp bạn thực hiện.</p>
+                            </div>
+                            <hr/>
+                            <div className="user-right-item">
+                                <img style={{width: '80px', height: '60px'}} src={icon3} alt=""/>
+                                <h5>Hoàn thiện và đăng mục cho thuê</h5>
+                                <p>Lựa chọn xem bạn muốn bắt đầu với việc đón tiếp khách có kinh nghiệm, chọn giá khởi điểm hay đăng mục cho thuê.</p>
                             </div>
                         </div>
-
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </Form>
-                </Formik>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     )
 
 }
