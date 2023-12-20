@@ -1,11 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
-import {Modal} from "react-bootstrap";
+import React, {useState} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {LoginUserSchema} from "../../../validate/validate";
-import Register from "../../Register";
-import {addHouse, getHouses} from "../../../services/houseService";
+import {addHouse, addImages, pushImage} from "../../../services/houseService";
+import {toast} from "react-toastify";
+import uploadIMG from "../../../firebase/uploadIMG";
+import {MdCloudUpload} from "react-icons/md";
 
 export default function AddHouse() {
     const [showAddHouseModal, setShowAddHouseModal] = useState(false);
@@ -18,8 +18,8 @@ export default function AddHouse() {
         return state;
     })
     const images = useSelector( state => {
-        console.log(state)
-        return state;
+        console.log(state.house.images)
+        return state.house.images;
     })
 
     const handleAddHouse = async (values) => {
@@ -31,6 +31,7 @@ export default function AddHouse() {
                 navigate('/user-info')
                 toast.error("Cập nhật thất bại!");
             } else {
+                dispatch(addImages({urls: images, id: res.payload.id}))
                 navigate('/houses')
                 toast.success("Cập nhật thành công!");
             }
@@ -113,7 +114,8 @@ export default function AddHouse() {
                                 {null ?
                                     <img id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
                                     :
-                                    <MdCloudUpload color={"#1475cf"} size={60}/>
+                                    <MdCloudUpload
+                                        color={"#1475cf"} size={60}/>
                                 }
                             </form>
                         </div>

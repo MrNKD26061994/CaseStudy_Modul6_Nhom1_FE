@@ -73,3 +73,16 @@ export const getAHouse = createAsyncThunk(
         return res.data;
     }
 )
+export const addImages = createAsyncThunk(
+    'push/image/addImages',
+    async (obj) => {
+        let ress = []
+        for (let i = 0; i < obj.urls.length; i++) {
+            let value = {url: obj.urls[i],status: "1", house: {id: obj.id}}
+            console.log(value)
+            const res = await customAxios.post('image', value);
+            ress.push(res)
+        }
+        return ress;
+    }
+)
