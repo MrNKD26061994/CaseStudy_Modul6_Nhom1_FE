@@ -2,13 +2,24 @@ import React, {useEffect, useState} from 'react';
 import "./CSS-Admin-ListUser.css";
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
-import {AdminApproveRenterToOwner, ShowListUserAreWaitingConfirmed} from "../../services/userService";
+import {
+    AdminApproveRenterToOwner,
+    refuseUserBecomeOwner,
+    ShowListUserAreWaitingConfirmed
+} from "../../services/userService";
 const SetPermisionForRenter = () => {
     const dispatch = useDispatch();
     const  approveRenterAccount = async (user) =>{
           await dispatch(AdminApproveRenterToOwner(user));
         await  dispatch(ShowListUserAreWaitingConfirmed());
            toast("bạn đã câp quyền chủ nhà thành công!")
+    }
+    const refuseRenter = async (user)=>{
+        if (window.confirm("Bạn chắc chắn hủy yêu cầu này?")) {
+            await dispatch(refuseUserBecomeOwner(user));
+            await  dispatch(ShowListUserAreWaitingConfirmed());
+            toast("Hủy thành công.")
+        }
     }
     useEffect(() =>  {
         dispatch(ShowListUserAreWaitingConfirmed())
@@ -48,7 +59,7 @@ const SetPermisionForRenter = () => {
                             <td>
                                 <button onClick={() => {
                                     approveRenterAccount(item)}} style={{width:"80px"}} type="button" className="btn btn-outline-primary">Duyệt</button></td>
-                            <td><button style={{width:"80px"}} type="button" className="btn btn-outline-primary">Hủy</button></td>
+                            <td><button onClick={()=>{refuseRenter(item)}} style={{width:"80px"}} type="button" className="btn btn-outline-primary">Hủy</button></td>
 
                         </tr>
                     ))}

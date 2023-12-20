@@ -17,16 +17,18 @@ const OwnerList = () => {
          await dispatch(AdminGetListOwner());
          await toast("Thao tác thành công!")
     }
-    const  AdminBlockUserHTML = async (user) =>{
-        await dispatch(AdminOpenUser(user));
-        await dispatch(AdminGetListOwner());
-        await toast("Thao tác thành công!")
+    const  AdminBlockUserHTML = async (user) =>{ ///Khóa
+        if (window.confirm("Bạn chắc chăn muốn khóa tài khoản này???")) {
+            await dispatch(AdminOpenUser(user));
+            await dispatch(AdminGetListOwner());
+            await toast("Thao tác thành công!")
+        }
     }
     useEffect(() =>  {
         dispatch(AdminGetListOwner())
     }, []);
     const listUser = useSelector(state=>{
-        console.log("List chủ nahf ", state);
+        console.log("List chủ nhà ", state);
         return state.users.listUser.data;
     })
     return (

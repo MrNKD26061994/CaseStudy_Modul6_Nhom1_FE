@@ -13,10 +13,13 @@ const RenterList = () => {
         await toast("Thao tác thành công!")
     }
     const  AdminBlockUserHTML = async (user) =>{
-        await dispatch(AdminOpenUser(user));
-        await dispatch(AdminGetListRenter());
-        await toast("Thao tác thành công!")
+        if (window.confirm("Bạn chắc chăn muốn khóa tài khoản này???")) {
+            await dispatch(AdminOpenUser(user));
+            await dispatch(AdminGetListRenter());
+            await toast("Thao tác thành công!")
+        }
     }
+
 
     useEffect(() =>  {
         dispatch(AdminGetListRenter())

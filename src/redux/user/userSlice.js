@@ -13,7 +13,7 @@ import {
     getName,
     login,
     logout,
-    openFormEdit,
+    openFormEdit, refuseUserBecomeOwner,
     register,
     ShowListUserAreWaitingConfirmed,
 } from "../../services/userService";
@@ -93,6 +93,9 @@ const userSlice = createSlice({
                 state.userDetail = action.payload
             })
             .addCase(AdminOpenUser.fulfilled, (state, action) => {
+                state.userDetail = action.payload
+            })
+            .addCase(refuseUserBecomeOwner.fulfilled, (state, action) => {
                 state.userDetail = action.payload
             })
             ;

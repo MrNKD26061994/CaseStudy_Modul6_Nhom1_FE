@@ -1,11 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import React, {useEffect, useState} from "react";
-import {Modal} from "react-bootstrap";
+import React, {useState} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {LoginUserSchema} from "../../../validate/validate";
-import Register from "../../Register";
-import {addHouse, getHouses} from "../../../services/houseService";
+import {addHouse, addImages, pushImage} from "../../../services/houseService";
+import {toast} from "react-toastify";
+import uploadIMG from "../../../firebase/uploadIMG";
+import {MdCloudUpload} from "react-icons/md";
 
 export default function AddHouse() {
     const [showAddHouseModal, setShowAddHouseModal] = useState(false);
@@ -14,18 +14,31 @@ export default function AddHouse() {
     const navigate = useNavigate();
 
     const user = useSelector( state => {
-        console.log(state)
+        // console.log(state)
         return state;
+    })
+    const images = useSelector( state => {
+        console.log(state.house.images)
+        return state.house.images;
     })
 
     const handleAddHouse = async (values) => {
         let id = JSON.parse(localStorage.getItem("user")).id
-        // console.log(localStorage.getItem("user"))
         let data = {...values, owner: {id: id}}
-        // console.log(data)
-        await dispatch(addHouse(data))
-        navigate('/houses')
+        await dispatch(addHouse(data)).then((res) => {
+            console.log(res.payload)
+            if(res.type === 'house/addHouse/rejected') {
+                navigate('/user-info')
+                toast.error("Cập nhật thất bại!");
+            } else {
+                dispatch(addImages({urls: images, id: res.payload.id}))
+                navigate('/houses')
+                toast.success("Cập nhật thành công!");
+            }
+        })
     }
+
+
     return (
         <div className={'row'}>
             <div className="offset-3 col-6 mt-5">
@@ -78,6 +91,33 @@ export default function AddHouse() {
                             <Field className="form-control" id="price" type="number" name="price"
                                    placeholder="Nhập giá tiền"/>
                             <ErrorMessage name="price" className="text-danger" component="small"/>
+                        </div>
+
+
+                        <div className="form-group">
+                            <label htmlFor="exampleInputPassword1">Thêm ảnh</label>
+                            <form className='identify'
+                                  onClick={() => document.querySelector("#frontSideFile").click()}>
+                                <input multiple={true} type="file" id="frontSideFile" name="frontSide" hidden accept={"image/jpeg ,image/png"}
+                                       onChange={(event) => {
+                                           uploadIMG(event)
+                                               .then((urls) => {
+                                                   toast.success("Tải ảnh thành công", { position: "top-center", autoClose: 2000 });
+                                                   dispatch(pushImage(urls));
+                                               })
+                                               .catch((error) => {
+                                                   console.error("Lỗi:", error);
+                                               });
+                                       }}
+                                />
+
+                                {null ?
+                                    <img id="frontside" width={'100%'} height={'100%'} alt={'img'}/>
+                                    :
+                                    <MdCloudUpload
+                                        color={"#1475cf"} size={60}/>
+                                }
+                            </form>
                         </div>
 
                         <button type="submit" className="btn btn-primary">Submit</button>
