@@ -6,7 +6,7 @@ import {
     showListHouseForUser,
     getAHouse,
     editDetailHouse, findHouseById,
-    pushImage, addImages
+    pushImage, addImages, pushThumbnail
 } from "../../services/houseService";
 import {closeFormEdit, getName, openFormEdit} from "../../services/houseService";
 import {findUserById} from "../../services/userService";
@@ -14,9 +14,11 @@ import {findUserById} from "../../services/userService";
 const initialState = {
     house: [],
     images: [],
+    thumbnail: "",
     houseDetail: {},
     isActiveEdit: false,
     nameEditOne: "",
+
 }
 const houseSlice = createSlice({
     name: 'house',
@@ -55,6 +57,9 @@ const houseSlice = createSlice({
             })
             .addCase(pushImage.fulfilled, (state, action) => {
                 state.images = action.payload;
+            })
+            .addCase(pushThumbnail.fulfilled, (state, action) => {
+                state.thumbnail = action.payload;
             })
             .addCase(showListHouseForUser.fulfilled,(state, action) => {
                 state.houses = action.payload

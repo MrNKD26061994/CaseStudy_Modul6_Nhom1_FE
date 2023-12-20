@@ -187,8 +187,8 @@ export default function EditHouse() {
                                     <Form>
                                         <div className="form-row">
                                             <div className="form-group col-12 color-red">
-                                                <Field name={'email'} type="email" className={'form-control'} placeholder={'Địa chỉ:'} />
-                                                <ErrorMessage name={'email'}></ErrorMessage>
+                                                <Field name={'address'} type="text" className={'form-control'} placeholder={'Địa chỉ:'} />
+                                                <ErrorMessage name={'address'}></ErrorMessage>
                                             </div>
                                         </div>
                                         <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>

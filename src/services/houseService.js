@@ -86,3 +86,9 @@ export const addImages = createAsyncThunk(
         return ress;
     }
 )
+export const pushThumbnail = createAsyncThunk(
+    'house/pushThumbnail',
+    async (url) => {
+        return url;
+    }
+)
