@@ -18,8 +18,8 @@ export default function AddHouse() {
         return state;
     })
     const images = useSelector( state => {
-        console.log(state.house.images)
-        return state.house.images;
+        console.log(state)
+        return state;
     })
 
     const handleAddHouse = async (values) => {
@@ -31,7 +31,7 @@ export default function AddHouse() {
                 navigate('/user-info')
                 toast.error("Cập nhật thất bại!");
             } else {
-                dispatch(addImages({urls: images, id: res.payload.id}))
+                dispatch(addImages(res.payload))
                 navigate('/houses')
                 toast.success("Cập nhật thành công!");
             }
