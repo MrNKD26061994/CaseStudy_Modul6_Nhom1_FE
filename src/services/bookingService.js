@@ -71,3 +71,24 @@ export const Top5HouseBooking = createAsyncThunk(
         return res;
     }
 )
+export const ShowListBookingOfTheOwner = createAsyncThunk(
+    'booking/ShowListBookingOfTheOwner',
+    async (user) => {
+        const res = await customAxios.post('booking/ShowListBookingOfTheOwner' , user);
+        return res;
+    }
+)
+export const OwnerCheckIn = createAsyncThunk(
+    'booking/OwnerCheckIn',
+    async (booking) => {
+        const res = await customAxios.put('booking/OwnerCheckIn' , booking);
+        return res;
+    }
+)
+export const OwnerCheckOut = createAsyncThunk(
+    'booking/OwnerCheckOut',
+    async (booking) => {
+        const res = await customAxios.put('booking/OwnerCheckOut' , booking);
+        return res;
+    }
+)
