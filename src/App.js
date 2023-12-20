@@ -24,6 +24,7 @@ import HouseDetail from "./pages/home/web/HouseDetail";
 import ShowListHouseForHomePage from "./pages/home/house/ShowListHouseForHomePage";
 import BookAHouse from "./pages/home/Booking/BookAHouse";
 import UserSeeBookingHistory from "./pages/home/Booking/UserSeeBookingHistory";
+import ShowListBookingOfTheOwnerFe from "./pages/home/Booking/ShowListBookingOfTheOwnerFE";
 import ShowTop5HouseBooking from "./components/Top5/ShowTop5HouseBooking";
 
 
@@ -50,7 +51,7 @@ function App() {
         <Routes>
             <Route path={''} element={<Home></Home>}>
                 <Route path={''} element={<HomeUser />} />
-                {/*<Route path={''} element={<ShowListHouseForHomePage />} />*/}
+                <Route path={''} element={<ShowListHouseForHomePage />} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
                 <Route path={'edit-house/:id'} element={<EditHouse></EditHouse>}></Route>
@@ -67,6 +68,7 @@ function App() {
                 <Route path={'bookAHouse/:id'} element={<BookAHouse/>} />
                 <Route path={'UserSeeBookingHistory'} element={<UserSeeBookingHistory/>} />
                 <Route path={'ShowTop5HouseBooking'} element={<ShowTop5HouseBooking/>} />
+                <Route path={'ShowListBookingOfTheOwnerFe'} element={<ShowListBookingOfTheOwnerFe/>} />
 
 
                 {/*<Route path={'test'} element={<Test />} />*/}
