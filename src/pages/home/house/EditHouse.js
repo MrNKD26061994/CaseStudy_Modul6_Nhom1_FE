@@ -35,8 +35,8 @@ export default function EditHouse() {
     })
 
     const showFormEditHouse = async (attribute) =>{
-        dispatch(openFormEdit()).then(() => {})
-        dispatch(getName(attribute)).then(() => {})
+        await dispatch(openFormEdit()).then(() => {})
+        await dispatch(getName(attribute)).then(() => {})
 
     }
     function offFormEditHouse() {
@@ -58,37 +58,6 @@ export default function EditHouse() {
         })
         navigate('')
     }
-
-    const [fileFront, setFileFront] = useState(null);
-    const [avatar, setAvatar] = useState(null);
-
-    // const uploadIdentify = (event) => {
-    //     if (event.target.files[0] == null) return;
-    //     const imageRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
-    //     const {name} = event.target;
-    //     toast.info("Đang tải ảnh lên", {autoClose: 500,});
-    //     uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
-    //         getDownloadURL(snapshot.ref).then(async (url) => {
-    //             // toast.success("Tải ảnh thành công", {position: "top-center", autoClose: 2000,});
-    //             await setAvatar(url);
-    //             let data = {...house}
-    //
-    //             data.avatar = url;
-    //             console.log(data)
-    //
-    //             await dispatch(editDetailHouse(data)).then((res) => {
-    //                 if(res.type === 'house/login/rejected') {
-    //                     navigate('/edit-house')
-    //                     toast.error("Cập nhật thất bại!");
-    //                 } else {
-    //                     navigate('/edit-house')
-    //                     toast.success("Cập nhật thành công!");
-    //                 }
-    //             })
-    //             navigate('')
-    //         });
-    //     })
-    // }
 
     return (
         <>
