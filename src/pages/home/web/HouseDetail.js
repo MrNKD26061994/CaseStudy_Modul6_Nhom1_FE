@@ -14,18 +14,18 @@ import {findHouseById} from "../../../services/houseService";
 import {getDaysBetweenTwoDates, getNumberOfNights, totalMoney} from "../../../function/function";
 import {createBooking, findBookingNotCheckin, getStartEndDate} from "../../../services/bookingService";
 import dayjs from "dayjs";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 
 export default function HouseDetail() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // const id = 2;
+    const {id} = useParams();
 
     useEffect(() => {
-        dispatch(findHouseById(2))
-        dispatch(findBookingNotCheckin(2))
+        dispatch(findHouseById(id))
+        dispatch(findBookingNotCheckin(id))
     }, []);
 
     const user = useSelector(state => {

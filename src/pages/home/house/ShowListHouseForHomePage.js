@@ -32,7 +32,7 @@ const ShowListHouseForHomePage = () => {
                 <div className="row">
                     {ListHouse && ListHouse.map((house, index)=>(
                         <div className="col-2">
-                            <Link style={{textDecoration: 'none'}}  to={"/house-detail"}>
+                            <Link style={{textDecoration: 'none'}}  to={"/house-detail/" + house.id}>
                             <div id={'id'+house.id} className="carousel slide carouselExampleControls"
                                  data-ride="carousel" data-interval="false">
                                 <div className="carousel-inner">
