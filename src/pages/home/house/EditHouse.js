@@ -22,7 +22,7 @@ export default function EditHouse() {
     let {id} = useParams();
     useEffect(() => {
         dispatch(findHouseById(id))
-    })
+    },[])
     const house = useSelector(state => {
         return state.house.houseDetail
     })

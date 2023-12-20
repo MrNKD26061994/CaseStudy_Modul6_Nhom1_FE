@@ -105,11 +105,13 @@
 .user-info-right {
 }
 
+.blogEdit {
+    display: flex;
+}
 
-
-
-
-
+.noneEdit {
+    display: none;
+}
 
 
 .breadcrumb-item+.breadcrumb-item::before {

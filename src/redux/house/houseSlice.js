@@ -7,7 +7,7 @@ import {
     getAHouse,
     editDetailHouse, findHouseById
 } from "../../services/houseService";
-import {closeFormEdit, getName, openFormEdit} from "../../services/userService";
+import {closeFormEdit, getName, openFormEdit} from "../../services/houseService";
 import {findUserById} from "../../services/userService";
 
 const initialState = {
