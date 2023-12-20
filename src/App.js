@@ -24,6 +24,7 @@ import HouseDetail from "./pages/home/web/HouseDetail";
 import ShowListHouseForHomePage from "./pages/home/house/ShowListHouseForHomePage";
 import BookAHouse from "./pages/home/Booking/BookAHouse";
 import UserSeeBookingHistory from "./pages/home/Booking/UserSeeBookingHistory";
+import ShowListBookingOfTheOwnerFe from "./pages/home/Booking/ShowListBookingOfTheOwnerFE";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 <Route path={'admin/currentAdminDetail'} element={<ShowAdminDetail/>} />
                 <Route path={'bookAHouse/:id'} element={<BookAHouse/>} />
                 <Route path={'UserSeeBookingHistory'} element={<UserSeeBookingHistory/>} />
+                <Route path={'ShowListBookingOfTheOwnerFe'} element={<ShowListBookingOfTheOwnerFe/>} />
 
 
                 <Route path={'test'} element={<Test />} />

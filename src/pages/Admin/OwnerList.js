@@ -26,7 +26,6 @@ const OwnerList = () => {
         dispatch(AdminGetListOwner())
     }, []);
     const listUser = useSelector(state=>{
-        console.log("List chủ nahf ", state);
         return state.users.listUser.data;
     })
     return (

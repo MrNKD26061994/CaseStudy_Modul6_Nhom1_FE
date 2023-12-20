@@ -3,7 +3,7 @@ import {
     CancelBookingTheHouse,
     createBooking,
     findBookingNotCheckin,
-    getStartEndDate,
+    getStartEndDate, OwnerCheckIn, OwnerCheckOut, ShowListBookingOfTheOwner,
     toggleCheckNextDate, UserWantToSeeBookingHistory
 } from "../../services/bookingService";
 
@@ -35,7 +35,13 @@ const bookingSlice = createSlice({
             .addCase(UserWantToSeeBookingHistory.fulfilled, (state, action) => {
                 state.bookings = action.payload;
             })
-            .addCase(CancelBookingTheHouse.fulfilled, (state, action) => {
+            .addCase(ShowListBookingOfTheOwner.fulfilled, (state, action) => {
+                state.bookings = action.payload;
+            })
+            .addCase(OwnerCheckIn.fulfilled, (state, action) => {
+                state.booking = action.payload;
+            })
+            .addCase(OwnerCheckOut.fulfilled, (state, action) => {
                 state.booking = action.payload;
             })
         ;
