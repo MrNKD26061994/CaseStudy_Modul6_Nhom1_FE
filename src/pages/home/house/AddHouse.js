@@ -2,10 +2,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import React, {useState} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {addHouse, addImages, pushImage} from "../../../services/houseService";
+import {addHouse, addImages, editDetailHouse, pushImage, pushThumbnail} from "../../../services/houseService";
 import {toast} from "react-toastify";
 import uploadIMG from "../../../firebase/uploadIMG";
 import {MdCloudUpload} from "react-icons/md";
+import {v4} from "uuid";
+import {storage} from "../../../firebase/firebase";
+import {getDownloadURL,ref,                                                        uploadBytesResumable} from "firebase/storage";
+import {editDetailUser} from "../../../services/userService";
+
 
 export default function AddHouse() {
     const [showAddHouseModal, setShowAddHouseModal] = useState(false);
@@ -13,18 +18,22 @@ export default function AddHouse() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const user = useSelector( state => {
+    const house = useSelector( state => {
         // console.log(state)
         return state;
     })
     const images = useSelector( state => {
-        console.log(state.house.images)
+        // console.log(state.house.images)
         return state.house.images;
+    })
+    const thumbnail = useSelector(state => {
+        console.log(state.house.thumbnail)
+        return state.house.thumbnail;
     })
 
     const handleAddHouse = async (values) => {
         let id = JSON.parse(localStorage.getItem("user")).id
-        let data = {...values, owner: {id: id}}
+        let data = {...values, owner: {id: id}, thumbnail: thumbnail}
         await dispatch(addHouse(data)).then((res) => {
             console.log(res.payload)
             if(res.type === 'house/addHouse/rejected') {
@@ -36,6 +45,17 @@ export default function AddHouse() {
                 toast.success("Cập nhật thành công!");
             }
         })
+    }
+    const uploadThumbnail = (event) => {
+        if (event.target.files[0] == null) return;
+        const thumbnailRef = ref(storage, `images/${event.target.files[0].name + v4()}`);
+        const {name} = event.target;
+        toast.info("Đang tải ảnh lên", {autoClose: 500,});
+        uploadBytesResumable(thumbnailRef, event.target.files[0]).then((snapshot) => {
+            getDownloadURL(snapshot.ref).then(async (url) => {
+                dispatch(pushThumbnail(url))
+                })
+            });
     }
 
 
@@ -118,6 +138,27 @@ export default function AddHouse() {
                                         color={"#1475cf"} size={60}/>
                                 }
                             </form>
+                        </div>
+
+                        <div style={{paddingBottom: '16px'}} className={`info-item blogEdit`}>
+                            <div className="infoItem-left">
+                                <p>Ảnh bìa</p>
+                            </div>
+                            <div className="infoItem-right">
+
+                                <form className='identify'
+                                      onClick={() => document.querySelector("#thumbnail").click()}>
+                                    <input type="file" id="thumbnail" name="thumbnail" onChange={(event) => {
+                                        uploadThumbnail(event)
+                                    }} hidden accept={"image/jpeg ,image/png"}/>
+                                    {house.thumbnail ?
+                                        <img src={house.thumbnail} id="frontside" width={'150px'} height={'150px'} alt={'img'}/>
+                                        :
+                                        <MdCloudUpload />
+                                    }
+                                </form>
+
+                            </div>
                         </div>
 
                         <button type="submit" className="btn btn-primary">Submit</button>
