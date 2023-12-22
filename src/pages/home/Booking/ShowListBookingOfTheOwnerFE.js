@@ -9,26 +9,26 @@ import {toast} from "react-toastify";
 
 const ShowListBookingOfTheOwnerFe = () => {
     const dispatch = useDispatch();
-    const [showBotton, setShowBtton] =useState(true);
-    useEffect(async () =>  {
-       await dispatch(ShowListBookingOfTheOwner( JSON.parse(localStorage.getItem("user"))))
+    const [showBotton, setShowBtton] = useState(true);
+    useEffect( () => {
+         dispatch(ShowListBookingOfTheOwner(JSON.parse(localStorage.getItem("user"))))
     }, []);
-    const bookings = useSelector(state=>{
+    const bookings = useSelector(state => {
         console.log(state.bookings.bookings.data);
         return state.bookings.bookings.data;
     })
-    const OwnerCheckInBooking  = async (booking) =>{
-        if(window.confirm("Bạn có chắc chắn thao tác này?")) {
-            await dispatch(OwnerCheckIn(booking));
-            await dispatch(ShowListBookingOfTheOwner(JSON.parse(localStorage.getItem("user"))))
-            await toast("Thao tác thành công!")
+    const OwnerCheckInBooking = async (booking) => {
+        if (window.confirm("Bạn có chắc chắn thao tác này?")) {
+           await dispatch(OwnerCheckIn(booking));
+            await  dispatch(ShowListBookingOfTheOwner(JSON.parse(localStorage.getItem("user"))))
+            await   toast("Thao tác thành công!")
         }
     }
-    const OwnerCheckOutBooking  = async (booking) =>{
-        if(window.confirm("Bạn có chắc chắn thao tác này?")){
-        await dispatch(OwnerCheckOut(booking));
-        await dispatch(ShowListBookingOfTheOwner( JSON.parse(localStorage.getItem("user"))))
-        await toast("Thao tác thành công!")
+    const OwnerCheckOutBooking = async (booking) => {
+        if (window.confirm("Bạn có chắc chắn thao tác này?")) {
+            await    dispatch(OwnerCheckOut(booking));
+            await   dispatch(ShowListBookingOfTheOwner(JSON.parse(localStorage.getItem("user"))))
+            await   toast("Thao tác thành công!")
         }
     }
     return (
@@ -50,25 +50,29 @@ const ShowListBookingOfTheOwnerFe = () => {
                     </tr>
                     </thead>
                     <tbody>
-                    {bookings && bookings.map((item, index)=>(
+                    {bookings && bookings.map((item, index) => (
                         <tr>
-                            <td scope="row">{index+1}</td>
-                            <td>{item.user.firstname+" "+ item.user.lastname}</td>
+                            <td scope="row">{index + 1}</td>
+                            <td>{item.user.firstname + " " + item.user.lastname}</td>
                             <td>{(item.create_at)}</td>
                             <td>{(item.startTime)}</td>
                             <td>{(item.endTime)}</td>
                             <td>{item.user.phone}</td>
-                            <td>{item.house.address + "-"+ item.house.ward+ "-"+item.house.district+ "-"+item.house.province}</td>
+                            <td>{item.house.address + "-" + item.house.ward + "-" + item.house.district + "-" + item.house.province}</td>
                             <td>
-                                <Link to={"/bookAHouse/"+item.id}><img className={"eyeImageCSS"}
-                                                                                 src={eyeImage} alt=""/></Link>
+                                <Link to={"/bookAHouse/" + item.id}><img className={"eyeImageCSS"}
+                                                                         src={eyeImage} alt=""/></Link>
                             </td>
 
                             <td>
                                 <div className="form-check form-switch mt-2">
-                                    {item.status===("Chờ nhận phòng")?
-                                        <button onClick={()=>{OwnerCheckInBooking(item)}} className="btn btn-primary">Xác nhận đến</button> :
-                                        <button onClick={()=>{OwnerCheckOutBooking(item)}} className="btn btn-primary">Xác nhận đi</button>
+                                    {item.status === ("Chờ nhận phòng") ?
+                                        <button onClick={() => {
+                                            OwnerCheckInBooking(item)
+                                        }} className="btn btn-primary">Xác nhận đến</button> :
+                                        <button onClick={() => {
+                                            OwnerCheckOutBooking(item)
+                                        }} className="btn btn-primary">Xác nhận đi</button>
                                     }
                                 </div>
                             </td>

@@ -23,7 +23,6 @@ const ShowListHouseForHomePage = () => {
     }, []);
     const ListHouse = useSelector(state=>{
         return state.house.houses;
-
     })
 
     return (
