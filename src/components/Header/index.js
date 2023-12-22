@@ -33,19 +33,26 @@ function Header() {
     }
 
     function handleManageUser() {
-        navigate('admin/UserManagement');
+        navigate('/admin/UserManagement');
     }
     function handleListOwner(){
-        navigate("ListOwner");
+        navigate("/ListOwner");
     }
     function handleListRenter(){
-        navigate("ListRenter");
+        navigate("/ListRenter");
     }
     function handleSetPermisionForRenter(){
-        navigate("admin/SetPermisionForRenter")
+        navigate("/admin/SetPermisionForRenter")
     }
     function ShowTop5House(){
-        navigate("ShowTop5HouseBooking")
+        navigate("/ShowTop5HouseBooking")
+    }
+    function handleSearchHouseByName(){
+        let name = document.getElementById("name")
+        navigate("/search-name/"+ name.value)
+    }
+    function handleSearchHouseByAddress() {
+        navigate("/ListHouseByAddress")
     }
 
 
@@ -57,11 +64,15 @@ function Header() {
                 </div>
 
                 <div className="header-mid">
-                    <div className="p-rl-16">Địa điểm bất kỳ</div>
+                    <div className="p-rl-16">
+                        <input type="text" className="p-rl-16 input-hidden" placeholder={"Địa điểm bất kỳ:"}
+                                style={{border: "hidden", height: "40px"}} id={"address"}/>
+                    </div>
                     <div><span className="header-mid-center p-rl-16">Tuần bất kỳ</span></div>
                     <div className="header-mid-right pr-2">
-                        <span className="p-rl-16">Thêm khách</span>
-                        <div className="btn-search">
+                        <input type="text" className="p-rl-16 input-hidden" placeholder={"Tìm kiếm:"}
+                               style={{border: "hidden", height: "40px"}} id="name"/>
+                        <div onClick={handleSearchHouseByName} className="btn-search">
                             <img className="search-icon" src={search} alt=""/>
                         </div>
                     </div>
@@ -71,7 +82,7 @@ function Header() {
                     {user && user.roles.some((item) => item.authority === "ROLE_OWNER") ?
                         <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/add-house"}>Đón tiếp khách</Link>
                         :
-                        <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>
+                        <Link styl  e={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>
                     }
                     <div className="user">
                         <img className="user-left-icon" src={nav} alt=""/>

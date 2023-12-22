@@ -25,16 +25,16 @@ export default function ListHouse(){
                     <thead>
                     <tr className={"Header_table"}>
                         <th scope="col">STT</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Province</th>
-                        <th scope="col">District</th>
-                        <th scope="col">Acreage</th>
-                        <th scope="col">Bedroom</th>
-                        <th scope="col">Bed</th>
-                        <th scope="col">Bathroom</th>
-                        <th scope="col" className={"bottom2"}>House Detail</th>
-                        <th scope="col" className={"bottom2"}>Status</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Tỉnh/Thành phố</th>
+                        <th scope="col">Quận/Huyện</th>
+                        <th scope="col">Diện tích</th>
+                        <th scope="col">Phòng ngủ</th>
+                        <th scope="col">Giường</th>
+                        <th scope="col">Phòng tắm</th>
+                        <th scope="col" className={"bottom2"}>Chi tiết</th>
+                        <th scope="col" className={"bottom2"}>Trạng thái</th>
                     </tr>
                     </thead>
                     <tbody>
