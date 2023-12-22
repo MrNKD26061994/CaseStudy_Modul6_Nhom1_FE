@@ -2,9 +2,15 @@ import {createSlice} from "@reduxjs/toolkit";
 import {
     CancelBookingTheHouse,
     createBooking,
-    findBookingNotCheckin,
-    getStartEndDate, OwnerCheckIn, OwnerCheckOut, ShowListBookingOfTheOwner,
-    toggleCheckNextDate, Top5HouseBooking, UserWantToSeeBookingHistory
+    findBookingNotCheckin, findOneBookingByHouseIDAndUserID,
+    getStartEndDate,
+    OwnerCheckIn,
+    OwnerCheckOut,
+    ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan,
+    ShowListBookingOfTheOwner,
+    toggleCheckNextDate,
+    Top5HouseBooking,
+    UserWantToSeeBookingHistory
 } from "../../services/bookingService";
 
 const initialState = {
@@ -14,6 +20,8 @@ const initialState = {
     bookings:[],
     listLong:[],
     Top5:[],
+    aBooking:{},
+    bookingsPaid:[],
     // booking: {startTime: new Date()},
 }
 
@@ -48,6 +56,12 @@ const bookingSlice = createSlice({
             })
             .addCase(Top5HouseBooking.fulfilled, (state, action) => {
                 state.Top5 = action.payload;
+            })
+            .addCase(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan.fulfilled, (state, action) => {
+                state.bookingsPaid = action.payload;
+            })
+            .addCase(findOneBookingByHouseIDAndUserID.fulfilled, (state, action) => {
+                state.aBooking = action.payload;
             })
         ;
     }

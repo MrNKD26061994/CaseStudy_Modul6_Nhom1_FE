@@ -92,3 +92,18 @@ export const OwnerCheckOut = createAsyncThunk(
         return res;
     }
 )
+
+export const ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan = createAsyncThunk(
+    'booking/ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan',
+    async ({house_id, user_id}) => {
+        const res = await customAxios.post('booking/ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan/'+house_id+"/"+user_id)
+            return res;
+    }
+)
+export const findOneBookingByHouseIDAndUserID = createAsyncThunk(
+    'booking/findOneBookingByHouseIDAndUserID',
+    async ({house_id, user_id}) => {
+        const res = await customAxios.post('booking/findOneBookingByHouseIDAndUserID/'+house_id+"/"+user_id);
+        return res;
+    }
+)
