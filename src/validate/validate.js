@@ -30,6 +30,7 @@ export const PhoneSchema = Yup.object().shape({
         .typeError("Số điện thoại phải nhập số")
         .matches(/^0[0-9]{9}$/, "Số điện thoại phải bắt đầu bằng số 0 và gồm 10 chữ số!"),
 })
+
 export const RegisterUserSchema = Yup.object().shape({
     username: Yup.string()
         .required('Vui lòng nhập tên đăng nhập')
