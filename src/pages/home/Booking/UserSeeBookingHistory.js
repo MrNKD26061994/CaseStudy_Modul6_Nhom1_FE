@@ -7,11 +7,11 @@ import "./UerSeeBookingHistory.css";
 import {toast} from "react-toastify";
 
 const UserSeeBookingHistory = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch().then(()=>{},[]);
     let user = JSON.parse(localStorage.getItem("user"))
 
     useEffect(async () => {
-        await dispatch(UserWantToSeeBookingHistory(user));
+        await dispatch(UserWantToSeeBookingHistory(user)).then(()=>{},[]);
     }, []);
     const bookings = useSelector(state => {
         return state.bookings.bookings.data;
@@ -29,7 +29,7 @@ const UserSeeBookingHistory = () => {
                 toast("Quá sát ngày, bạn không thể hủy, Liên hệ chủ nhà để thực hiện thao tác này!")
 
             } else if(err==="booking/CancelBookingTheHouse/fulfilled"){
-                dispatch(UserWantToSeeBookingHistory(user));
+                dispatch(UserWantToSeeBookingHistory(user)).then(()=>{},[]);
                 toast("Hủy thành công!")
             }
         })
@@ -37,6 +37,9 @@ const UserSeeBookingHistory = () => {
     return (
         <>
             <div className="container_table">
+                <div className="nav-userInfo">
+                   <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Lịch sử đặt</h1>
+                </div>
                 <table className="table table-striped">
                     <thead>
                     <tr className={"Header_table"}>

@@ -38,6 +38,9 @@ const ShowListUser = () => {
     return (
         <>
             <div className="container_table">
+                <div className="nav-userInfo">
+                    <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Quản lý người dùng</h1>
+                </div>
                 <table className="table table-striped">
                     <thead>
                     <tr className={"Header_table"}>

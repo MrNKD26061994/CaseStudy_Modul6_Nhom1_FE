@@ -51,7 +51,7 @@ export default function HouseDetail() {
     })
 
     let bookingsPaid = useSelector(state => {
-        return state.bookings.bookingsPaid;
+        return state.bookings.bookingsPaid.status;
     })
     const checkNextDate = useSelector(state => {
         return state.bookings.checkNextDate;
@@ -91,19 +91,20 @@ export default function HouseDetail() {
         navigate("/")
     }
 
-    function changeShowCommentForm() {
-        dispatch(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan(
-            {
-                house_id: param.id,
-                user_id: JSON.parse(localStorage.getItem("user")).id
-            })).then(()=>{
-            if (bookingsPaid ===undefined || bookingsPaid.length === 0 || bookingsPaid=== null ) {
-                setShowCommentForm(false);
+   async function changeShowCommentForm() {
+       dispatch(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan(
+           {
+               house_id: param.id,
+               user_id: JSON.parse(localStorage.getItem("user")).id
+           }), [])
+       console.log(param.id)
+            if (bookingsPaid ===204) {
+             await   setShowCommentForm(false);
             }
             else {
-                setShowCommentForm(true);
+              await  setShowCommentForm(true);
             }
-            },[]);
+
     }
 
     return (
