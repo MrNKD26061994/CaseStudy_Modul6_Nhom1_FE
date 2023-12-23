@@ -34,7 +34,6 @@ export default function UserInfo() {
     const showFormEdit = async (attribute) =>{
         dispatch(openFormEdit()).then(() => {})
         dispatch(getName(attribute)).then(() => {})
-
     }
     function offFormEdit() {
         dispatch(closeFormEdit()).then(() => {})
