@@ -11,6 +11,7 @@ import {logout} from "../../services/userService";
 import {toast} from "react-toastify";
 import Register from "../../pages/Register";
 import ChangePassword from "../Modal/ChangePassword";
+import MyNotify from "../MyNotify";
 
 function Header() {
     const dispatch = useDispatch();
@@ -88,6 +89,7 @@ function Header() {
                             {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>*/}
                         </>
                     }
+                    <MyNotify></MyNotify>
                     <div className="user">
                         <img className="user-left-icon" src={nav} alt=""/>
                         {user ?

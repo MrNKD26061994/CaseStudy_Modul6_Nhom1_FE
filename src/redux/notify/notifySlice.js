@@ -10,9 +10,12 @@ import {
 } from "../../services/houseService";
 import {closeFormEdit, getName, openFormEdit} from "../../services/houseService";
 import {findUserById} from "../../services/userService";
+import {countUnreadNotify, listUnReadNotify, subUnReadNotify} from "../../services/notifyService";
 
 const initialState = {
     notify: {},
+    count: 0,
+    listNotify: [],
 
 }
 const notifySlice = createSlice({
@@ -20,8 +23,14 @@ const notifySlice = createSlice({
     initialState,
     extraReducers: builder => {
         builder
-            .addCase(addImages.fulfilled,(state, action) => {
-                state['images'].concat(action.payload);
+            .addCase(countUnreadNotify.fulfilled,(state, action) => {
+                state.count = action.payload
+            })
+            .addCase(listUnReadNotify.fulfilled,(state, action) => {
+                state.listNotify = action.payload
+            })
+            .addCase(subUnReadNotify.fulfilled,(state, action) => {
+                state.listNotify = state.listNotify.filter(notify => notify.id !== action.payload)
             })
 
     }

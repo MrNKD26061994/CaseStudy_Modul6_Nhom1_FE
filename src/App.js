@@ -1,12 +1,12 @@
 import './App.css';
 import {ToastContainer} from "react-toastify";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Home from "./pages/home/Home";
 import UserDetail from "./pages/home/user/UserDetail";
 import HomeUser from "./pages/home/user/HomeUser";
 import UserInfo from "./pages/home/user/UserInfo";
 import Registration from "./pages/Registration";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import OwnerList from "./pages/Admin/OwnerList";
 import RenterList from "./pages/Admin/RenterList";
 import ShowListUser from "./pages/Admin/ShowListUser";
@@ -23,26 +23,20 @@ import BookAHouse from "./pages/home/Booking/BookAHouse";
 import UserSeeBookingHistory from "./pages/home/Booking/UserSeeBookingHistory";
 import ShowListBookingOfTheOwnerFe from "./pages/home/Booking/ShowListBookingOfTheOwnerFE";
 import ShowTop5HouseBooking from "./components/Top5/ShowTop5HouseBooking";
+import {countUnreadNotify, listUnReadNotify, listUnReadNotifyByAccountLogin} from "./services/notifyService";
 
 
 function App() {
     const dispatch = useDispatch();
-    // const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // useEffect(() => {
-    //     if(localStorage.getItem('user') != null) {
-    //         let user = JSON.parse(localStorage.getItem('user'));
-    //         if(user.roles.some((item) => item.authority === "ROLE_ADMIN")) {
-    //             dispatch(findAdminById(user.id));
-    //         } else {
-    //             dispatch(findUserById(user.id));
-    //         }
-    //         navigate('/')
-    //         // dispatch(findUserById(JSON.parse(localStorage.getItem('user')).id) != null);
-    //     } else {
-    //         navigate('/')
-    //     }
-    // },[])
+    const navigate = useNavigate();
+    const account = useSelector(state => state.user.currentUser);
+    account && listUnReadNotifyByAccountLogin(account.id).then(response => {
+        console.log(response.data)
+        dispatch(countUnreadNotify(response.data.length));
+        dispatch(listUnReadNotify(response.data))
+    }).catch(error => {
+        console.log(error);
+    })
   return (
     <div className="App myContainer">
         <ToastContainer />

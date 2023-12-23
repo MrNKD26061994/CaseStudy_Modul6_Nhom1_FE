@@ -5,7 +5,7 @@ import _ from "lodash";
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 import {toast} from "react-toastify";
-import {countUnReadNotifyByAccountLogin} from "../services/notifyService";
+import {countUnreadNotify, listUnReadNotifyByAccountLogin} from "../services/notifyService";
 
 export const WebSocketContext = createContext(null)
 
@@ -51,21 +51,21 @@ const WebSocketProvider = ({children}) => {
             // dispatch(changeStatus());
         } else {
             setNotify(data);
-            countUnReadNotifyByAccountLogin(account.id).then(response => {
-                dispatch(countUnreadNotify(response.data));
+            listUnReadNotifyByAccountLogin(account.id).then(response => {
+                dispatch(countUnreadNotify(response.data.length));
             }).catch(error => {
                 console.log(error);
             })
-            if (data.message === 'Admin đã đồng ý cho bạn làm chủ nhà'){
-                AccountService.getAccountById(account.id).then(response => {
-                    const data = {...response, token: account.token};
-                    data.password = null;
-                    dispatch(editAccount(data));
-                    localStorage.setItem("account", JSON.stringify(data));
-                }).catch(error => {
-                    console.log(error);
-                })
-            }
+            // if (data.message === 'Admin đã đồng ý cho bạn làm chủ nhà'){
+            //     AccountService.getAccountById(account.id).then(response => {
+            //         const data = {...response, token: account.token};
+            //         data.password = null;
+            //         dispatch(editAccount(data));
+            //         localStorage.setItem("account", JSON.stringify(data));
+            //     }).catch(error => {
+            //         console.log(error);
+            //     })
+            // }
         }
     }
 

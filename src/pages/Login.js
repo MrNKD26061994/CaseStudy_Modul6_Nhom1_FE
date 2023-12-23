@@ -9,6 +9,7 @@ import Register from "./Register";
 import '../components/Modal/style.css'
 import iconGoogle from "../assets/imgs/icon-google.png"
 import {LoginUserSchema} from "../validate/validate";
+import {countUnreadNotify, countUnReadNotifyByAccountLogin} from "../services/notifyService";
 
 export default function Login({props}) {
 
@@ -19,7 +20,7 @@ export default function Login({props}) {
 
     const handleLogin = async (values, {resetForm}) => {
         dispatch(login(values)).then((res) => {
-            console.log(res);
+
             if (res.type === 'user/login/rejected') {
                 navigate('')
                 toast.error("Đăng nhập thất bại!");
