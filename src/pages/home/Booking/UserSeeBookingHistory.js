@@ -7,11 +7,11 @@ import "./UerSeeBookingHistory.css";
 import {toast} from "react-toastify";
 
 const UserSeeBookingHistory = () => {
-    const dispatch = useDispatch().then(()=>{},[]);
+    const dispatch = useDispatch();
     let user = JSON.parse(localStorage.getItem("user"))
 
-    useEffect(async () => {
-        await dispatch(UserWantToSeeBookingHistory(user)).then(()=>{},[]);
+    useEffect( () => {
+         dispatch(UserWantToSeeBookingHistory(user)).then(()=>{},[]);
     }, []);
     const bookings = useSelector(state => {
         return state.bookings.bookings.data;

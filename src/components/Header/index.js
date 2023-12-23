@@ -132,7 +132,7 @@ function Header() {
                                             // Form Renter
 
                                             <>
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
+                                                {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>*/}
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/UserSeeBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
                                             </>
                                         }

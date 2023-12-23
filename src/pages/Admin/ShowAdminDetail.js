@@ -9,7 +9,7 @@ const ShowAdminDetail = () => {
     const [user, setUser] = useState({})
     let param = useParams();
     useEffect(() => {
-      setUser(currentAdminUser);
+      setUser(JSON.parse(localStorage.getItem("user")));
        }, []);
     return (
         <>
