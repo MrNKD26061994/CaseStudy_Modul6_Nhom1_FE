@@ -126,7 +126,7 @@ function Header() {
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/add-house"}>Tạo mới nhà cho thuê<span className="sr-only">(current)</span></Link>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/houses"}>Danh sách căn nhà<span className="sr-only">(current)</span></Link>
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/ShowListBookingOfTheOwnerFe"}>Xem danh sách đặt nhà<span className="sr-only">(current)</span></Link>
-
+                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/ReviewBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
                                             </>
                                             :
                                             // Form Renter

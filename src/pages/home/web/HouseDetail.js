@@ -111,7 +111,8 @@ export default function HouseDetail() {
         <>
             <div className="container" style={{height: '2000px'}}>
                 <div className="head-container">
-                    <h4>{house.name}</h4>
+                    <div style={{display:"flex", flexDirection:"row"}}><h4>Xem chi tiết nhà ></h4>
+                    <h4>{house.name}</h4></div>
                     <div className="btn-share-save">
                         <div className="b-share">
                             <img src={iconShare} alt=""/>

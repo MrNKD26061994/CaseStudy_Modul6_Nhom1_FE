@@ -20,6 +20,9 @@ export default function ListHouse(){
 
     return(
         <div className={'container_table'}>
+            <div className="nav-userInfo">
+                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Danh sách nhà của bạn</h1>
+            </div>
             <div className="col-12">
                 <table className="table table-striped">
                     <thead>

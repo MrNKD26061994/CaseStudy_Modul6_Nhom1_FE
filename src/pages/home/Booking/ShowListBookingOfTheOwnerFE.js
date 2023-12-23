@@ -33,6 +33,9 @@ const ShowListBookingOfTheOwnerFe = () => {
     }
     return (
         <div>
+            <div className="nav-userInfo">
+                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Xem người đặt phòng và đang ở</h1>
+            </div>
             <div className="container_table">
                 <table className="table table-striped">
                     <thead>
@@ -72,7 +75,7 @@ const ShowListBookingOfTheOwnerFe = () => {
                                         }} className="btn btn-primary">Xác nhận đến</button> :
                                         <button onClick={() => {
                                             OwnerCheckOutBooking(item)
-                                        }} className="btn btn-primary">Xác nhận đi</button>
+                                        }} className="btn btn-primary">Trả phòng</button>
                                     }
                                 </div>
                             </td>
