@@ -16,6 +16,7 @@ import {createBooking, findBookingNotCheckin, getStartEndDate} from "../../../se
 import dayjs from "dayjs";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
+import WebsocketComponent from "../../../websocket/WebsocketComponent";
 
 export default function HouseDetail() {
     const dispatch = useDispatch();
@@ -187,7 +188,9 @@ export default function HouseDetail() {
                                 <CalendarTest listDay={listDay}></CalendarTest>
                             </div>
                         </div>
+                        <div style={{background: "red"}}>
 
+                        </div>
                         <div className="house-content-right w-30">
                             <div className='house-right-content'>
                                 <div className="right-content">

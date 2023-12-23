@@ -1,19 +1,16 @@
 import './App.css';
 import {ToastContainer} from "react-toastify";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Home from "./pages/home/Home";
 import UserDetail from "./pages/home/user/UserDetail";
 import HomeUser from "./pages/home/user/HomeUser";
 import UserInfo from "./pages/home/user/UserInfo";
 import Registration from "./pages/Registration";
-import {useEffect} from "react";
-import {findAdminById, findUserById} from "./services/userService";
 import {useDispatch} from "react-redux";
 import OwnerList from "./pages/Admin/OwnerList";
 import RenterList from "./pages/Admin/RenterList";
 import ShowListUser from "./pages/Admin/ShowListUser";
 import SetPermisionForRenter from "./pages/Admin/SetPermisionForRenter";
-import Test from "./firebase/Test";
 import ViewUserDetail from "./pages/Admin/ViewUserDetail";
 import ShowAdminDetail from "./pages/Admin/ShowAdminDetail";
 import ListHouse from "./pages/home/house/ListHouse";
@@ -29,6 +26,7 @@ import ShowTop5HouseBooking from "./components/Top5/ShowTop5HouseBooking";
 
 
 function App() {
+    const dispatch = useDispatch();
     // const dispatch = useDispatch();
     // const navigate = useNavigate();
     // useEffect(() => {
@@ -69,6 +67,7 @@ function App() {
                 <Route path={'UserSeeBookingHistory'} element={<UserSeeBookingHistory/>} />
                 <Route path={'ShowTop5HouseBooking'} element={<ShowTop5HouseBooking/>} />
                 <Route path={'ShowListBookingOfTheOwnerFe'} element={<ShowListBookingOfTheOwnerFe/>} />
+                {/*<Route path={'test1'} element={<WebsocketComponent/>} />*/}
 
 
                 {/*<Route path={'test'} element={<Test />} />*/}

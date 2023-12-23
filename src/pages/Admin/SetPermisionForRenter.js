@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "./CSS-Admin-ListUser.css";
 import {toast} from "react-toastify";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,11 +7,38 @@ import {
     refuseUserBecomeOwner,
     ShowListUserAreWaitingConfirmed
 } from "../../services/userService";
+import {saveNotify} from "../../services/notifyService";
+import {WebSocketContext} from "../../websocket/WebSocketProvider";
 const SetPermisionForRenter = () => {
     const dispatch = useDispatch();
+    const account = useSelector(state => state.user.currentUser);
+
+    const {sendNotify} = useContext(WebSocketContext);
+
+    function handleSendNotify(accountLogin, receiverId, message, navigate) {
+        console.log(accountLogin)
+        console.log(receiverId)
+        const data = {
+            sender: accountLogin,
+            receiver: {id: receiverId},
+            message,
+            navigate
+        }
+        saveNotify(data).then(response => {
+            console.log(response)
+            sendNotify(response.data);
+            // sendAdmin(response.data);
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
     const  approveRenterAccount = async (user) =>{
-          await dispatch(AdminApproveRenterToOwner(user));
+        await dispatch(AdminApproveRenterToOwner(user)).then((res) => {
+            handleSendNotify(account, user.id, 'Admin đã đồng ý cho bạn làm chủ nhà', 'profile/houses-owner');
+          });
         await  dispatch(ShowListUserAreWaitingConfirmed());
+
            toast("bạn đã câp quyền chủ nhà thành công!")
     }
     const refuseRenter = async (user)=>{

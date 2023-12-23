@@ -10,7 +10,7 @@ import '../components/Modal/style.css'
 import iconGoogle from "../assets/imgs/icon-google.png"
 import {LoginUserSchema} from "../validate/validate";
 
-export default function Login() {
+export default function Login({props}) {
 
     const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -39,7 +39,7 @@ export default function Login() {
 
     return (
         <>
-            <div onClick={() => showModalLogin()} className="sub-login-item">Đăng nhập</div>
+            <div onClick={() => showModalLogin()} className={`${props.nameClass}`}>{props.nameTitle}</div>
 
             <Modal
                 show={showLoginModal}
