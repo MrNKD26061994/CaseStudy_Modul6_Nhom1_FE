@@ -18,7 +18,6 @@ function Header() {
     const navigate = useNavigate();
 
     const user = useSelector(state => {
-        // console.log("BBBBB",state.user.currentUser)
         return state.user.currentUser
     })
 
@@ -34,20 +33,21 @@ function Header() {
     }
 
     function handleManageUser() {
-        navigate('/admin/UserManagement');
+        navigate('admin/UserManagement');
     }
     function handleListOwner(){
-        navigate("/ListOwner");
+        navigate("ListOwner");
     }
     function handleListRenter(){
-        navigate("/ListRenter");
+        navigate("ListRenter");
     }
     function handleSetPermisionForRenter(){
-        navigate("/admin/SetPermisionForRenter")
+        navigate("admin/SetPermisionForRenter")
     }
     function ShowTop5House(){
-        navigate("/ShowTop5HouseBooking")
+        navigate("ShowTop5HouseBooking")
     }
+
     function handleSearchHouseByName(){
         let name = document.getElementById("name")
         navigate("/search-name/"+ name.value)
@@ -56,18 +56,17 @@ function Header() {
         navigate("/ListHouseByAddress")
     }
 
-
     return (
         <>
             <header>
                 <div onClick={()=>navigate("/")} className="header-left">
-               <img id="logo" src={logo} alt=""/>
+                    <img id="logo" src={logo} alt=""/>
                 </div>
 
                 <div className="header-mid">
                     <div className="p-rl-16">
                         <input type="text" className="p-rl-16 input-hidden" placeholder={"Địa điểm bất kỳ:"}
-                                style={{border: "hidden", height: "40px"}} id={"address"}/>
+                               style={{border: "hidden", height: "40px"}} id={"address"}/>
                     </div>
                     <div><span className="header-mid-center p-rl-16">Tuần bất kỳ</span></div>
                     <div className="header-mid-right pr-2">
@@ -79,13 +78,8 @@ function Header() {
                     </div>
                 </div>
 
-                <div className="header-right">
-                    {/*{user && user.roles.some((item) => item.authority === "ROLE_OWNER") ?*/}
-                    {/*    <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/add-house"}>Đón tiếp khách</Link>*/}
-                    {/*    :*/}
-                    {/*    <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>*/}
-                    {/*}*/}
 
+                <div className="header-right">
                     {user ?
                         <>
                             {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
@@ -97,7 +91,6 @@ function Header() {
                         :
                         <>
                             <Login props={{nameClass: "headerRight-left", nameTitle: "Cho thuê chỗ ở qua Airbnb"}}/>
-                            {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>*/}
                         </>
                     }
                     <MyNotify></MyNotify>
@@ -135,38 +128,16 @@ function Header() {
                                                     <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/add-house"}>Tạo mới nhà cho thuê<span className="sr-only">(current)</span></Link>
                                                     <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/houses"}>Danh sách căn nhà<span className="sr-only">(current)</span></Link>
                                                     <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/ShowListBookingOfTheOwnerFe"}>Xem danh sách đặt nhà<span className="sr-only">(current)</span></Link>
-
+                                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/ReviewBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
                                                 </>
                                                 :
                                                 // Form Renter
-                                    </>
-                                    :
-                                    <>
-                                        <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
-                                        {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
-                                            <>
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/add-house"}>Tạo mới nhà cho thuê<span className="sr-only">(current)</span></Link>
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/houses"}>Danh sách căn nhà<span className="sr-only">(current)</span></Link>
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/ShowListBookingOfTheOwnerFe"}>Xem danh sách đặt nhà<span className="sr-only">(current)</span></Link>
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/ReviewBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
-                                            </>
-                                            :
-                                            // Form Renter
-
                                                 <>
-                                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
                                                     <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/UserSeeBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
                                                 </>
                                             }
                                         </>
                                     }
-                                            <>
-                                                {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>*/}
-                                                <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/UserSeeBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
-                                            </>
-                                        }
-                                    </>
-                                }
                                     <div onClick={handleLogout} className="sub-login-item">Đăng xuất</div>
                                 </>
                                 :
