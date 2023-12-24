@@ -5,7 +5,13 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {closeFormEdit, editDetailHouse, findHouseById, getName, openFormEdit} from "../../../services/houseService";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
-// import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
+import {
+    AddressHouseSchema, BathroomHouseSchema, BedroomHouseSchema, DescriptionHouseSchema,
+    EmailSchema,
+    FirstLastNameSchema,
+    NameHouseSchema,
+    PhoneSchema, PriceHouseSchema
+} from "../../../validate/validate";
 import {MdCloudUpload} from "react-icons/md";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "../../../firebase/firebase";
@@ -14,6 +20,7 @@ import {findUserById} from "../../../services/userService";
 import icon1 from "../../../assets/imgs/container/1.png";
 import icon2 from "../../../assets/imgs/container/1-1.png";
 import icon3 from "../../../assets/imgs/container/1-1-2.png";
+import {NameHouse} from "../../../validate/validate";
 
 export default function EditHouse() {
 
@@ -65,12 +72,12 @@ export default function EditHouse() {
                 <div className="nav-userInfo">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb" style={{background: 'none'}}>
-                            <li className="breadcrumb-item"><Link to={''}>Home</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page">Thông tin ngôi nhà</li>
+                            <li className="breadcrumb-item" style={{marginBottom:"10px", marginTop:"80px"}} ><Link to={''}>Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page" style={{marginBottom:"10px", marginTop:"80px"}}>Thông tin ngôi nhà</li>
                         </ol>
                     </nav>
                 </div>
-                <h1>Thông tin ngôi nhà</h1>
+                <h1 style={{marginBottom:"10px", marginTop:"5px"}}>Thông tin ngôi nhà</h1>
 
 
                 <div className="user-info">
@@ -102,6 +109,7 @@ export default function EditHouse() {
                                 <p className="color-grey">Đây là tên ngôi nhà của bạn trên giấy tờ</p>
                                 <Formik initialValues={{name: house.name}}
                                         enableReinitialize={true}
+                                        validationSchema={NameHouseSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEditHouse(values, formikBag);
                                         }}>
@@ -149,7 +157,7 @@ export default function EditHouse() {
                                 <p className="color-grey">Địa chỉ ngôi nhà của bạn</p>
                                 <Formik initialValues={{address: house.address}}
                                         enableReinitialize={true}
-                                        // validationSchema={EmailSchema}
+                                        validationSchema={AddressHouseSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEditHouse(values, formikBag);
                                         }}>
@@ -169,103 +177,103 @@ export default function EditHouse() {
                             </div>
                         </div>
 
-                        <div className={`info-item ${(attributeName === `Province`) ?
-                            isActiveEdit ? `noneEdit` : `blogEdit`
-                            : `blogEdit`}`}>
-                            <div className="infoItem-left">
-                                <p>Tỉnh/Thành phố</p>
-                                {house.province ?
-                                    <p className='color-grey'>{house.province}</p>
-                                    :
-                                    <p className='color-grey'>Chưa được cung cấp</p>
-                                }
-                            </div>
-                            <div className="infoItem-right">
-                                {house.province ?
-                                    <div onClick={() => showFormEditHouse('Province')} className="editBtn">Chỉnh sửa</div>
-                                    :
-                                    <div onClick={() => showFormEditHouse('Province')} className="editBtn">Thêm</div>
-                                }
-                            </div>
-                        </div>
-                        <div className={`info-item ${(attributeName === `Province`) ?
-                            isActiveEdit ? `blogEdit` : `noneEdit`
-                            : `noneEdit`}`}>
-                            <div className="infoItem-left">
-                                <p>Tỉnh/Thành phố</p>
-                                <p className="color-grey">Tỉnh/Thành phố</p>
-                                <Formik initialValues={{province: house.province}}
-                                        enableReinitialize={true}
-                                    // validationSchema={PhoneSchema}
-                                        onSubmit={(values,formikBag) => {
-                                            handleEditHouse(values, formikBag);
-                                        }}>
-                                    <Form>
-                                        <div className="form-row">
-                                            <div className="form-group col-12 color-red">
-                                                <Field name={'province'} type="text" className={'form-control'} placeholder={'Tỉnh/Thành phố:'} />
-                                                <ErrorMessage name={'province'}></ErrorMessage>
-                                            </div>
-                                        </div>
+                        {/*<div className={`info-item ${(attributeName === `Province`) ?*/}
+                        {/*    isActiveEdit ? `noneEdit` : `blogEdit`*/}
+                        {/*    : `blogEdit`}`}>*/}
+                        {/*    <div className="infoItem-left">*/}
+                        {/*        <p>Tỉnh/Thành phố</p>*/}
+                        {/*        {house.province ?*/}
+                        {/*            <p className='color-grey'>{house.province}</p>*/}
+                        {/*            :*/}
+                        {/*            <p className='color-grey'>Chưa được cung cấp</p>*/}
+                        {/*        }*/}
+                        {/*    </div>*/}
+                        {/*    <div className="infoItem-right">*/}
+                        {/*        {house.province ?*/}
+                        {/*            <div onClick={() => showFormEditHouse('Province')} className="editBtn">Chỉnh sửa</div>*/}
+                        {/*            :*/}
+                        {/*            <div onClick={() => showFormEditHouse('Province')} className="editBtn">Thêm</div>*/}
+                        {/*        }*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                        {/*<div className={`info-item ${(attributeName === `Province`) ?*/}
+                        {/*    isActiveEdit ? `blogEdit` : `noneEdit`*/}
+                        {/*    : `noneEdit`}`}>*/}
+                        {/*    <div className="infoItem-left">*/}
+                        {/*        <p>Tỉnh/Thành phố</p>*/}
+                        {/*        <p className="color-grey">Tỉnh/Thành phố</p>*/}
+                        {/*        <Formik initialValues={{province: house.province}}*/}
+                        {/*                enableReinitialize={true}*/}
+                        {/*            // validationSchema={PhoneSchema}*/}
+                        {/*                onSubmit={(values,formikBag) => {*/}
+                        {/*                    handleEditHouse(values, formikBag);*/}
+                        {/*                }}>*/}
+                        {/*            <Form>*/}
+                        {/*                <div className="form-row">*/}
+                        {/*                    <div className="form-group col-12 color-red">*/}
+                        {/*                        <Field name={'province'} type="text" className={'form-control'} placeholder={'Tỉnh/Thành phố:'} />*/}
+                        {/*                        <ErrorMessage name={'province'}></ErrorMessage>*/}
+                        {/*                    </div>*/}
+                        {/*                </div>*/}
 
-                                        <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>
+                        {/*                <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>*/}
 
-                                    </Form>
-                                </Formik>
-                            </div>
-                            <div className="infoItem-right">
-                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
-                            </div>
-                        </div>
+                        {/*            </Form>*/}
+                        {/*        </Formik>*/}
+                        {/*    </div>*/}
+                        {/*    <div className="infoItem-right">*/}
+                        {/*        <div onClick={offFormEditHouse} className="editBtn">Hủy</div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
-                        <div className={`info-item ${(attributeName === `District`) ?
-                            isActiveEdit ? `noneEdit` : `blogEdit`
-                            : `blogEdit`}`}>
-                            <div className="infoItem-left">
-                                <p>Quận/ Huyện</p>
-                                {house.district ?
-                                    <p className='color-grey'>{house.district}</p>
-                                    :
-                                    <p className='color-grey'>Chưa được cung cấp</p>
-                                }
-                            </div>
-                            <div className="infoItem-right">
-                                {house.district ?
-                                    <div onClick={() => showFormEditHouse('District')} className="editBtn">Chỉnh sửa</div>
-                                    :
-                                    <div onClick={() => showFormEditHouse('District')} className="editBtn">Thêm</div>
-                                }
-                            </div>
-                        </div>
-                        <div className={`info-item ${(attributeName === `District`) ?
-                            isActiveEdit ? `blogEdit` : `noneEdit`
-                            : `noneEdit`}`}>
-                            <div className="infoItem-left">
-                                <p>Quận/ Huyện</p>
-                                <p className="color-grey">Quận/ Huyện</p>
-                                <Formik initialValues={{district: house.district}}
-                                        enableReinitialize={true}
-                                    // validationSchema={PhoneSchema}
-                                        onSubmit={(values,formikBag) => {
-                                            handleEditHouse(values, formikBag);
-                                        }}>
-                                    <Form>
-                                        <div className="form-row">
-                                            <div className="form-group col-12 color-red">
-                                                <Field name={'district'} type="text" className={'form-control'} placeholder={'Quận/Huyện:'} />
-                                                <ErrorMessage name={'district'}></ErrorMessage>
-                                            </div>
-                                        </div>
+                        {/*<div className={`info-item ${(attributeName === `District`) ?*/}
+                        {/*    isActiveEdit ? `noneEdit` : `blogEdit`*/}
+                        {/*    : `blogEdit`}`}>*/}
+                        {/*    <div className="infoItem-left">*/}
+                        {/*        <p>Quận/ Huyện</p>*/}
+                        {/*        {house.district ?*/}
+                        {/*            <p className='color-grey'>{house.district}</p>*/}
+                        {/*            :*/}
+                        {/*            <p className='color-grey'>Chưa được cung cấp</p>*/}
+                        {/*        }*/}
+                        {/*    </div>*/}
+                        {/*    <div className="infoItem-right">*/}
+                        {/*        {house.district ?*/}
+                        {/*            <div onClick={() => showFormEditHouse('District')} className="editBtn">Chỉnh sửa</div>*/}
+                        {/*            :*/}
+                        {/*            <div onClick={() => showFormEditHouse('District')} className="editBtn">Thêm</div>*/}
+                        {/*        }*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                        {/*<div className={`info-item ${(attributeName === `District`) ?*/}
+                        {/*    isActiveEdit ? `blogEdit` : `noneEdit`*/}
+                        {/*    : `noneEdit`}`}>*/}
+                        {/*    <div className="infoItem-left">*/}
+                        {/*        <p>Quận/ Huyện</p>*/}
+                        {/*        <p className="color-grey">Quận/ Huyện</p>*/}
+                        {/*        <Formik initialValues={{district: house.district}}*/}
+                        {/*                enableReinitialize={true}*/}
+                        {/*            // validationSchema={PhoneSchema}*/}
+                        {/*                onSubmit={(values,formikBag) => {*/}
+                        {/*                    handleEditHouse(values, formikBag);*/}
+                        {/*                }}>*/}
+                        {/*            <Form>*/}
+                        {/*                <div className="form-row">*/}
+                        {/*                    <div className="form-group col-12 color-red">*/}
+                        {/*                        <Field name={'district'} type="text" className={'form-control'} placeholder={'Quận/Huyện:'} />*/}
+                        {/*                        <ErrorMessage name={'district'}></ErrorMessage>*/}
+                        {/*                    </div>*/}
+                        {/*                </div>*/}
 
-                                        <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>
+                        {/*                <button style={{marginBottom: '16px', padding: '12px 24px', fontWeight: '500', borderRadius: '10px'}} type="submit" className="btn btn-dark">Lưu</button>*/}
 
-                                    </Form>
-                                </Formik>
-                            </div>
-                            <div className="infoItem-right">
-                                <div onClick={offFormEditHouse} className="editBtn">Hủy</div>
-                            </div>
-                        </div>
+                        {/*            </Form>*/}
+                        {/*        </Formik>*/}
+                        {/*    </div>*/}
+                        {/*    <div className="infoItem-right">*/}
+                        {/*        <div onClick={offFormEditHouse} className="editBtn">Hủy</div>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
 
 
                         <div className={`info-item ${(attributeName === `Bedroom`) ?
@@ -295,7 +303,7 @@ export default function EditHouse() {
                                 <p className="color-grey">Số phòng ngủ trong ngôi nhà của bạn</p>
                                 <Formik initialValues={{bedroom: house.bedroom}}
                                         enableReinitialize={true}
-                                        // validationSchema={PhoneSchema}
+                                        validationSchema={BedroomHouseSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEditHouse(values, formikBag);
                                         }}>
@@ -345,6 +353,7 @@ export default function EditHouse() {
                                 <p className="color-grey">Số phòng tắm trong ngôi nhà của bạn</p>
                                 <Formik initialValues={{bathroom: house.bathroom}}
                                         enableReinitialize={true}
+                                        validationSchema={BathroomHouseSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEditHouse(values, formikBag);
                                         }}>
@@ -352,6 +361,7 @@ export default function EditHouse() {
                                         <div className="form-row">
                                             <div className="form-group col-12 color-red">
                                                 <Field name={'bathroom'} type="text" className={'form-control'} placeholder={'Số phòng tắm:'} />
+                                                <ErrorMessage name={'bathroom'}></ErrorMessage>
                                             </div>
                                         </div>
 
@@ -392,6 +402,7 @@ export default function EditHouse() {
                                 <p className="color-grey">Mô tả chung về ngôi nhà của bạn</p>
                                 <Formik initialValues={{description: house.description}}
                                         enableReinitialize={true}
+                                        validationSchema={DescriptionHouseSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEditHouse(values, formikBag);
                                         }}>
@@ -399,6 +410,7 @@ export default function EditHouse() {
                                         <div className="form-row">
                                             <div className="form-group col-12 color-red">
                                                 <Field name={'description'} type="text" className={'form-control'} placeholder={'Mô tả chung về ngôi nhà của bạn:'} />
+                                                <ErrorMessage name={'description'}></ErrorMessage>
                                             </div>
                                         </div>
 
@@ -439,13 +451,15 @@ export default function EditHouse() {
                                 <p className="color-grey">Giá ngôi nhà của bạn </p>
                                 <Formik initialValues={{price: house.price}}
                                         enableReinitialize={true}
+                                        validationSchema={PriceHouseSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEditHouse(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
                                             <div className="form-group col-12 color-red">
-                                                <Field name={'address'} type="text" className={'form-control'} placeholder={'Giá ngôi nhà của bạn:'} />
+                                                <Field name={'price'} type="text" className={'form-control'} placeholder={'Giá ngôi nhà của bạn:'} />
+                                                <ErrorMessage name={'price'}></ErrorMessage>
                                             </div>
                                         </div>
 
@@ -485,7 +499,7 @@ export default function EditHouse() {
                     </div>
                     <div className="user-info-right w-25">
                         <div className="user-right">
-                            <div className="user-right-item">
+                            <div className="user-right-item" >
                                 <img src={icon1} alt=""/>
                                 <h5>Tại sao thông tin của tôi không được hiển thị ở đây?</h5>
                                 <p>Chúng tôi đang ẩn một số thông tin tài khoản để bảo vệ danh tính của bạn.</p>

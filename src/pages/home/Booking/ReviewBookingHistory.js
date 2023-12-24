@@ -22,7 +22,7 @@ const ReviewBookingHistory = () => {
     return (
         <div>
             <div className="nav-userInfo">
-                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Xem người đặt phòng và đang ở</h1>
+                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"85px"}}>Xem lịch sử đặt</h1>
             </div>
             <div className="container_table">
                 <table className="table table-striped">

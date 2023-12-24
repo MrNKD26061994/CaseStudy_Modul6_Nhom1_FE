@@ -53,7 +53,8 @@ function Header() {
         navigate("/search-name/"+ name.value)
     }
     function handleSearchHouseByAddress() {
-        navigate("/ListHouseByAddress")
+        let address = document.getElementById("address")
+        navigate("/search-address/" + address.value)
     }
 
     return (
@@ -64,10 +65,7 @@ function Header() {
                 </div>
 
                 <div className="header-mid">
-                    <div className="p-rl-16">
-                        <input type="text" className="p-rl-16 input-hidden" placeholder={"Địa điểm bất kỳ:"}
-                               style={{border: "hidden", height: "40px"}} id={"address"}/>
-                    </div>
+                    <div><span className="header-mid-center p-rl-16">Địa điểm bất kỳ</span></div>
                     <div><span className="header-mid-center p-rl-16">Tuần bất kỳ</span></div>
                     <div className="header-mid-right pr-2">
                         <input type="text" className="p-rl-16 input-hidden" placeholder={"Tìm kiếm:"}

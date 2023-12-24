@@ -24,6 +24,64 @@ export const EmailSchema = Yup.object().shape({
             }
         })
 })
+export const NameHouseSchema = Yup.object().shape({
+    name: Yup.string()
+        .required("Vui lòng nhập tên ngôi nhà")
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Tên nhà không được chứa kí tự đặc biệt'),
+})
+
+export const AddressHouseSchema = Yup.object().shape({
+    address: Yup.string()
+        .required('Vui lòng nhập địa chỉ ngôi nhà')
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Địa chỉ nhà không được chứa kí tự đặc biệt'),
+})
+export const BedroomHouseSchema = Yup.object().shape({
+    bedroom: Yup.string()
+        .required('Vui lòng nhập số phòng ngủ')
+        .matches(/^[1-9]\d*$/,'Số phòng ngủ không thể là chữ cái và 0'),
+})
+export const BathroomHouseSchema = Yup.object().shape({
+    bathroom: Yup.string()
+        .required('Vui lòng nhập số phòng tắm')
+        .matches(/^[1-9]\d*$/,'Số phòng tắm không thể là chữ cái và 0'),
+})
+export const DescriptionHouseSchema = Yup.object().shape({
+    description: Yup.string()
+        .required('Vui lòng nhập mô tả')
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Mô tả không thể chứa ký tự đặc biệt'),
+})
+export const PriceHouseSchema = Yup.object().shape({
+    price: Yup.string()
+        .required('Vui lòng nhập số tiền')
+        .matches(/^[1-9]\d*$/,'Số tiền không thể là chữ cái và 0'),
+})
+export const AddHouseSchema = Yup.object().shape({
+    name: Yup.string()
+        .required("Vui lòng nhập tên ngôi nhà")
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Tên nhà không được chứa kí tự đặc biệt')
+    ,
+    address: Yup.string()
+        .required('Vui lòng nhập địa chỉ ngôi nhà')
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Địa chỉ nhà không được chứa kí tự đặc biệt')
+    ,
+    // bedroom: Yup.string()
+    //     .required('Vui lòng nhập số phòng ngủ')
+    //     .matches(/^[1-9]\d*$/,'Số phòng ngủ không thể là chữ cái và 0')
+    // ,
+    // bathroom: Yup.string()
+    //     .required('Vui lòng nhập số phòng tắm')
+    //     .matches(/^[1-9]\d*$/,'Số phòng tắm không thể là chữ cái và 0')
+    // ,
+    description: Yup.string()
+        .required('Vui lòng nhập mô tả')
+        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Mô tả không thể chứa ký tự đặc biệt')
+    ,
+    price: Yup.string()
+        .required('Vui lòng nhập số tiền')
+        .matches(/^[1-9]\d*$/,'Số tiền không thể là chữ cái và 0'),
+})
+
+
 export const PhoneSchema = Yup.object().shape({
     phone: Yup.string()
         .required("Số điện thoại không được để trống")
