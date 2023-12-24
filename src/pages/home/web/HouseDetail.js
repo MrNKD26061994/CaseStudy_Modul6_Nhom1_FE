@@ -66,10 +66,10 @@ export default function HouseDetail() {
 
     return (
         <>
-            <div className="container" style={{height: '2000px'}}>
+            <div className="container" style={{height: '2000px', marginTop: "103px"}}>
                     <div className="head-container">
                         <h4>{house.name}</h4>
-                        <div className="btn-share-save">
+                        <div className="btn-share-save d-flex mb-4">
                             <div className="b-share">
                                 <img src={iconShare} alt=""/>
                                 Chia sẻ
