@@ -83,3 +83,6 @@ div[style="position: absolute; pointer-events: none; color: rgba(130, 130, 130, 
 .noneEdit {
   display: none;
 }
+.notify:hover {
+  background-color: #f7f7f7;
+}

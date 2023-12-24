@@ -11,6 +11,7 @@ import {logout} from "../../services/userService";
 import {toast} from "react-toastify";
 import Register from "../../pages/Register";
 import ChangePassword from "../Modal/ChangePassword";
+import MyNotify from "../MyNotify";
 
 function Header() {
     const dispatch = useDispatch();
@@ -79,44 +80,65 @@ function Header() {
                 </div>
 
                 <div className="header-right">
-                    {user && user.roles.some((item) => item.authority === "ROLE_OWNER") ?
-                        <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/add-house"}>Đón tiếp khách</Link>
+                    {/*{user && user.roles.some((item) => item.authority === "ROLE_OWNER") ?*/}
+                    {/*    <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/add-house"}>Đón tiếp khách</Link>*/}
+                    {/*    :*/}
+                    {/*    <Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>*/}
+                    {/*}*/}
+
+                    {user ?
+                        <>
+                            {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
+                                <><Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/add-house"}>Đón tiếp khách</Link></>
+                                :
+                                <><Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link></>
+                            }
+                        </>
                         :
-                        <Link styl  e={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>
+                        <>
+                            <Login props={{nameClass: "headerRight-left", nameTitle: "Cho thuê chỗ ở qua Airbnb"}}/>
+                            {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"headerRight-left"} to={"/become-an-owner"}>Cho thuê chỗ ở qua Airbnb</Link>*/}
+                        </>
                     }
+                    <MyNotify></MyNotify>
                     <div className="user">
                         <img className="user-left-icon" src={nav} alt=""/>
-                        {user == null ?
-                            <>
-                                <img className="user-icon" src={imgUser} alt=""/>
-                            </>
-                            :
+                        {user ?
                             <>
                                 <img style={{borderRadius: '50%'}} className="user-icon" src={user.avatar} alt=""/>
                             </>
+                            :
+                            <>
+                                <img className="user-icon" src={imgUser} alt=""/>
+                            </>
                         }
                         <div className="sub-login" id="user">
-                            {user == null ?
-                                <>
-                                    <Login/>
-
-                                    <Register nameClass={"sub-login-item"}/>
-                                    <hr/>
-                                    <div onClick={handleHomeOwner} className="sub-login-item">Cho thuê chỗ ở qua Airbnb</div>
-                                </>
-                                :
+                            {user ?
                                 <>
                                     <ChangePassword nameClass={'sub-login-item'}/>
-                                {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
-                                    // Form Admin
-                                    <>
-                                        <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/admin/currentAdminDetail"}>Xem thông tin Admin<span className="sr-only">(current)</span></Link>
-                                        <div onClick={handleManageUser} className="sub-login-item">Quản lý User</div>
-                                        <div onClick={handleListOwner} className="sub-login-item">Xem danh sách chủ nhà</div>
-                                        <div onClick={handleListRenter} className="sub-login-item">Xem danh sách người thuê nhà</div>
-                                        <div onClick={handleSetPermisionForRenter} className="sub-login-item">Xem chờ xác nhận</div>
-                                        <div onClick={ShowTop5House} className="sub-login-item"> Xem 6 ngôi nhà được đặt nhiều nhất</div>
+                                    {user.roles.some((item) => item.authority === "ROLE_ADMIN") ?
+                                        // Form Admin
+                                        <>
+                                            <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/admin/currentAdminDetail"}>Xem thông tin Admin<span className="sr-only">(current)</span></Link>
+                                            <div onClick={handleManageUser} className="sub-login-item">Quản lý User</div>
+                                            <div onClick={handleListOwner} className="sub-login-item">Xem danh sách chủ nhà</div>
+                                            <div onClick={handleListRenter} className="sub-login-item">Xem danh sách người thuê nhà</div>
+                                            <div onClick={handleSetPermisionForRenter} className="sub-login-item">Xem chờ xác nhận</div>
+                                            <div onClick={ShowTop5House} className="sub-login-item"> Xem 6 ngôi nhà được đặt nhiều nhất</div>
 
+                                        </>
+                                        :
+                                        <>
+                                            <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-info"}>Thông tin tài khoản<span className="sr-only">(current)</span></Link>
+                                            {user.roles.some((item) => item.authority === "ROLE_OWNER") ?
+                                                <>
+                                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/add-house"}>Tạo mới nhà cho thuê<span className="sr-only">(current)</span></Link>
+                                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/houses"}>Danh sách căn nhà<span className="sr-only">(current)</span></Link>
+                                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/ShowListBookingOfTheOwnerFe"}>Xem danh sách đặt nhà<span className="sr-only">(current)</span></Link>
+
+                                                </>
+                                                :
+                                                // Form Renter
                                     </>
                                     :
                                     <>
@@ -131,6 +153,13 @@ function Header() {
                                             :
                                             // Form Renter
 
+                                                <>
+                                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>
+                                                    <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/UserSeeBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
+                                                </>
+                                            }
+                                        </>
+                                    }
                                             <>
                                                 {/*<Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/user-detail"}>Thông tin tài khoản Test<span className="sr-only">(current)</span></Link>*/}
                                                 <Link style={{textDecoration: 'none', color: 'black'}} className={"nav-link sub-login-item"} to={"/UserSeeBookingHistory"}>Xem lịch sử đặt<span className="sr-only">(current)</span></Link>
@@ -139,6 +168,14 @@ function Header() {
                                     </>
                                 }
                                     <div onClick={handleLogout} className="sub-login-item">Đăng xuất</div>
+                                </>
+                                :
+                                <>
+                                    <Login props={{nameClass: "sub-login-item", nameTitle: "Đăng nhập"}}/>
+
+                                    <Register nameClass={"sub-login-item"}/>
+                                    <hr/>
+                                    <div onClick={handleHomeOwner} className="sub-login-item">Cho thuê chỗ ở qua Airbnb</div>
                                 </>
                             }
                         </div>

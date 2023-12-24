@@ -4,16 +4,21 @@ import houseReducer from "./house/houseSlice";
 import bookingReducer from "./booking/bookingSlice";
 import reviewReducer from "./review/reviewSlice";
 
+import webSocketReducer from "../websocket/webSocketSlice";
+import notifyReducer from "./notify/notifySlice";
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
+        house: houseReducer,
         bookings: bookingReducer,
+        webSocket: webSocketReducer,
+        notify: notifyReducer,
+
         users: userReducer,
         userDetail: userReducer,
         isActiveEdit: userReducer,
         nameEditOne: userReducer,
-        house: houseReducer,
         booking: bookingReducer,
         review: reviewReducer,
     }
