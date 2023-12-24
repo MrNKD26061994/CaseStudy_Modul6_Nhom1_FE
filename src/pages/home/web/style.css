@@ -120,11 +120,13 @@
 
 .house-content-right {
     margin-top: 32px;
-    position: sticky;
+    position: relative;
     top: 80px;
 }
 
 .house-right-content {
+    position: sticky;
+    top: 80px;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;}
 
