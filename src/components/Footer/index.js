@@ -13,9 +13,9 @@ export default function Footer() {
                     </ul>
                 </div>
                 <div className="footer-right">
-                    <span><img src={language} alt=""/>Tiếng Việt (VN)</span>
-                    <span>$ <span>USD</span></span>
-                    <span>Hỗ trợ và tài nguyên</span>
+                    <span className='ml-2'><img className='mr-1' src={language} alt=""/>Tiếng Việt (VN)</span>
+                    <span className='ml-2'>$ <span>USD</span></span>
+                    <span className='ml-2'>Hỗ trợ và tài nguyên</span>
                 </div>
             </div>
         </>
