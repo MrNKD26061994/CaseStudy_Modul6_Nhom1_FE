@@ -23,6 +23,9 @@ const ShowTop5HouseBooking = () => {
                 <div className="nav-userInfo">
                     <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>6 ngôi nhà được đặt lịch nhiều nhất</h1>
                 </div>
+                <div className="nav-userInfo">
+                    <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>6 ngôi nhà được đặt lịch nhiều nhất</h1>
+                </div>
                 <div className="row">
                     {Top5 && Top5.map((house, index)=>(
                         <div className="col-2">

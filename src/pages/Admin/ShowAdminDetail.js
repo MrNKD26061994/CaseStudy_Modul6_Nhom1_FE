@@ -13,6 +13,9 @@ const ShowAdminDetail = () => {
        }, []);
     return (
         <>
+            <div className="nav-userInfo">
+                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Thông tin cá nhân</h1>
+            </div>
             <div className="container">
                 <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
 

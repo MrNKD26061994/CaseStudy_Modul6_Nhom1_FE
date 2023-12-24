@@ -34,7 +34,7 @@ const ShowListBookingOfTheOwnerFe = () => {
     return (
         <div>
             <div className="nav-userInfo">
-                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"80px"}}>Xem người đặt phòng và đang ở</h1>
+                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"80px"}}>Xem nhà đang hoạt động</h1>
             </div>
             <div className="container_table">
                 <table className="table table-striped">
@@ -47,7 +47,6 @@ const ShowListBookingOfTheOwnerFe = () => {
                         <th scope="col" className={"email"}>Ngày đi</th>
                         <th scope="col" className={"phone"}>Điện thoại</th>
                         <th scope="col" className={"address"}>Địa chỉ chủ nhà</th>
-                        <th scope="col" className={"showBookingDetail"}>Xem</th>
                         <th scope="col" className={"checkin-out"}>Đến/Đi</th>
 
                     </tr>
@@ -62,11 +61,6 @@ const ShowListBookingOfTheOwnerFe = () => {
                             <td>{(item.endTime)}</td>
                             <td>{item.user.phone}</td>
                             <td>{item.house.address + "-" + item.house.ward + "-" + item.house.district + "-" + item.house.province}</td>
-                            <td>
-                                <Link to={"/bookAHouse/" + item.id}><img className={"eyeImageCSS"}
-                                                                         src={eyeImage} alt=""/></Link>
-                            </td>
-
                             <td>
                                 <div className="form-check form-switch mt-2">
                                     {item.status === ("Chờ nhận phòng") ?
