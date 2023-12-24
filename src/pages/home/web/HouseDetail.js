@@ -91,7 +91,7 @@ export default function HouseDetail() {
         navigate("/")
     }
 
-   async function changeShowCommentForm() {
+    function changeShowCommentForm() {
        dispatch(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan(
            {
                house_id: param.id,
@@ -99,10 +99,10 @@ export default function HouseDetail() {
            }), [])
        console.log(param.id)
             if (bookingsPaid ===204) {
-             await   setShowCommentForm(false);
+                setShowCommentForm(false);
             }
             else {
-              await  setShowCommentForm(true);
+                setShowCommentForm(true);
             }
 
     }
@@ -111,7 +111,8 @@ export default function HouseDetail() {
         <>
             <div className="container" style={{height: '2000px'}}>
                 <div className="head-container">
-                    <h4>{house.name}</h4>
+                    <div style={{display:"flex", flexDirection:"row"}}><h4>Xem chi tiết nhà ></h4>
+                    <h4>{house.name}</h4></div>
                     <div className="btn-share-save">
                         <div className="b-share">
                             <img src={iconShare} alt=""/>
@@ -320,10 +321,16 @@ export default function HouseDetail() {
                                         booking: aBooking
                                     }}
                                             onSubmit={(values) => {
-                                                dispatch(saveAReview(values));
-                                                toast("bình luận thành công")
-                                                values.comment = "";
-                                                values.rating = "";
+                                                dispatch(saveAReview(values)).then((res)=>{
+                                                    console.log("REsss", res.payload.status)
+                                                    if(res.payload.status===204){
+                                                        toast("Bạn đã thêm nhận xét rồi, xin cảm ơn!")
+                                                    } else {
+                                                        toast("Bình luận và đánh giá thành công!")
+                                                    }
+                                                    values.comment = "";
+                                                    values.rating = "";
+                                                });
                                             }}>
                                         <Form>
                                             <div>

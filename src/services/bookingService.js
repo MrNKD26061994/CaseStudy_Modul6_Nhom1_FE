@@ -107,3 +107,10 @@ export const findOneBookingByHouseIDAndUserID = createAsyncThunk(
         return res;
     }
 )
+export const ShowBookingHistoryForOwner = createAsyncThunk(
+    'booking/ShowBookingHistoryForOwner/{id}',
+    async (id) => {
+        const res = await customAxios.post('booking/ShowBookingHistoryForOwner/'+id);
+        return res;
+    }
+)

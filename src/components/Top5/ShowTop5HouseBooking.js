@@ -11,11 +11,10 @@ import {getAHouse, showListHouseForUser} from "../../services/houseService";
 const ShowTop5HouseBooking = () => {
     const dispatch = useDispatch();
 
-    useEffect(async () =>  {
-       await dispatch(Top5HouseBooking());
+    useEffect( () =>  {dispatch(Top5HouseBooking());
     }, []);
+
     const Top5 = useSelector(state=>{
-        console.log("mmmmmmm",state);
         return state.bookings.Top5.data;
     })
     return (

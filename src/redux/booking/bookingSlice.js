@@ -5,7 +5,7 @@ import {
     findBookingNotCheckin, findOneBookingByHouseIDAndUserID,
     getStartEndDate,
     OwnerCheckIn,
-    OwnerCheckOut,
+    OwnerCheckOut, ShowBookingHistoryForOwner,
     ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan,
     ShowListBookingOfTheOwner,
     toggleCheckNextDate,
@@ -62,6 +62,9 @@ const bookingSlice = createSlice({
             })
             .addCase(findOneBookingByHouseIDAndUserID.fulfilled, (state, action) => {
                 state.aBooking = action.payload;
+            })
+            .addCase(ShowBookingHistoryForOwner.fulfilled, (state, action) => {
+                state.bookings = action.payload;
             })
         ;
     }
