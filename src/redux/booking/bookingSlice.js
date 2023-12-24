@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {
     CancelBookingTheHouse,
     createBooking,
-    findBookingNotCheckin, findOneBookingByHouseIDAndUserID,
+    findBookingNotCheckin, findOneBookingByHouseIDAndUserID, getABooking,
     getStartEndDate,
     OwnerCheckIn,
     OwnerCheckOut, ShowBookingHistoryForOwner,
@@ -65,6 +65,9 @@ const bookingSlice = createSlice({
             })
             .addCase(ShowBookingHistoryForOwner.fulfilled, (state, action) => {
                 state.bookings = action.payload;
+            })
+            .addCase(getABooking.fulfilled, (state, action) => {
+                state.aBooking = action.payload;
             })
         ;
     }

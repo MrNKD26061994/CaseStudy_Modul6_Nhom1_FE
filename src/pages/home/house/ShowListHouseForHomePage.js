@@ -64,7 +64,6 @@ const ShowListHouseForHomePage = () => {
                                 <div className="bottom-item-left">
                                     <p>{house.name}</p>
                                     <p className="grey">{house.province + "/" + house.district + "/" + house.ward}</p>
-                                    <p className="grey">Ngày</p>
                                     <p>{"$"+house.price + " / đêm"}</p>
                                 </div>
                                 <div className="bottom-item-right">

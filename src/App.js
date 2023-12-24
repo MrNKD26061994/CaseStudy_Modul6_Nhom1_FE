@@ -27,6 +27,7 @@ import {countUnreadNotify, listUnReadNotify, listUnReadNotifyByAccountLogin} fro
 import ListHouseByName from "./pages/home/house/ListHouseByName";
 import ListHouseByAddress from "./pages/home/house/ListHouseByAddress";
 import ReviewBookingHistory from "./pages/home/Booking/ReviewBookingHistory";
+import ShowABookingDetail from "./pages/home/Booking/ShowABookingDetail";
 
 
 
@@ -68,6 +69,7 @@ function App() {
                 <Route path={'ShowTop5HouseBooking'} element={<ShowTop5HouseBooking/>} />
                 <Route path={'ShowListBookingOfTheOwnerFe'} element={<ShowListBookingOfTheOwnerFe/>} />
                 <Route path={'ReviewBookingHistory'} element={<ReviewBookingHistory/>} />
+                <Route path={'ShowABookingDetail/:id'} element={<ShowABookingDetail/>} />
 
 
                 {/*<Route path={'test'} element={<Test />} />*/}

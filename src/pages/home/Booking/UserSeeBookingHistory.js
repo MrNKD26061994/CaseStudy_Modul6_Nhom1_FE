@@ -38,6 +38,9 @@ const UserSeeBookingHistory = () => {
         <>
             <div className="container_table">
                 <div className="nav-userInfo">
+                    <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Lịch sử đặt</h1>
+                </div>
+                <div className="nav-userInfo">
                    <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Lịch sử đặt</h1>
                 </div>
                 <table className="table table-striped">
@@ -63,7 +66,7 @@ const UserSeeBookingHistory = () => {
                             <td>{item.house.province + "-" + item.house.district + "-" + item.house.ward + "-" + item.house.address}</td>
                             <td>{item.status}</td>
 
-                            <td><Link to={"/house-detail/" + item.id}>
+                            <td><Link to={"/ShowABookingDetail/" + item.id}>
                                 <img className={"eyeImageCSS"} src={eyeImage} alt=""/>
                             </Link></td>
 
