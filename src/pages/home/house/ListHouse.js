@@ -20,6 +20,7 @@ export default function ListHouse(){
 
     return(
         <div className={'container_table'}>
+            <h1 color={"#FF0000"}>Danh sách căn nhà</h1>
             <div className="col-12">
                 <table className="table table-striped">
                     <thead>

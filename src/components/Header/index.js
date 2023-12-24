@@ -52,7 +52,8 @@ function Header() {
         navigate("/search-name/"+ name.value)
     }
     function handleSearchHouseByAddress() {
-        navigate("/ListHouseByAddress")
+        let address = document.getElementById("address")
+        navigate("/search-address/" + address.value)
     }
 
 
@@ -65,14 +66,14 @@ function Header() {
 
                 <div className="header-mid">
                     <div className="p-rl-16">
-                        <input type="text" className="p-rl-16 input-hidden" placeholder={"Địa điểm bất kỳ:"}
-                                style={{border: "hidden", height: "40px"}} id={"address"}/>
+                        <input type="text" className="p-rl-16 input-hidden" placeholder={"Tên nhà:"}
+                                style={{border: "hidden", height: "40px"}} id={"name"}/>
                     </div>
                     <div><span className="header-mid-center p-rl-16">Tuần bất kỳ</span></div>
                     <div className="header-mid-right pr-2">
-                        <input type="text" className="p-rl-16 input-hidden" placeholder={"Tìm kiếm:"}
-                               style={{border: "hidden", height: "40px"}} id="name"/>
-                        <div onClick={handleSearchHouseByName} className="btn-search">
+                        <input type="text" className="p-rl-16 input-hidden" placeholder={"Tìm kiếm địa điểm:"}
+                               style={{border: "hidden", height: "40px"}} id="address"/>
+                        <div onClick={handleSearchHouseByAddress} className="btn-search">
                             <img className="search-icon" src={search} alt=""/>
                         </div>
                     </div>
