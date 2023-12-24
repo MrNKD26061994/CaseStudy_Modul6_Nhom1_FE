@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {closeFormEdit, editDetailUser, findUserById, getName, openFormEdit} from "../../../services/userService";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
-import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
+import {AddressSchema, EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
 import {MdCloudUpload} from "react-icons/md";
 import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "../../../firebase/firebase";
@@ -44,7 +44,13 @@ export default function UserInfo() {
         let data = {...user, ...values}
         console.log(data)
         await dispatch(editDetailUser(data)).then((res) => {
-
+            if (res.type === 'user/login/rejected') {
+                navigate('/user-info')
+                toast.error("Cập nhật thất bại!");
+            } else {
+                navigate('/user-info')
+                toast.success("Cập nhật thành công!");
+            }
         })
         navigate('')
     }
@@ -123,14 +129,14 @@ export default function UserInfo() {
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-md-6 color-red">
+                                            <div className="form-group col-md-6">
                                                 <Field name={'firstname'} type="text" className={'form-control'} placeholder={'First Name:'} />
-                                                <ErrorMessage name={'firstname'}></ErrorMessage>
+                                                <div className="color-red"><ErrorMessage name={'firstname'}></ErrorMessage></div>
                                             </div>
 
-                                            <div className="form-group col-md-6 color-red">
+                                            <div className="form-group col-md-6">
                                                 <Field name={'lastname'} type="text" className={"form-control"} placeholder={'Last Name:'}/>
-                                                <ErrorMessage name={'lastname'}></ErrorMessage>
+                                                <div className="color-red"><ErrorMessage name={'lastname'}></ErrorMessage></div>
                                             </div>
                                         </div>
 
@@ -178,9 +184,9 @@ export default function UserInfo() {
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-12 color-red">
+                                            <div className="form-group col-12">
                                                 <Field name={'email'} type="email" className={'form-control'} placeholder={'Email:'} />
-                                                <ErrorMessage name={'email'}></ErrorMessage>
+                                                <div className="color-red"><ErrorMessage name={'email'}></ErrorMessage></div>
                                             </div>
                                         </div>
 
@@ -240,9 +246,9 @@ export default function UserInfo() {
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-12 color-red">
+                                            <div className="form-group col-12">
                                                 <Field name={'phone'} type="text" className={'form-control'} placeholder={'Số điện thoại:'} />
-                                                <ErrorMessage name={'phone'}></ErrorMessage>
+                                                <div className="color-red"><ErrorMessage name={'phone'}></ErrorMessage></div>
                                             </div>
                                         </div>
 
@@ -284,13 +290,15 @@ export default function UserInfo() {
                                 <p className="color-grey">Sử dụng địa chỉ thường trú để nhận thư.</p>
                                 <Formik initialValues={{address: user.address}}
                                         enableReinitialize={true}
+                                        validationSchema={AddressSchema}
                                         onSubmit={(values,formikBag) => {
                                             handleEdit(values, formikBag);
                                         }}>
                                     <Form>
                                         <div className="form-row">
-                                            <div className="form-group col-12 color-red">
+                                            <div className="form-group col-12">
                                                 <Field name={'address'} type="text" className={'form-control'} placeholder={'Địa chỉ:'} />
+                                                <div className="color-red"><ErrorMessage name={'address'}></ErrorMessage></div>
                                             </div>
                                         </div>
 

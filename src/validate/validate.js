@@ -4,11 +4,11 @@ import {checkEmail, checkUsername} from "../services/userService";
 export const FirstLastNameSchema = Yup.object().shape({
     firstname: Yup.string()
         .required('Vui lòng không được để trống')
-        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Họ không được chứa kí tự đặc biệt')
+        .matches(/^[a-zA-ZÀ-ỹ ]+$/, 'Họ không được chứa kí tự đặc biệt')
     ,
     lastname: Yup.string()
         .required('Vui lòng không được để trống')
-        .matches(/^[a-zA-ZÀ-ỹ0-9 ]+$/, 'Tên không được chứa kí tự đặc biệt'),
+        .matches(/^[a-zA-ZÀ-ỹ ]+$/, 'Tên không được chứa kí tự đặc biệt'),
 })
 
 export const EmailSchema = Yup.object().shape({
@@ -29,6 +29,10 @@ export const PhoneSchema = Yup.object().shape({
         .required("Số điện thoại không được để trống")
         .typeError("Số điện thoại phải nhập số")
         .matches(/^0[0-9]{9}$/, "Số điện thoại phải bắt đầu bằng số 0 và gồm 10 chữ số!"),
+})
+export const AddressSchema = Yup.object().shape({
+    address: Yup.string()
+        .required("Địa chỉ không được để trống"),
 })
 
 export const RegisterUserSchema = Yup.object().shape({
