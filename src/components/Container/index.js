@@ -17,37 +17,38 @@ function Container() {
 
 
     return (
-        <>{
-            navigate("ShowListHouseForHomePage")
-        }
+        <>
+            {
+                navigate("ShowListHouseForHomePage")
+            }
 
             {/*<div id="container" className="container-fluid">*/}
             {/*    <div className="row">*/}
             {/*        <div className="col-2">*/}
-            {/*            <div id="carouselExampleControls" className="carousel slide carouselExampleControls" data-ride="carousel" data-interval="false">*/}
-            {/*                <div className="carousel-inner">*/}
-            {/*                    <div className="carousel-item active">*/}
-            {/*                        <img src={house3} className="d-block w-100" alt="..."/>*/}
-            {/*                    </div>*/}
-            {/*                    <div className="carousel-item">*/}
-            {/*                        <img src={house4} className="d-block w-100" alt="..."/>*/}
-            {/*                    </div>*/}
-            {/*                    <div className="carousel-item">*/}
-            {/*                        <img src={house3} className="d-block w-100" alt="..."/>*/}
-            {/*                    </div>*/}
-            {/*                </div>*/}
+                        <div id="carouselExampleControls" className="carousel slide carouselExampleControls" data-ride="carousel" data-interval="false">
+                            <div className="carousel-inner">
+                                <div className="carousel-item active">
+                                    <img src={house3} className="d-block w-100" alt="..."/>
+                                </div>
+                                <div className="carousel-item">
+                                    <img src={house4} className="d-block w-100" alt="..."/>
+                                </div>
+                                <div className="carousel-item">
+                                    <img src={house3} className="d-block w-100" alt="..."/>
+                                </div>
+                            </div>
 
-            {/*                <button className="carousel-control-prev carousel-control-p" type="button" data-target="#carouselExampleControls" data-slide="prev">*/}
-            {/*                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>*/}
-            {/*                    <span className="sr-only">Previous</span>*/}
-            {/*                </button>*/}
-            {/*                <button className="carousel-control-next carousel-control-n" type="button" data-target="#carouselExampleControls" data-slide="next">*/}
-            {/*                    <span className="carousel-control-next-icon" aria-hidden="true"></span>*/}
-            {/*                    <span className="sr-only">Next</span>*/}
-            {/*                </button>*/}
+                            <button className="carousel-control-prev carousel-control-p" type="button" data-target="#carouselExampleControls" data-slide="prev">
+                                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span className="sr-only">Previous</span>
+                            </button>
+                            <button className="carousel-control-next carousel-control-n" type="button" data-target="#carouselExampleControls" data-slide="next">
+                                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span className="sr-only">Next</span>
+                            </button>
 
-            {/*                <img className="myHeart-icon" src={heartIcon} alt=""/>*/}
-            {/*            </div>*/}
+                            <img className="myHeart-icon" src={heartIcon} alt=""/>
+                        </div>
 
             {/*            <div className="bottom-item">*/}
             {/*                <div className="bottom-item-left">*/}
