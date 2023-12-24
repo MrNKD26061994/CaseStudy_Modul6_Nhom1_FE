@@ -25,6 +25,7 @@ import ShowListBookingOfTheOwnerFe from "./pages/home/Booking/ShowListBookingOfT
 import ShowTop5HouseBooking from "./components/Top5/ShowTop5HouseBooking";
 import {countUnreadNotify, listUnReadNotify, listUnReadNotifyByAccountLogin} from "./services/notifyService";
 import ListHouseByName from "./pages/home/house/ListHouseByName";
+import ListHouseByAddress from "./pages/home/house/ListHouseByAddress";
 import ReviewBookingHistory from "./pages/home/Booking/ReviewBookingHistory";
 
 
@@ -48,6 +49,7 @@ function App() {
                 <Route path={''} element={<HomeUser />} />
                 <Route path={''} element={<ShowListHouseForHomePage />} />
                 <Route path={'search-name/:name'} element={<ListHouseByName/>} />
+                <Route path={'search-address/:address'} element={<ListHouseByAddress/>} />
                 <Route path={'user-detail'} element={<UserDetail />} />
                 <Route path={'user-info'} element={<UserInfo />} />
                 <Route path={'edit-house/:id'} element={<EditHouse></EditHouse>}></Route>

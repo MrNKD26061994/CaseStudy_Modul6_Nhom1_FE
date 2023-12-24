@@ -6,7 +6,7 @@ import {
     showListHouseForUser,
     getAHouse,
     editDetailHouse, findHouseById,
-    pushImage, addImages, pushThumbnail, searchHouse
+    pushImage, addImages, pushThumbnail, searchHouse, searchHouseByAddress
 } from "../../services/houseService";
 import {closeFormEdit, getName, openFormEdit} from "../../services/houseService";
 import {findUserById} from "../../services/userService";
@@ -19,6 +19,8 @@ const initialState = {
     isActiveEdit: false,
     nameEditOne: "",
     searchName: [],
+    searchAddress: [],
+
 
 }
 const houseSlice = createSlice({
@@ -73,6 +75,10 @@ const houseSlice = createSlice({
             .addCase(searchHouse.fulfilled,(state, action) => {
                 state.searchName = action.payload.data
             })
+            .addCase(searchHouseByAddress.fulfilled,(state, action) => {
+                state.searchAddress = action.payload.data
+            })
+
 
     }
 })

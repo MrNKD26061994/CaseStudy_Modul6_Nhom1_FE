@@ -56,7 +56,6 @@ export default function UserInfo() {
         toast.info("Đang tải ảnh lên", {autoClose: 500,});
         uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
             getDownloadURL(snapshot.ref).then(async (url) => {
-
                 let data = {...user}
                 data.avatar = url;
                 await dispatch(editDetailUser(data)).then((res) => {

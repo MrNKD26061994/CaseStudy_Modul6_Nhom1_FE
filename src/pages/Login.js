@@ -27,7 +27,6 @@ export default function Login({props}) {
                 resetForm();
             }
             else {
-                navigate('')
                 toast.success("Đăng nhập thành công!");
                 setShowLoginModal(false);
             }
