@@ -21,7 +21,7 @@ export default function ListHouse(){
     return(
         <div className={'container_table'}>
             <div className="nav-userInfo">
-                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Danh sách nhà của bạn</h1>
+                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"80px"}}>Danh sách nhà của bạn</h1>
             </div>
             <div className="col-12">
                 <table className="table table-striped">
@@ -30,14 +30,16 @@ export default function ListHouse(){
                         <th scope="col">STT</th>
                         <th scope="col">Tên</th>
                         <th scope="col">Địa chỉ</th>
-                        <th scope="col">Tỉnh/Thành phố</th>
-                        <th scope="col">Quận/Huyện</th>
-                        <th scope="col">Diện tích</th>
+                        {/*<th scope="col">Tỉnh/Thành phố</th>*/}
+                        {/*<th scope="col">Quận/Huyện</th>*/}
+                        {/*<th scope="col">Diện tích</th>*/}
                         <th scope="col">Phòng ngủ</th>
-                        <th scope="col">Giường</th>
+                        {/*<th scope="col">Giường</th>*/}
                         <th scope="col">Phòng tắm</th>
+                        <th scope="col">Mô tả chung</th>
+                        <th scope="col">Giá</th>
                         <th scope="col" className={"bottom2"}>Chi tiết</th>
-                        <th scope="col" className={"bottom2"}>Trạng thái</th>
+                        {/*<th scope="col" className={"bottom2"}>Trạng thái</th>*/}
                     </tr>
                     </thead>
                     <tbody>
@@ -47,24 +49,26 @@ export default function ListHouse(){
                                 <th scope="row">{index +1}</th>
                                 <td>{item.name}</td>
                                 <td>{item.address}</td>
-                                <td>{item.province}</td>
-                                <td>{item.district}</td>
-                                <td>{item.acreage}</td>
+                                {/*<td>{item.province}</td>*/}
+                                {/*<td>{item.district}</td>*/}
+                                {/*<td>{item.acreage}</td>*/}
                                 <td>{item.bedroom}</td>
-                                <td>{item.bed}</td>
+                                {/*<td>{item.bed}</td>*/}
                                 <td>{item.bathroom}</td>
+                                <td>{item.description}</td>
+                                <td>{item.price}</td>
                                 <td><Link  to={"/edit-house/"+ item.id}>
                                     <img className={"eyeImageCSS"} src={eyeImage} alt=""/>
                                 </Link></td>
-                                <td>
-                                    <select  className="form-select">
-                                        <option value="">---Vui lòng chọn---</option>
-                                        <option value="fix">Đang bảo trì</option>
-                                        <option value="busy">Đã được thuê</option>
-                                        <option value="free">Nhà còn trống</option>
-                                    </select>
+                                {/*<td>*/}
+                                {/*    <select  className="form-select">*/}
+                                {/*        <option value="">---Vui lòng chọn---</option>*/}
+                                {/*        <option value="fix">Đang bảo trì</option>*/}
+                                {/*        <option value="busy">Đã được thuê</option>*/}
+                                {/*        <option value="free">Nhà còn trống</option>*/}
+                                {/*    </select>*/}
 
-                                </td>
+                                {/*</td>*/}
 
                             </tr>
 

@@ -1,3 +1,4 @@
+import "./CSS-ListHouse.css"
 import {useDispatch, useSelector} from "react-redux";
 import {Link, useNavigate} from "react-router-dom";
 import React, {useState} from "react";
@@ -10,7 +11,14 @@ import {v4} from "uuid";
 import {storage} from "../../../firebase/firebase";
 import {getDownloadURL,ref,                                                        uploadBytesResumable} from "firebase/storage";
 import {editDetailUser} from "../../../services/userService";
-import {EmailSchema, FirstLastNameSchema, PhoneSchema} from "../../../validate/validate";
+import {
+    AddHouseSchema,
+    AddressHouseSchema,
+    EmailSchema,
+    FirstLastNameSchema,
+    NameHouseSchema,
+    PhoneSchema
+} from "../../../validate/validate";
 import icon1 from "../../../assets/imgs/container/aaa.webp";
 import icon2 from "../../../assets/imgs/container/bbb.webp";
 import icon3 from "../../../assets/imgs/container/ccc.webp";
@@ -79,18 +87,21 @@ export default function AddHouse() {
 
                 <div className="user-info">
                     <div className={`user-info-left w-65`}>
-                        <Formik initialValues={{name: '', address: '', bedroom: '', bathroom: '',description: '', price: ''}} onSubmit={(values) => {
+                        <Formik initialValues={{name: '', address: '', bedroom: '', bathroom: '',description: '', price: ''}}
+                                validationSchema={AddHouseSchema}
+                                onSubmit={(values) => {
                             handleAddHouse(values)
+
                         }}>
                             <Form>
                                 <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
                                     <div className="w-30 pb-3">
                                         <div>Tên nhà</div>
                                     </div>
-                                    <div className="w-70 pb-3">
+                                    <div className="w-70 pb-3 color-red">
                                         <Field type="text" className="form-control" placeholder="Nhập tên nhà"
                                                name="name"/>
-                                        <ErrorMessage name="name" className="text-danger" component="small"/>
+                                        <ErrorMessage  name={'name'}></ErrorMessage>
                                     </div>
                                 </div>
 
@@ -98,14 +109,14 @@ export default function AddHouse() {
                                     <div className="w-30 pb-3">
                                         <div>Địa chỉ</div>
                                     </div>
-                                    <div className="w-70 pb-3">
+                                    <div className="w-70 pb-3 color-red">
                                         <Field type="text" className={'form-control'} name={'address'} placeholder="Nhập địa chỉ"/>
-                                        <ErrorMessage name="name" className="text-danger" component="small"/>
+                                        <ErrorMessage name={'address'}></ErrorMessage>
                                     </div>
                                 </div>
 
                                 <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
-                                    <div className="w-30 pb-3">
+                                    <div className="w-30 pb-3 ">
                                         <div>Số phòng ngủ</div>
                                     </div>
                                     <div className="w-70 pb-3">
@@ -115,7 +126,7 @@ export default function AddHouse() {
                                                 <option value={i + 1} key={i + 1}>{i + 1}</option>
                                             ))}
                                         </Field>
-                                        <ErrorMessage name="bedroom" className="text-danger" component="small"/>
+                                        {/*<ErrorMessage name="bedroom" className="text-danger" component="small"/>*/}
                                     </div>
                                 </div>
 
@@ -130,17 +141,17 @@ export default function AddHouse() {
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </Field>
-                                        <ErrorMessage name="bathroom" className="text-danger" component="small"/>
+                                        {/*<ErrorMessage name="bathroom" className="text-danger" component="small"/>*/}
                                     </div>
                                 </div>
 
                                 <div className={`info-item blogEdit d-flex align-items-center justify-content-center`}>
-                                    <div className="w-30 pb-3">
+                                    <div className="w-30 pb-3 ">
                                         <div>Mô tả chi tiết</div>
                                     </div>
-                                    <div className="w-70 pb-3">
+                                    <div className="w-70 pb-3 color-red">
                                         <Field type="text" className={'form-control'} name={'description'} placeholder="Nhập mô tả" />
-                                        <ErrorMessage name="description" className="text-danger" component="small"/>
+                                        <ErrorMessage name={'description'}></ErrorMessage>
                                     </div>
                                 </div>
 
@@ -148,10 +159,10 @@ export default function AddHouse() {
                                     <div className="w-30 pb-3">
                                         <div>Giá tiền (VNĐ/ngày)</div>
                                     </div>
-                                    <div className="w-70 pb-3">
+                                    <div className="w-70 pb-3 color-red">
                                         <Field className="form-control" id="price" type="number" name="price"
                                                placeholder="Nhập giá tiền"/>
-                                        <ErrorMessage name="price" className="text-danger" component="small"/>
+                                        <ErrorMessage name={'price'}></ErrorMessage>
                                     </div>
                                 </div>
 

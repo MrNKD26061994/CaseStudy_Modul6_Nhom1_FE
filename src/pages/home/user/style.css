@@ -52,12 +52,14 @@
 }
 .user-right{
     padding: 24px;
+    height: 700px;
 }
 .user-right-item{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    height: 33%;
 }
 .user-right-item h5{
     margin: 16px 0 0 0;
