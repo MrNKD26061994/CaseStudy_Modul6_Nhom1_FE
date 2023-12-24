@@ -172,7 +172,7 @@ header {
     top: 23px;
     left: 0;
     width: 86px;
-    height: 31px;
+    height: 40px;
 }
 
 .notify:hover::after {
@@ -181,7 +181,7 @@ header {
     top: 23px;
     left: -13px;
     width: 55px;
-    height: 31px;
+    height: 40px;
 }
 
 .user:hover .sub-login {
