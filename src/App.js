@@ -27,6 +27,8 @@ import UserSeeBookingHistory from "./pages/home/Booking/UserSeeBookingHistory";
 import ShowListBookingOfTheOwnerFe from "./pages/home/Booking/ShowListBookingOfTheOwnerFE";
 import ShowTop5HouseBooking from "./components/Top5/ShowTop5HouseBooking";
 import ListHouseByName from "./pages/home/house/ListHouseByName";
+import ListHouseByAddress from "./pages/home/house/ListHouseByAddress";
+import ReviewBookingHistory from "./pages/home/Booking/ReviewBookingHistory";
 
 
 
