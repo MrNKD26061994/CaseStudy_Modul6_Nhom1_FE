@@ -16,7 +16,7 @@ import television from "../../../assets/imgs/web/tivi.png"
 import sauna from "../../../assets/imgs/web/sauna.png"
 import CalendarTest from "../../../components/CalendarTest";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {findHouseById} from "../../../services/houseService";
 import {getDaysBetweenTwoDates, getNumberOfNights, totalMoney} from "../../../function/function";
 import {createBooking, findBookingNotCheckin, getStartEndDate} from "../../../services/bookingService";
@@ -25,6 +25,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import WebsocketComponent from "../../../websocket/WebsocketComponent";
 import USDollar from "../../../utils/utils";
+import Login from "../../Login";
 
 export default function HouseDetail() {
     const dispatch = useDispatch();
@@ -54,22 +55,21 @@ export default function HouseDetail() {
         return state.bookings.checkNextDate;
     })
 
-    // if (dayjs(booking.startTime).add(1, 'day').format("YYYY-MM-DD") ===
-    //     listDay.find((item) => dayjs(item) >= dayjs(booking.startTime))) {
-    //     dispatch(getStartEndDate(undefined, undefined));
-    // }
-
-    // console.log(booking)
-
-    // console.log(checkNextDate)
-
     function handBooking() {
         let total = totalMoney(booking.startTime, booking.endTime, house.price)
         let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "checked"}
-        dispatch(createBooking(value))
-        toast.success("Đặt tour thành công!");
-        console.log(booking,"lllll");
-        navigate("/")
+        if(house.owner.id === user.id) {
+            toast.error("Bạn không thể thuê ngôi nhà của mình!");
+        } else {
+            if(value.startTime && value.endTime) {
+                dispatch(createBooking(value))
+                toast.success("Đặt tour thành công!");
+                navigate("/")
+            } else {
+                console.log(value)
+                toast.error("Bạn cần chọn ngày để đặt nhà!");
+            }
+        }
     }
 
     return (
@@ -238,7 +238,17 @@ export default function HouseDetail() {
                                         <div>{booking.endTime && booking.endTime.format("DD/MM/YYYY")}</div>
                                     </div>
                                 </div>
-                                <div className="btn btn-danger mt-4 w-100" onClick={handBooking}>Đặt phòng</div>
+                                {user ?
+                                    <>
+                                        <div className="btn btn-danger mt-4 w-100" onClick={handBooking}>Đặt phòng</div>
+                                    </>
+                                    :
+                                    <>
+                                        <Login props={{nameClass: "btn btn-danger mt-4 w-100", nameTitle: "Đặt phòng"}}/>
+                                    </>
+                                }
+
+
 
                                 {getNumberOfNights(booking.startTime, booking.endTime) < 0 ?
                                     <>

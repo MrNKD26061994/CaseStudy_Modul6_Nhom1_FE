@@ -7,6 +7,7 @@ export default function HomeUser() {
     return (
         <>
             <Navbar />
+            {/*<Container></Container>*/}
             <ShowListHouseForHomePage />
         </>
     )
