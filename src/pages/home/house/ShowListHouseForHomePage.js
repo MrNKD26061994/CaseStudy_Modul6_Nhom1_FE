@@ -11,10 +11,10 @@ import "../../../components/Container/style.css"
 const ShowListHouseForHomePage = () => {
     const dispatch = useDispatch();
 
-
     useEffect(() =>  {
         dispatch(showListHouseForUser())
     }, []);
+
     const ListHouse = useSelector(state=>{
         return state.house.houses;
     })
