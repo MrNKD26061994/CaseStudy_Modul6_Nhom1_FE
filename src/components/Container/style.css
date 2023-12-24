@@ -20,15 +20,18 @@
 }
 
 .myCarousel {
-    display: flex;
-    flex-direction: column;
+
 }
 
-.myCarousel > :first-child {
-    flex: 1;
+.myCarousel {
+
 }
 
 .carousel-inner {
+
+}
+.carousel-absolute {
+    height: 0;
 }
 .carousel-item {
     aspect-ratio: 3 / 2.9;
@@ -55,7 +58,7 @@
 .bottom-item {
     display: flex;
     justify-content: space-between;
-    margin-top: 12px;
+    padding-top: 16px;
 }
 
 .bottom-item-left {

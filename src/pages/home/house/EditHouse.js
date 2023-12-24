@@ -68,20 +68,20 @@ export default function EditHouse() {
 
     return (
         <>
-            <div className="container">
+            <div style={{marginTop:"80px"}} className="container">
                 <div className="nav-userInfo">
-                    <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb" style={{background: 'none'}}>
-                            <li className="breadcrumb-item" style={{marginBottom:"10px", marginTop:"80px"}} ><Link to={''}>Home</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page" style={{marginBottom:"10px", marginTop:"80px"}}>Thông tin ngôi nhà</li>
+                    <nav style={{padding: '0'}} aria-label="breadcrumb">
+                        <ol className="breadcrumb mb-0" style={{background: 'none', padding: "12px 16px 12px 0"}}>
+                            <li className="breadcrumb-item" style={{color: "black"}}><Link to={'/'}>Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Thông tin ngôi nhà</li>
                         </ol>
                     </nav>
                 </div>
-                <h1 style={{marginBottom:"10px", marginTop:"5px"}}>Thông tin ngôi nhà</h1>
+                <h1 style={{textAlign:"left", marginBottom: "40px"}}>Thông tin ngôi nhà</h1>
 
 
                 <div className="user-info">
-                    <div className={`user-info-left w-70`}>
+                    <div className={`user-info-left w-65`}>
                         <div className={`info-item ${(attributeName === `Name`) ?
                             isActiveEdit ? `noneEdit` : `blogEdit`
                             : `blogEdit`}`}>
@@ -497,7 +497,7 @@ export default function EditHouse() {
 
 
                     </div>
-                    <div className="user-info-right w-25">
+                    <div className="user-info-right w-30">
                         <div className="user-right">
                             <div className="user-right-item" >
                                 <img src={icon1} alt=""/>
