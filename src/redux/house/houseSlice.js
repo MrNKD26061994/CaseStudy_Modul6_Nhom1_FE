@@ -6,7 +6,7 @@ import {
     showListHouseForUser,
     getAHouse,
     editDetailHouse, findHouseById,
-    pushImage, addImages, pushThumbnail, searchHouse, searchHouseByAddress
+    pushImage, addImages, pushThumbnail, searchHouse, searchHouseByAddress, findAHouseByBookingID
 } from "../../services/houseService";
 import {closeFormEdit, getName, openFormEdit} from "../../services/houseService";
 import {findUserById} from "../../services/userService";
@@ -77,6 +77,9 @@ const houseSlice = createSlice({
             })
             .addCase(searchHouseByAddress.fulfilled,(state, action) => {
                 state.searchAddress = action.payload.data
+            })
+            .addCase(findAHouseByBookingID.fulfilled,(state, action) => {
+                state.houseDetail = action.payload.data
             })
 
 
