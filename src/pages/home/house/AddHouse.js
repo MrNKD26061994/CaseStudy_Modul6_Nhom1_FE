@@ -65,16 +65,18 @@ export default function AddHouse() {
 
     return (
         <>
-            <div className="container">
+            <div className="container" style={{marginTop: "80px"}}>
+
                 <div className="nav-userInfo">
                     <nav style={{padding: '0'}} aria-label="breadcrumb">
-                        <ol className="breadcrumb" style={{background: 'none'}}>
-                            <li className="breadcrumb-item"><Link to={''}>Home</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page">Thêm căn nhà</li>
+                        <ol className="breadcrumb mb-0" style={{background: 'none', padding: "12px 16px 12px 0"}}>
+                            <li className="breadcrumb-item" style={{color: "black"}}><Link to={'/'}>Home</Link></li>
+                            <li className="breadcrumb-item active" aria-current="page">Thông tin cá nhân</li>
                         </ol>
                     </nav>
                 </div>
-                <h1>Thêm căn nhà</h1>
+                <h1 style={{textAlign:"left", marginBottom: "40px"}}>Thêm căn nhà</h1>
+
                 <div className="user-info">
                     <div className={`user-info-left w-65`}>
                         <Formik initialValues={{name: '', address: '', bedroom: '', bathroom: '',description: '', price: ''}} onSubmit={(values) => {
@@ -202,7 +204,7 @@ export default function AddHouse() {
                                         </form>
                                     </div>
                                 </div>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" className="btn btn-primary mt-3">Đăng ký nhà</button>
 
                             </Form>
                         </Formik>

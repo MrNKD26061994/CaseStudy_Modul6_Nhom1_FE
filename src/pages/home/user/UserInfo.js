@@ -56,7 +56,6 @@ export default function UserInfo() {
         toast.info("Đang tải ảnh lên", {autoClose: 500,});
         uploadBytesResumable(imageRef, event.target.files[0]).then((snapshot) => {
             getDownloadURL(snapshot.ref).then(async (url) => {
-
                 let data = {...user}
                 data.avatar = url;
                 await dispatch(editDetailUser(data)).then((res) => {
@@ -75,16 +74,16 @@ export default function UserInfo() {
 
     return (
         <>
-            <div className="container">
+            <div style={{marginTop:"80px"}} className="container">
                 <div className="nav-userInfo">
                     <nav style={{padding: '0'}} aria-label="breadcrumb">
-                        <ol className="breadcrumb" style={{background: 'none'}}>
-                            <li className="breadcrumb-item"><Link to={''}>Home</Link></li>
+                        <ol className="breadcrumb mb-0" style={{background: 'none', padding: "12px 16px 12px 0"}}>
+                            <li className="breadcrumb-item" style={{color: "black"}}><Link to={'/'}>Home</Link></li>
                             <li className="breadcrumb-item active" aria-current="page">Thông tin cá nhân</li>
                         </ol>
                     </nav>
                 </div>
-                <h1>Thông tin cá nhân</h1>
+                <h1 style={{textAlign:"left", marginBottom: "40px"}}>Thông tin cá nhân</h1>
 
 
                 <div className="user-info">
@@ -207,17 +206,25 @@ export default function UserInfo() {
                                     <p className='color-grey'>Chưa được cung cấp</p>
                                 }
                             </div>
-                            {user.roles.some((item) => item.authority !== "ROLE_ADMIN") ?
-                                <div className="infoItem-right">
-                                    {user.phone ?
-                                        <div onClick={() => showFormEdit('Phone')} className="editBtn">Chỉnh sửa</div>
-                                        :
-                                        <>
-                                            <div onClick={() => showFormEdit('Phone')} className="editBtn">Thêm</div>
-                                        </>
+                            {user.roles ?
+                                <>
+                                    {user.roles.some((item) => item.authority !== "ROLE_ADMIN") ?
+                                        <div className="infoItem-right">
+                                            {user.phone ?
+                                                <div onClick={() => showFormEdit('Phone')} className="editBtn">Chỉnh sửa</div>
+                                                :
+                                                <>
+                                                    <div onClick={() => showFormEdit('Phone')} className="editBtn">Thêm</div>
+                                                </>
+                                            }
+                                        </div> :
+                                        <></>
                                     }
-                                </div> :
-                                <></>}
+                                </>
+                                :
+                                <></>
+                            }
+
                         </div>
                         <div className={`info-item ${(attributeName === `Phone`) ?
                                             isActiveEdit ? `blogEdit` : `noneEdit`

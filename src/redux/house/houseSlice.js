@@ -41,7 +41,9 @@ const houseSlice = createSlice({
                 state.house = action.payload
             })
             .addCase(addHouse.fulfilled,(state, action) => {
-                state['house'].push(action.payload);
+                // state['house'].push(action.payload);
+                state.house = action.payload
+                // state.house.push(action.payload);
             })
             .addCase(addImages.fulfilled,(state, action) => {
                 state['images'].concat(action.payload);

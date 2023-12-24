@@ -8,7 +8,6 @@ export default function HomeUser() {
         <>
             <Navbar />
             <ShowListHouseForHomePage />
-
         </>
     )
 }

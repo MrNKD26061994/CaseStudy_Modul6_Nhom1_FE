@@ -26,7 +26,7 @@ const ShowListHouseForHomePage = () => {
     })
 
     return (
-        <div>
+        <div style={{marginTop: "174px"}}>
             <div id="container" className="container-fluid">
                 <div className="row">
                     {ListHouse && ListHouse.map((house, index)=>(
