@@ -1,4 +1,4 @@
-nav {
+.nav > nav {
     position: fixed;
     top: 80px;
     height: 78px;
@@ -16,13 +16,16 @@ nav {
     height: 100%;
     display: flex;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 8px;
+    margin-left: -24px;
 }
+
 .nav-item-full{
     height: 100%;
     display: flex;
     align-items: center;
     border-bottom: 3px solid #ffffff;
+    margin-left: 24px;
 }
 
 .nav-item-full:hover {

@@ -6,7 +6,7 @@ import "./style.css"
 function Navbar() {
 
     return (
-        <>
+        <div className={"nav"}>
             <nav>
                 <div className="nav-category">
                     <div className="nav-item-full nav-item-full-active">
@@ -31,7 +31,7 @@ function Navbar() {
                     </div>
                 </div>
             </nav>
-        </>
+        </div>
 );
 }
 
