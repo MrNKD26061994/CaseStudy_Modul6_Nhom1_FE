@@ -15,12 +15,8 @@
     height: 24px !important;
 }
 
-.carouselExampleControls .carousel-inner {
+.myCarousel .carousel-inner {
     border-radius: 10px;
-}
-
-.myCarousel {
-
 }
 
 .myCarousel {
@@ -37,8 +33,7 @@
     aspect-ratio: 3 / 2.9;
 }
 
-.carouselExampleControls img {
-    width: 100%;
+.myCarousel img {
     height: 100%;
     object-fit: cover;
 }
@@ -48,11 +43,9 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 10 !important;
 }
 
 .carousel-control-prev {
-    z-index: 1000;
 }
 
 .bottom-item {

@@ -6,7 +6,8 @@ import house4 from "../../../assets/imgs/container/A11.webp";
 import heartIcon from "../../../assets/imgs/container/heart-icon.png";
 import starIcon from "../../../assets/imgs/container/icon-star.png";
 import {Link} from "react-router-dom";
-import "../../../components/Container/style.css"
+import USDollar from "../../../utils/utils";
+// import "../../../components/Container/style.css"
 
 const ShowListHouseForHomePage = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const ShowListHouseForHomePage = () => {
     }, []);
 
     const ListHouse = useSelector(state=>{
+        console.log(state.house.houses)
         return state.house.houses;
     })
 
@@ -23,21 +25,23 @@ const ShowListHouseForHomePage = () => {
         <div style={{marginTop: "174px"}}>
             <div id="container" className="container-fluid">
                 <div className="row">
+
+
                     {ListHouse && ListHouse.map((house, index)=>(
                         <div className="col-2 mb-4">
-                            <div id={'id'+house.id} className="carousel slide carouselExampleControls myCarousel"
-                                 data-ride="carousel" data-interval="false">
+
+                            <div id={'id'+house.id} className="carousel slide myCarousel"
+                                 data-ride="carousel" data-touch="false" data-interval="false">
                                 <Link style={{textDecoration: 'none'}}  to={"/house-detail/" + house.id}>
                                     <div className="carousel-inner">
                                         <div className="carousel-item active">
                                             <img src={house.thumbnail} className="d-block w-100" alt="..."/>
                                         </div>
-                                        <div className="carousel-item">
-                                            <img src={house4} className="d-block w-100" alt="..."/>
-                                        </div>
-                                        <div className="carousel-item">
-                                            <img src={house3} className="d-block w-100" alt="..."/>
-                                        </div>
+                                        {house.images.map((image, index) => (
+                                            <div className="carousel-item">
+                                                <img src={image.url} className="d-block w-100" alt="..."/>
+                                            </div>
+                                        ))}
                                     </div>
                                 </Link>
                                 <div className="carousel-absolute">
@@ -58,9 +62,8 @@ const ShowListHouseForHomePage = () => {
                                 <div className="bottom-item">
                                     <div className="bottom-item-left">
                                         <p>{house.name}</p>
-                                        <p className="grey">{house.province + "/" + house.district + "/" + house.ward}</p>
-                                        <p className="grey">Ngày</p>
-                                        <p>{"$"+house.price + " / đêm"}</p>
+                                        <p className="grey">{house.address}</p>
+                                        <p>{USDollar.format(house.price) + " / đêm"}</p>
                                     </div>
                                     <div className="bottom-item-right">
                                         <div>
@@ -74,6 +77,8 @@ const ShowListHouseForHomePage = () => {
                             </Link>
                         </div>
                         ))}
+
+
                 </div>
             </div>
         </div>

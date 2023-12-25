@@ -35,7 +35,7 @@ function App() {
     const navigate = useNavigate();
     const account = useSelector(state => state.user.currentUser);
     account && listUnReadNotifyByAccountLogin(account.id).then(response => {
-        console.log(response.data)
+        // console.log(response.data)
         dispatch(countUnreadNotify(response.data.length));
         dispatch(listUnReadNotify(response.data))
     }).catch(error => {
@@ -47,7 +47,7 @@ function App() {
         <Routes>
             <Route path={''} element={<Home></Home>}>
                 <Route path={''} element={<HomeUser />} />
-                <Route path={''} element={<ShowListHouseForHomePage />} />
+                {/*<Route path={''} element={<ShowListHouseForHomePage />} />*/}
                 <Route path={'search-name/:name'} element={<ListHouseByName/>} />
                 <Route path={'search-address/:address'} element={<ListHouseByAddress/>} />
                 <Route path={'user-detail'} element={<UserDetail />} />
