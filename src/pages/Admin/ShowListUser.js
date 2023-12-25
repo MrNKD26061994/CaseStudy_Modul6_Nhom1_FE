@@ -37,10 +37,7 @@ const ShowListUser = () => {
     })
     return (
         <>
-            <div className="container_table">
-                <div className="nav-userInfo">
-                    <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"80px"}}>Quản lý người dùng</h1>
-                </div>
+            <div className="container_table" style={{marginTop:"90px"}}>
                 <div className="nav-userInfo">
                     <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Quản lý người dùng</h1>
                 </div>

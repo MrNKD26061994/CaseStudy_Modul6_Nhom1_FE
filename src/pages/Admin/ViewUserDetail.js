@@ -17,8 +17,7 @@ const ViewUserDetail = () => {
         })}, []);
     return (
         <>
-            <div className="container">
-                <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
+            <div className="container" style={{marginTop:"90px"}}>
             <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
 
                 <div className="user-info">

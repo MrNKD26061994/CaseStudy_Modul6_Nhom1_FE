@@ -13,10 +13,7 @@ const ShowAdminDetail = () => {
        }, []);
     return (
         <>
-            <div className="nav-userInfo">
-                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Thông tin cá nhân</h1>
-            </div>
-            <div className="container">
+            <div className="container" style={{marginTop:"90px"}}>
                 <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"80px"}} id={"UserInformation"}>Thông tin cá nhân</h1>
 
                 <div className="user-info">
