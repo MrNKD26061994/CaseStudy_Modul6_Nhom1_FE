@@ -60,7 +60,7 @@ const UserSeeBookingHistory = () => {
                             <td>{item.create_at}</td>
                             <td>{item.house.name}</td>
                             <td>{item.total}</td>
-                            <td>{item.house.province + "-" + item.house.district + "-" + item.house.ward + "-" + item.house.address}</td>
+                            <td>{item.house.address}</td>
                             <td>{item.status}</td>
 
                             <td><Link to={"/ShowABookingDetail/" + item.id}>
