@@ -54,7 +54,11 @@ export const findHouseById =createAsyncThunk(
     'get/house/id',
     async (id) => {
         const res = await customAxios.get('house/' + id);
-        return res;
+        let house = res.data;
+        const res2 = await customAxios.get('image/images/' + house.id);
+        house = {...house, images: res2.data}
+        console.log(house)
+        return house;
     }
 )
 
@@ -80,7 +84,12 @@ export const showListHouseForUser = createAsyncThunk(
     '/get/house/houses',
     async (data) => {
         const res = await customAxios.get('house/houses');
-        return res.data.content;
+        let houses = res.data.content;
+        for (let i = 0; i < houses.length; i++) {
+            const res2 = await customAxios.get('image/images/' + houses[i].id);
+            houses[i] = {...houses[i], images: res2.data}
+        }
+        return houses;
     }
 )
 export const getAHouse = createAsyncThunk(

@@ -58,7 +58,7 @@ const houseSlice = createSlice({
                 state.isActiveEdit = false;
             })
             .addCase(findHouseById.fulfilled, (state, action) => {
-                state.houseDetail = action.payload.data
+                state.houseDetail = action.payload
             })
             .addCase(pushImage.fulfilled, (state, action) => {
                 state.images = action.payload;

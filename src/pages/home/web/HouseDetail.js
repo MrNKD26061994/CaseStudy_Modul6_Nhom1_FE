@@ -90,24 +90,48 @@ export default function HouseDetail() {
                 </div>
                 <div className="row house-img">
                     <div className="img-left col-md-6 p-0">
-                        <img src="https://a0.muscache.com/im/pictures/miso/Hosting-611964103002302908/original/ede7b8fc-9f6a-40ec-8f58-45b19d941a18.jpeg?im_w=1200" alt=""/>
+                        <img src={house.thumbnail} alt=""/>
                     </div>
                     <div className="img-right col-md-6 p-0">
                         <div className="row m-0 h-100">
                             <div className="img-right-top d-flex pb-2 pl-0 pr-0">
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    {house.images ? house.images[0] ?
+                                        <><img src={house.images[0].url} alt=""/></>
+                                        :
+                                        <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    {house.images ? house.images[1] ?
+                                        <><img src={house.images[1].url} alt=""/></>
+                                        :
+                                        <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                             </div>
                             <div className="img-right-bottom d-flex p-0">
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    {house.images ? house.images[2] ?
+                                        <><img src={house.images[2].url} alt=""/></>
+                                        :
+                                        <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440" alt=""/>
+                                    {house.images ? house.images[3] ?
+                                        <><img src={house.images[3].url} alt=""/></>
+                                        :
+                                        <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                                 <div className="all-img">
                                     <img src={iconAllImg} alt=""/>
@@ -226,7 +250,7 @@ export default function HouseDetail() {
                     <div className="house-content-right w-30">
                         <div className='house-right-content'>
                             <div className="right-content">
-                                <h4 className={'mb-4'}>${house.price} / đêm</h4>
+                                <h4 className={'mb-4'}>{USDollar.format(house.price)} / đêm</h4>
                                 <div className={'d-flex date-booking'}>
                                     <div className="house-start w-50 border-date">
                                         <div>Nhận phòng</div>

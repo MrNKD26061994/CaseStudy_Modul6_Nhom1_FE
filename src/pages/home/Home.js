@@ -7,6 +7,7 @@ export default function Home() {
         <>
             <Header></Header>
             <Outlet></Outlet>
+            <div style={{height: "80px"}}></div>
             <Footer></Footer>
         </>
     );
