@@ -57,7 +57,7 @@ export default function HouseDetail() {
 
     function handBooking() {
         let total = totalMoney(booking.startTime, booking.endTime, house.price)
-        let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "checked"}
+        let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "Chờ nhận phòng"}
         if(house.owner.id === user.id) {
             toast.error("Bạn không thể thuê ngôi nhà của mình!");
         } else {
