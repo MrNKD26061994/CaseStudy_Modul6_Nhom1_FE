@@ -18,6 +18,7 @@ const ViewUserDetail = () => {
     return (
         <>
             <div className="container">
+                <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
             <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
 
                 <div className="user-info">

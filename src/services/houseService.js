@@ -90,6 +90,13 @@ export const getAHouse = createAsyncThunk(
         return res.data;
     }
 )
+export const findAHouseByBookingID = createAsyncThunk(
+    '/Post/findAHouseByBookingID/{id}',
+    async (id) => {
+        const res = await customAxios.get('house/findAHouseByBookingID/'+id);
+        return res.data;
+    }
+)
 
 export const addImages = createAsyncThunk(
     'push/image/addImages',
@@ -110,4 +117,5 @@ export const pushThumbnail = createAsyncThunk(
         return url;
     }
 )
+
 
