@@ -40,7 +40,7 @@ const bookingSlice = createSlice({
                 state.checkNextDate = action.payload;
             })
             .addCase(createBooking.fulfilled, (state, action) => {
-                state.booking = action.payload;
+                state.booking = {};
             })
             .addCase(UserWantToSeeBookingHistory.fulfilled, (state, action) => {
                 state.bookings = action.payload;
