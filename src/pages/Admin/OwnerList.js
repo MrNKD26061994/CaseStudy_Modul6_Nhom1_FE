@@ -35,7 +35,7 @@ const OwnerList = () => {
         <>
             <div className="container_table">
                 <div className="nav-userInfo">
-                    <h1 style={{display:"flex", justifyContent:"center", marginBottom:"20px", marginTop:"20px"}}>Danh sách chủ nhà</h1>
+                    <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"80px"}}>Danh sách chủ nhà</h1>
                 </div>
                 <table className="table table-striped">
                     <thead>

@@ -14,7 +14,7 @@ const ShowAdminDetail = () => {
     return (
         <>
             <div className="container">
-                <h1 id={"UserInformation"}>Thông tin cá nhân</h1>
+                <h1 style={{display:"flex", justifyContent:"center", marginBottom:"10px", marginTop:"80px"}} id={"UserInformation"}>Thông tin cá nhân</h1>
 
                 <div className="user-info">
                     <div className="AvatarImageClass w-30">
