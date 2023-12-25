@@ -55,7 +55,7 @@ const RenterList = () => {
                             <th scope="row">{index + 1}</th>
                             <td>{item.username}</td>
                             <td>{item.firstname + " " + item.lastname}</td>
-                            <td>{item.province + "/" + item.district + "/" + item.ward + "/" + item.address}</td>
+                            <td>{ item.address}</td>
                             <td>{item.email}</td>
                             <td>{item.phone}</td>
                             <td><img style={{width: 50, height: 50}} src={item.avatar} alt="Avatar"/></td>
