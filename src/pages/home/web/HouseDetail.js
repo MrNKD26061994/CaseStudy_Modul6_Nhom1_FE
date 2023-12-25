@@ -16,28 +16,30 @@ import television from "../../../assets/imgs/web/tivi.png"
 import sauna from "../../../assets/imgs/web/sauna.png"
 import CalendarTest from "../../../components/CalendarTest";
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {findHouseById} from "../../../services/houseService";
 import {getDaysBetweenTwoDates, getNumberOfNights, totalMoney} from "../../../function/function";
-import {createBooking, findBookingNotCheckin, getStartEndDate} from "../../../services/bookingService";
+import {
+    createBooking,
+    findBookingNotCheckin, findOneBookingByHouseIDAndUserID,
+    getStartEndDate,
+    ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan
+} from "../../../services/bookingService";
 import dayjs from "dayjs";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import WebsocketComponent from "../../../websocket/WebsocketComponent";
 import USDollar from "../../../utils/utils";
 import Login from "../../Login";
+import {FindListReviewByHouseID, saveAReview} from "../../../services/reviewService";
+import {Field, Form, Formik} from "formik";
 
 export default function HouseDetail() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const [showCommentForm, setShowCommentForm] = useState(false)
     const {id} = useParams();
-
-    useEffect(() => {
-        dispatch(findHouseById(id))
-        dispatch(findBookingNotCheckin(id))
-    }, []);
-
+    const param = useParams();
     const user = useSelector(state => {
         return state.user.currentUser;
     })
@@ -54,7 +56,24 @@ export default function HouseDetail() {
     const checkNextDate = useSelector(state => {
         return state.bookings.checkNextDate;
     })
+    const aBooking = useSelector(state => {
+        return state.bookings.aBooking.data;
+    })
 
+    let bookingsPaid = useSelector(state => {
+        return state.bookings.bookingsPaid.status;
+    })
+    const listReview = useSelector(state => {
+        return state.review.listReview.data;
+    })
+    useEffect(() => {
+        dispatch(FindListReviewByHouseID(param.id))
+    }, [house])
+
+    useEffect(() => {
+        dispatch(findHouseById(id))
+        dispatch(findBookingNotCheckin(id))
+    }, []);
     function handBooking() {
         let total = totalMoney(booking.startTime, booking.endTime, house.price)
         let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "Chờ nhận phòng"}
@@ -72,6 +91,37 @@ export default function HouseDetail() {
         }
     }
 
+    useEffect(() => {
+        dispatch(findBookingNotCheckin(id)).then(() => {
+            dispatch(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan(
+                {
+                    house_id: param.id,
+                    user_id: JSON.parse(localStorage.getItem("user")).id
+                }), [])
+        })
+    }, [house])
+
+    useEffect(() => {
+        dispatch(findOneBookingByHouseIDAndUserID({
+            house_id: param.id,
+            user_id: JSON.parse(localStorage.getItem("user")).id
+        }))
+    }, [])
+
+     function changeShowCommentForm() {
+        dispatch(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan(
+            {
+                house_id: param.id,
+                user_id: JSON.parse(localStorage.getItem("user")).id
+            }), [])
+        console.log(param.id)
+        if (bookingsPaid ===204) {
+               setShowCommentForm(false);
+        }
+        else {
+              setShowCommentForm(true);
+        }
+    }
     return (
         <>
             <div className="container" style={{height: '2000px', marginTop: "103px"}}>
@@ -143,24 +193,22 @@ export default function HouseDetail() {
                     </div>
                 </div>
                 <div className="house-content">
-
                     <div className="house-content-left w-65">
                         <div className="house-info d-flex flex-column">
-                            {house&&<h2>{house.name}, {house.address}</h2>}
+                            {house && <h2>{house.name}, {house.address}</h2>}
                             <span>7 khách 3 phòng ngủ 4 giường 3 phòng tắm</span>
-                            <div className='house-info-rating d-flex justify-content-center align-items-center' >
+                            <div className='house-info-rating d-flex justify-content-center align-items-center'>
                                 <img src={iconStar} alt=""/>
                                 <span>4,87</span><span className={'house-rating'}>119 đánh giá</span>
                             </div>
                         </div>
                         <div className="house-info-c d-flex align-items-center">
-                            {house.owner ?
-                                <img src={house.owner.avatar} alt=""/>
-                                :
-                                <img src="https://a0.muscache.com/im/pictures/user/608b7b18-f017-45c5-a265-0f5201997939.jpg?im_w=240" alt=""/>
-                            }
+                            <img
+                                src="https://a0.muscache.com/im/pictures/user/608b7b18-f017-45c5-a265-0f5201997939.jpg?im_w=240"
+                                alt=""/>
                             <div className={'d-flex flex-column align-items-start ml-4'}>
-                                <h5>Chủ nhà/Người tổ chức: {house.owner&&<>{house.owner.lastname} {house.owner.firstname}</>}</h5>
+                                <h5>Chủ nhà/Người tổ
+                                    chức: {house.owner && <>{house.owner.lastname} {house.owner.firstname}</>}</h5>
                                 <span>Chủ nhà siêu cấp 2 năm kinh nghiệm đón tiếp khách</span>
                             </div>
                         </div>
@@ -168,15 +216,15 @@ export default function HouseDetail() {
                             <div className={'house-info-item d-flex mb-4 justify-content-between'}>
                                 <img src={icon1} alt=""/>
                                 <div className="d-flex flex-column align-items-start ml-4">
-                                    <h5>Tự nhận phòng</h5>
-                                    <span>Bạn có thể gặp nhân viên trực cửa để nhận phòng.</span>
+                                    <h5>Chủ nhà/Người tổ chức: Raşit</h5>
+                                    <span>Chủ nhà siêu cấp 2 năm kinh nghiệm đón tiếp khách</span>
                                 </div>
                             </div>
                             <div className={'house-info-item d-flex mb-4 justify-content-between'}>
                                 <img src={icon2} alt=""/>
                                 <div className="d-flex flex-column align-items-start ml-4">
-                                    <h5>{house.owner&&<>{house.owner.lastname} {house.owner.firstname}</>} là chủ nhà siêu cấp</h5>
-                                    <span>Chủ nhà siêu cấp là những chủ nhà dày dạn kinh nghiệm, được đánh giá cao.</span>
+                                    <h5>İsmail Hakkı là Chủ nhà siêu cấp</h5>
+                                    <span>Chủ nhà siêu cấp là những Chủ nhà dày dạn kinh nghiệm, được đánh giá cao.</span>
                                 </div>
                             </div>
                             <div className={'house-info-item d-flex mb-4 justify-content-between'}>
@@ -187,117 +235,142 @@ export default function HouseDetail() {
                                 </div>
                             </div>
                         </div>
-
-                        <div className="house-info d-flex flex-column">
+                        <div className="house-info">
                             <h3 style={{textAlign: 'left', paddingBottom: '24px'}}>Nơi này có những gì cho bạn</h3>
-                            <div style={{width: "100%"}} className=" house-utilities d-flex justify-content-between">
+                            <div className="house-utilities d-flex">
                                 <div className="utili-left w-50 d-flex flex-column">
-                                    <div className="utili-item pb-3 d-flex align-items-center">
-                                        <img src={car} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>Chỗ đỗ xe miễn phí tại nơi ở</span>
+                                    <div className="utili-item w-50 pb-3">
+                                        <img src={flower} alt=""/>
+                                        <span>Hướng nhìn ra vườn</span>
                                     </div>
-                                    <div className="utili-item pb-3 d-flex align-items-center">
-                                        <img src={city} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>Hướng nhìn ra đường chân trời thành phố</span>
-                                    </div>
-                                    <div className="utili-item pb-3 d-flex align-items-center">
-                                        <img src={wifi} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>Wi-fi</span>
-                                    </div>
-                                    <div className="utili-item pb-3 d-flex align-items-center">
-                                        <img src={television} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>55" HDTV với Amazon Prime Video, Apple TV, HBO Max, Netflix</span>
+                                    <div className="utili-item w-50 pb-3">
+                                        <img src={flower} alt=""/>
+                                        <span>Hướng nhìn ra vườn</span>
                                     </div>
                                 </div>
                                 <div className="utili-right w-50 d-flex flex-column">
-                                    <div className="utili-item pb-3 d-flex align-items-center">
+                                    <div className="utili-item w-50 pb-3">
                                         <img src={flower} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>Hướng nhìn ra vườn</span>
+                                        <span>Hướng nhìn ra vườn</span>
                                     </div>
-                                    <div className="utili-item pb-3 d-flex align-items-center">
-                                        <img src={table} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>Không gian riêng để làm việc</span>
-                                    </div>
-                                    <div className="utili-item pb-3 d-flex align-items-center">
-                                        <img src={kitchen} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>Bếp</span>
-                                    </div>
-                                    <div className="utili-item pb-3 d-flex align-items-center">
-                                        <img src={sauna} alt=""/>
-                                        <span style={{paddingLeft: "16px", textAlign: "left"}}>Phòng xông hơi khô</span>
+                                    <div className="utili-item w-50 pb-3">
+                                        <img src={flower} alt=""/>
+                                        <span>Hướng nhìn ra vườn</span>
                                     </div>
                                 </div>
+
+
                             </div>
 
-                            <button type="button" className="btn btn-outline-secondary mt-5">Hiển thị tất cả 36 tiện nghi</button>
+                            <button type="button" className="btn btn-outline-secondary mt-5">Hiển thị tất cả 36 tiện
+                                nghi
+                            </button>
                         </div>
-
-                        <div style={{height: '477px', position: "relative"}}>
-                            {/*<h4>{getNumberOfNights(booking.startTime, booking.endTime)} đêm tại House</h4>*/}
-                            <h4>
-                                {(getNumberOfNights(booking.startTime, booking.endTime) <= 0) ?
-                                    <></> :
-                                    <>{getNumberOfNights(booking.startTime, booking.endTime)} </>
-                                }
-                                đêm tại {house.name}</h4>
-                            <p>{checkNextDate===""? <>{booking.startTime && <>{booking.startTime.format("DD/MM/YYYY")} -</> }{booking.endTime && booking.endTime.format("DD/MM/YYYY")}</> : checkNextDate}</p>
+                        <div style={{height: '500px', position: "relative", borderBottom: '1px solid #dddddd'}}>
+                            <h4>{getNumberOfNights(booking.startTime, booking.endTime)} đêm tại House</h4>
+                            <p>{checkNextDate === "" ? <>Ngày</> : checkNextDate}</p>
                             <CalendarTest listDay={listDay}></CalendarTest>
                         </div>
-                    </div>
-                    <div style={{background: "red"}}>
+                        <div className="row">
+                            {listReview && listReview.map((review, index) => (
+                                <div className="col-6" style={{paddingTop: '32px'}}>
+                                    <div className='d-flex flex-column'>
+                                        <div className='d-flex align-items-center pt-3'>
+                                            <img style={{width: "40px", height: "40px", borderRadius: "50%"}}
+                                                 src={review.booking.user.avatar} alt="avatar"/>
+                                            <h4 style={{margin: 0, paddingLeft: '24px'}}>{review.booking.user.firstname+" "+ review.booking.user.lastname}</h4>
+                                        </div>
 
+                                        <div className='d-flex pt-3'>
+                                            <h5 style={{margin: 0, width: "40px"}}>{review.rating}</h5>
+                                            <h5 style={{margin: 0, paddingLeft: '24px'}}>{review.createAt}</h5>
+                                        </div>
+
+                                        <div className='pt-3'>
+                                            <h6 style={{margin: 0, width: '100%', textAlign: "left", fontWeight: '400'}}>{review.comment}</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                     <div className="house-content-right w-30">
                         <div className='house-right-content'>
                             <div className="right-content">
-                                <h4 className={'mb-4'}>{USDollar.format(house.price)} / đêm</h4>
+                                <h4 className={'mb-4'}>${house.price} / đêm</h4>
                                 <div className={'d-flex date-booking'}>
                                     <div className="house-start w-50 border-date">
                                         <div>Nhận phòng</div>
-                                        <div>{booking.startTime && booking.startTime.format("DD/MM/YYYY")}</div>
+                                        <div>12/30/2023</div>
                                     </div>
 
                                     <div className="house-finish w-50">
                                         <div>Trả phòng</div>
-                                        <div>{booking.endTime && booking.endTime.format("DD/MM/YYYY")}</div>
+                                        <div>1/1/2024</div>
                                     </div>
                                 </div>
-                                {user ?
-                                    <>
-                                        <div className="btn btn-danger mt-4 w-100" onClick={handBooking}>Đặt phòng</div>
-                                    </>
-                                    :
-                                    <>
-                                        <Login props={{nameClass: "btn btn-danger mt-4 w-100", nameTitle: "Đặt phòng"}}/>
-                                    </>
-                                }
+                                <div className="btn btn-danger mt-4 w-100" onClick={handBooking}>Đặt phòng</div>
 
-
-
-                                {getNumberOfNights(booking.startTime, booking.endTime) < 0 ?
-                                    <>
-                                        <div className="house-price d-flex justify-content-between mt-4 w-100 mb-4">
-                                            <div className="house-price-left">{USDollar.format(house.price)}<span> x </span> 0<span> đêm</span></div>
-                                            <div className="house-price-right">$0</div>
-                                        </div>
-                                        <div className="price-pay d-flex justify-content-between w-100 pt-4">
-                                            <div className="price-pay-left">Tổng tiền</div>
-                                            <div className="price-pay-right">$0</div>
-                                        </div>
-                                    </>
-                                    :
-                                    <>
-                                        <div className="house-price d-flex justify-content-between mt-4 w-100 mb-4">
-                                            <div className="house-price-left">{USDollar.format(house.price)}<span> x </span> {getNumberOfNights(booking.startTime, booking.endTime)}<span> đêm</span></div>
-                                            <div className="house-price-right">{USDollar.format(totalMoney(booking.startTime, booking.endTime, house.price))}</div>
-                                        </div>
-                                        <div className="price-pay d-flex justify-content-between w-100 pt-4">
-                                            <div className="price-pay-left">Tổng tiền</div>
-                                            <div className="price-pay-right">{USDollar.format(totalMoney(booking.startTime, booking.endTime, house.price))}</div>
-                                        </div>
-                                    </>
-                                }
+                                <div className="house-price d-flex justify-content-between mt-4 w-100 mb-4">
+                                    <div
+                                        className="house-price-left">${house.price} x {getNumberOfNights(booking.startTime, booking.endTime)} đêm
+                                    </div>
+                                    <div
+                                        className="house-price-right">${totalMoney(booking.startTime, booking.endTime, house.price)}</div>
+                                </div>
+                                <div className="price-pay d-flex justify-content-between w-100 pt-4">
+                                    <div className="price-pay-left">Tổng tiền</div>
+                                    <div
+                                        className="price-pay-right">${totalMoney(booking.startTime, booking.endTime, house.price)}</div>
+                                </div>
                             </div>
+                        </div>
+                        <div style={{height: '600px', position: "relative"}}>
+                            <button onClick={() => {
+                                changeShowCommentForm()
+                            }} type="button" className="btn btn-outline-secondary mt-5">Nhận xét từ người dùng
+                            </button>
+                            {showCommentForm === true ?
+                                <div style={{
+                                    position: "relative",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    marginTop: "30px",
+                                    justifyContent: "flex-start"
+                                }}>
+                                    <Formik initialValues={{
+                                        comment: '',
+                                        status: '1',
+                                        rating: '',
+                                        createAt: new Date(),
+                                        booking: aBooking
+                                    }}
+                                            onSubmit={(values) => {
+                                                dispatch(saveAReview(values));
+                                                toast("bình luận thành công")
+                                                values.comment = "";
+                                                values.rating = "";
+                                            }}>
+                                        <Form>
+                                            <div>
+                                                <div className="form-group">
+                                                    <Field placeholder={"Nhập vào bình luận của bạn"} name={'comment'}
+                                                           type="text" className={'form-control'}/>
+                                                </div>
+                                                <div className="form-group">
+                                                    <Field placeholder={"Đánh giá từ 0 - 5"} name={'rating'} type="text"
+                                                           className={'form-control'}/>
+                                                </div>
+                                                <button onClick={() => {
+                                                    changeShowCommentForm()
+                                                }} type="submit" className="btn btn-outline-secondary mt-5">Gửi nhận xét
+                                                </button>
+                                            </div>
+                                        </Form>
+                                    </Formik>
+
+                                </div> : ""}
                         </div>
                     </div>
                 </div>
