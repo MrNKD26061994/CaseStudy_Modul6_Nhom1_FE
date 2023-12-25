@@ -15,34 +15,116 @@ import television from "../../../assets/imgs/web/tivi.png"
 import sauna from "../../../assets/imgs/web/sauna.png"
 import CalendarTest from "../../../components/CalendarTest";
 import {useDispatch, useSelector} from "react-redux";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {findAHouseByBookingID, findHouseById} from "../../../services/houseService";
 import {getDaysBetweenTwoDates, getNumberOfNights, totalMoney} from "../../../function/function";
-import {createBooking, findBookingNotCheckin, getABooking, getStartEndDate} from "../../../services/bookingService";
+import {
+    createBooking,
+    findBookingNotCheckin, findOneBookingByHouseIDAndUserID,
+    getABooking,
+    getStartEndDate,
+    ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan
+} from "../../../services/bookingService";
 import dayjs from "dayjs";
 import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 import WebsocketComponent from "../../../websocket/WebsocketComponent";
 import USDollar from "../../../utils/utils";
+import {FindListReviewByHouseID} from "../../../services/reviewService";
 
 
 const ShowABookingDetail = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const [showCommentForm, setShowCommentForm] = useState(false)
     const {id} = useParams();
-
-    useEffect(() => {
-        dispatch(findAHouseByBookingID(id))
-    }, []);
-
-    const user = JSON.parse(localStorage.getItem("user"))
+    const param = useParams();
+    const user = useSelector(state => {
+        return state.user.currentUser;
+    })
     const house = useSelector(state => {
         return state.house.houseDetail;
     })
     const listDay = useSelector(state => {
         return state.bookings.listDay;
     })
+
+    const booking = useSelector(state => {
+        return state.bookings.booking;
+    })
+    const checkNextDate = useSelector(state => {
+        return state.bookings.checkNextDate;
+    })
+    const aBooking = useSelector(state => {
+        return state.bookings.aBooking.data;
+    })
+
+    let bookingsPaid = useSelector(state => {
+        return state.bookings.bookingsPaid.status;
+    })
+    const listReview = useSelector(state => {
+        return state.review.listReview.data;
+    })
+    useEffect(() => {
+        dispatch(FindListReviewByHouseID(param.id))
+    }, [house])
+
+    useEffect(() => {
+        dispatch(findHouseById(id))
+        dispatch(findBookingNotCheckin(id))
+    }, []);
+    function handBooking() {
+        let total = totalMoney(booking.startTime, booking.endTime, house.price)
+        let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "Chờ nhận phòng"}
+        if(house.owner.id === user.id) {
+            toast.error("Bạn không thể thuê ngôi nhà của mình!");
+        } else {
+            if(value.startTime && value.endTime) {
+                dispatch(createBooking(value))
+                toast.success("Đặt tour thành công!");
+                navigate("/")
+            } else {
+                console.log(value)
+                toast.error("Bạn cần chọn ngày để đặt nhà!");
+            }
+        }
+    }
+
+    useEffect(() => {
+        dispatch(findBookingNotCheckin(id)).then(() => {
+            dispatch(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan(
+                {
+                    house_id: param.id,
+                    user_id: JSON.parse(localStorage.getItem("user")).id
+                }), [])
+        })
+    }, [house])
+
+    useEffect(() => {
+        dispatch(findOneBookingByHouseIDAndUserID({
+            house_id: param.id,
+            user_id: JSON.parse(localStorage.getItem("user")).id
+        }))
+    }, [])
+
+    function changeShowCommentForm() {
+        dispatch(ShowListBookingByHouseIDAndUserIdAndStatusEquaDaThanhToan(
+            {
+                house_id: param.id,
+                user_id: JSON.parse(localStorage.getItem("user")).id
+            }), [])
+        console.log(param.id)
+        if (bookingsPaid ===204) {
+            setShowCommentForm(false);
+        }
+        else {
+            setShowCommentForm(true);
+        }
+    }
+
+    useEffect(() => {
+        dispatch(findAHouseByBookingID(id))
+    }, []);
 
     return (
         <>
@@ -212,6 +294,29 @@ const ShowABookingDetail = () => {
 
                     </div>
                     <div style={{background: "red"}}>
+                        <div className="row">
+                            {listReview && listReview.map((review, index) => (
+                                <div className="col-6" style={{paddingTop: '32px'}}>
+                                    <div className='d-flex flex-column'>
+                                        <div className='d-flex align-items-center pt-3'>
+                                            <img style={{width: "40px", height: "40px", borderRadius: "50%"}}
+                                                 src={review.booking.user.avatar} alt="avatar"/>
+                                            <h4 style={{margin: 0, paddingLeft: '24px'}}>{review.booking.user.firstname+" "+ review.booking.user.lastname}</h4>
+                                        </div>
+
+                                        <div className='d-flex pt-3'>
+                                            <h5 style={{margin: 0, width: "40px"}}>{review.rating}</h5>
+                                            <h5 style={{margin: 0, paddingLeft: '24px'}}>{review.createAt}</h5>
+                                        </div>
+
+                                        <div className='pt-3'>
+                                            <h6 style={{margin: 0, width: '100%', textAlign: "left", fontWeight: '400'}}>{review.comment}</h6>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
 
                     </div>
                 </div>
