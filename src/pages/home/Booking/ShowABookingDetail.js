@@ -15,8 +15,8 @@ import television from "../../../assets/imgs/web/tivi.png"
 import sauna from "../../../assets/imgs/web/sauna.png"
 import CalendarTest from "../../../components/CalendarTest";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {findHouseById} from "../../../services/houseService";
+import React, {useEffect} from "react";
+import {findAHouseByBookingID, findHouseById} from "../../../services/houseService";
 import {getDaysBetweenTwoDates, getNumberOfNights, totalMoney} from "../../../function/function";
 import {createBooking, findBookingNotCheckin, getABooking, getStartEndDate} from "../../../services/bookingService";
 import dayjs from "dayjs";
@@ -33,41 +33,16 @@ const ShowABookingDetail = () => {
     const {id} = useParams();
 
     useEffect(() => {
-
-        dispatch(findHouseById(id)).then(()=>{
-            dispatch(getABooking(id))
-        })
-        dispatch(findBookingNotCheckin(id))
+        dispatch(findAHouseByBookingID(id))
     }, []);
 
-    const user = useSelector(state => {
-        return state.user.currentUser;
-    })
+    const user = JSON.parse(localStorage.getItem("user"))
     const house = useSelector(state => {
         return state.house.houseDetail;
     })
     const listDay = useSelector(state => {
         return state.bookings.listDay;
     })
-
-    const booking = useSelector(state => {
-        return state.bookings.booking;
-    })
-    const aBooking = useSelector(state=>{
-        return state.bookings.aBooking.data;
-
-    })
-    const checkNextDate = useSelector(state => {
-        return state.bookings.checkNextDate;
-    })
-    function handBooking() {
-        let total = totalMoney(booking.startTime, booking.endTime, house.price)
-        let value = {...booking, create_at: dayjs(), house: house, user: user, total: total, status: "checked"}
-        dispatch(createBooking(value))
-        toast.success("Đặt tour thành công!");
-        console.log(booking, "lllll");
-        navigate("/")
-    }
 
     return (
         <>
@@ -87,34 +62,48 @@ const ShowABookingDetail = () => {
                 </div>
                 <div className="row house-img">
                     <div className="img-left col-md-6 p-0">
-                        <img
-                            src="https://a0.muscache.com/im/pictures/miso/Hosting-611964103002302908/original/ede7b8fc-9f6a-40ec-8f58-45b19d941a18.jpeg?im_w=1200"
-                            alt=""/>
+                        <img src={house.thumbnail} alt=""/>
                     </div>
                     <div className="img-right col-md-6 p-0">
                         <div className="row m-0 h-100">
                             <div className="img-right-top d-flex pb-2 pl-0 pr-0">
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img
-                                        src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440"
-                                        alt=""/>
+                                    {house.images ? house.images[0] ?
+                                            <><img src={house.images[0].url} alt=""/></>
+                                            :
+                                            <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img
-                                        src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440"
-                                        alt=""/>
+                                    {house.images ? house.images[1] ?
+                                            <><img src={house.images[1].url} alt=""/></>
+                                            :
+                                            <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                             </div>
                             <div className="img-right-bottom d-flex p-0">
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img
-                                        src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440"
-                                        alt=""/>
+                                    {house.images ? house.images[2] ?
+                                            <><img src={house.images[2].url} alt=""/></>
+                                            :
+                                            <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                                 <div className="img-right-item col-md-6 pl-2 p-0">
-                                    <img
-                                        src="https://a0.muscache.com/im/pictures/5a150df4-7898-4555-8bbc-c8f565f9bcf9.jpg?im_w=1440"
-                                        alt=""/>
+                                    {house.images ? house.images[3] ?
+                                            <><img src={house.images[3].url} alt=""/></>
+                                            :
+                                            <><img src={house.thumbnail} alt=""/></>
+                                        :
+                                        <></>
+                                    }
                                 </div>
                                 <div className="all-img">
                                     <img src={iconAllImg} alt=""/>
@@ -221,16 +210,6 @@ const ShowABookingDetail = () => {
                             </button>
                         </div>
 
-                        <div style={{height: '477px', position: "relative"}}>
-                            <h4>
-                                {(getNumberOfNights(booking.startTime, booking.endTime) <= 0) ?
-                                    <></> :
-                                    <>{getNumberOfNights(booking.startTime, booking.endTime)} </>
-                                }
-                                đêm tại {house.name}</h4>
-                            <p>{checkNextDate === "" ? <>{booking.startTime && <>{booking.startTime.format("DD/MM/YYYY")} -</>}{booking.endTime && booking.endTime.format("DD/MM/YYYY")}</> : checkNextDate}</p>
-                            <CalendarTest listDay={listDay}></CalendarTest>
-                        </div>
                     </div>
                     <div style={{background: "red"}}>
 

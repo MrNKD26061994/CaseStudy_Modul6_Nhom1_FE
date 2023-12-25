@@ -100,9 +100,9 @@ export const getAHouse = createAsyncThunk(
     }
 )
 export const findAHouseByBookingID = createAsyncThunk(
-    '/Post/findAHouseByBookingID/{id}',
+    'post/house/findAHouseByBookingID/{id}',
     async (id) => {
-        const res = await customAxios.get('house/findAHouseByBookingID/'+id);
+        const res = await customAxios.post('house/findAHouseByBookingID/'+id);
         return res.data;
     }
 )

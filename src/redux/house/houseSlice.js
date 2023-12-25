@@ -79,7 +79,7 @@ const houseSlice = createSlice({
                 state.searchAddress = action.payload.data
             })
             .addCase(findAHouseByBookingID.fulfilled,(state, action) => {
-                state.houseDetail = action.payload.data
+                state.houseDetail = action.payload
             })
 
 
